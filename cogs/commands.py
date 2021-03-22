@@ -11,6 +11,7 @@ class Commands(commands.Cog):
             return
         if isinstance(error, commands.errors.MissingRequiredArgument):
             await ctx.send('Missing argument, type `.help` for more information')
+        raise error
         
     @commands.command()
     async def help(self, ctx):

@@ -3,7 +3,7 @@ from discord.ext import commands
 import requests
 import json
 
-api = 'RGAPI-75ccb4b5-e9aa-486d-99aa-23ca507dd270'
+api = 'RGAPI-6a15b991-08e8-4373-bcde-83594bdc51a6'
 version = '11.6.1'
                 
 class League(commands.Cog):
@@ -23,7 +23,7 @@ class League(commands.Cog):
             summoner_id = summoner_json['id']
             name = summoner_json['name']
             level = summoner_json['summonerLevel']
-            icon_id = summoner_json['profileIconId']
+            icon_id = summoner_json['profileIconId']    
                 
             try:        
                 league_request = requests.get(f'https://{server}.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_id}?api_key={api}')
@@ -148,8 +148,8 @@ class League(commands.Cog):
                     if q['queueId'] == game_json['queueId']:
                         description = q['description']
                         queue_type = description
-                f.close()                    
-                    
+                f.close()
+                                             
                 for p in game_json['participants']:
                     if p['championId'] == champion_id:
                         kills = p['stats']['kills']
@@ -159,7 +159,7 @@ class League(commands.Cog):
                         minions = p['stats']['totalMinionsKilled']
                         gold = p['stats']['goldEarned']
                 embed.add_field(name=f'{status} {champion_name} - ({queue_type})', value=f'''{kills} / {deaths} / {assists} \u200B \u200B <:minion:823209384908816404>{minions} \u200B \u200B <:gold:823209384942370836>{gold} \n \u200B''', inline=False)
-            await ctx.send(file=file, embed=embed)
+            await ctx.send(file=file, embed=embed)        
     
 def setup(client):
     client.add_cog(League(client))
