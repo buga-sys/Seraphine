@@ -49,7 +49,7 @@ class Champions(commands.Cog):
         embed = discord.Embed(title=f'{name} - {title}', description=f'''{', '.join(tags)} \n Partype: {partype}''')
         embed.set_thumbnail(url=f'attachment://{champion_image}')
         embed.add_field(name=f'(Passive) {passive_name}', value=f"{passive_description}", inline=False)
-        embed.add_field(name=f'(Q) {spells_names[0]}', value=f"{'/'.join(map(str, spells_cd[0]))} \n {spells_description[0]})", inline=False)
+        embed.add_field(name=f'(Q) {spells_names[0]}', value=f"{'/'.join(map(str, spells_cd[0]))} \n {spells_description[0]}", inline=False)
         embed.add_field(name=f'(W) {spells_names[1]}', value=f"{'/'.join(map(str, spells_cd[1]))} \n {spells_description[1]}", inline=False)
         embed.add_field(name=f'(E) {spells_names[2]}', value=f"{'/'.join(map(str, spells_cd[2]))} \n {spells_description[2]}", inline=False)
         embed.add_field(name=f'(R) {spells_names[3]}', value=f"{'/'.join(map(str, spells_cd[3]))} \n {spells_description[3]}", inline=False)
