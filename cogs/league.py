@@ -3,7 +3,7 @@ from discord.ext import commands
 import requests
 import json
 
-api = 'RGAPI-6a15b991-08e8-4373-bcde-83594bdc51a6'
+api = 'RGAPI-b916a618-fb2b-4289-82eb-91b0039e9219'
 version = '11.6.1'
                 
 class League(commands.Cog):
@@ -76,6 +76,7 @@ class League(commands.Cog):
             embed = discord.Embed(title=f'**{name}** - Summoner Level: {level}')
             embed.set_thumbnail(url=f'attachment://{icon_png}')
             embed.add_field(name='Ranked (Solo/Duo)', value=f'{full_solo_rank} \n {solo_lp} LP / {solo_wins}W {solo_losses}L \n Win Ratio {solo_win_ratio}%')
+            embed.add_field(name='\u200B', value='\u200B')
             embed.add_field(name='Ranked (Flex)', value=f'{full_flex_rank} \n {flex_lp} LP / {flex_wins}W {flex_losses}L \n Win Ratio {flex_win_ratio}%')
             await ctx.send(file=file, embed=embed)          
         else:

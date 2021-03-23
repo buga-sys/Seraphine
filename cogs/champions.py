@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 import json
 
-api = 'RGAPI-6a15b991-08e8-4373-bcde-83594bdc51a6'
 version = '11.6.1'
 
 class Champions(commands.Cog):

@@ -10,26 +10,25 @@ class Commands(commands.Cog):
         if isinstance(error, commands.CommandNotFound):
             return
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            await ctx.send('Missing argument, type `.help` for more information')
+            await ctx.send('Missing argument, type `?commands` for more information')
         raise error
         
     @commands.command()
     async def help(self, ctx):
         embed=discord.Embed(description='''
-                            **ARB IS STILL UNDER DEVELOPMENT**
-                            ''', color=0x850000)
-        embed.set_thumbnail(url='https://i.imgur.com/7ytdI2o.png')
-        embed.set_author(name='ARB', icon_url='https://i.imgur.com/7ytdI2o.png')
+                            **SERAPHINE IS STILL UNDER DEVELOPMENT**
+                            ''')
+        embed.set_thumbnail(url='')
+        embed.set_author(name='Seraphine', icon_url='')
         embed.add_field(name="List of commands", value="`?commands`")
         await ctx.send(embed=embed)
     
     @commands.command(name='commands', aliases=['cmds'])
     async def _commands(self, ctx):
-        embed=discord.Embed(color=0x850000)
-        embed.set_author(name='ARB', icon_url='https://i.imgur.com/7ytdI2o.png')
-        embed.add_field(name=":partying_face: Fun", value="`fun`")
-        embed.add_field(name=":tools: Utility", value="`utility`")
-        embed.add_field(name=":gear: Settings", value="`settings`")
+        embed=discord.Embed()
+        embed=discord.Embed(title="Commands", description='''
+                            `profile` `history` `champion` `ability` `item`''')
+        embed.set_thumbnail(url='')
         embed.set_footer(text="use prefix ? before each command.")
         await ctx.send(embed=embed)  
 

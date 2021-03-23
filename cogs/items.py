@@ -10,7 +10,7 @@ class Items(commands.Cog):
         self.client = client   
    
     @commands.command(aliases=['i'])
-    async def item(self, ctx, value):
+    async def item(self, ctx, *, value):
         try:
             with open(f'dragontail\\{version}\\data\\en_GB\\item.json', encoding='utf-8') as f:
                 items = json.load(f)
