@@ -10,6 +10,7 @@ async def on_ready():
 
 client.load_extension('cogs.league')
 client.load_extension('cogs.champions')
+client.load_extension('cogs.items')
 client.load_extension('cogs.commands')
 
 client.run('ODE4NDg4NTM3NDU2MTgxMjQ4.YEYy2g.7Pa84mtVXUw8rER23v6zxlwyq4g')
