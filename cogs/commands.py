@@ -9,27 +9,24 @@ class Commands(commands.Cog):
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandNotFound):
             return
-        if isinstance(error, commands.errors.MissingRequiredArgument):
-            await ctx.send('Missing argument, type `?commands` for more information')
         raise error
         
     @commands.command()
     async def help(self, ctx):
         embed=discord.Embed(description='''
                             **SERAPHINE IS STILL UNDER DEVELOPMENT**
-                            ''')
+                            ''', color=0xfda5b0)
         embed.set_thumbnail(url='')
         embed.set_author(name='Seraphine', icon_url='')
-        embed.add_field(name="List of commands", value="`?commands`")
+        embed.add_field(name="List of commands", value="`!commands`")
         await ctx.send(embed=embed)
     
     @commands.command(name='commands', aliases=['cmds'])
     async def _commands(self, ctx):
-        embed=discord.Embed()
         embed=discord.Embed(title="Commands", description='''
-                            `profile` `history` `champion` `ability` `item`''')
+                            `profile` `history` `champion` `ability` `item` `itemtype`''', color=0xfda5b0)
         embed.set_thumbnail(url='')
-        embed.set_footer(text="use prefix ? before each command.")
+        embed.set_footer(text="use prefix ! before each command.")
         await ctx.send(embed=embed)  
 
 def setup(client):

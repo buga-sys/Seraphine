@@ -1,0 +1,38 @@
+[
+  {
+    "id": "Iron",
+    "emoji": "<:Iron:825095477741092884>"
+  },
+  {
+    "id": "Bronze",
+    "emoji": "<:Bronze:825095477866266725>"
+  },
+  {
+    "id": "Silver",
+    "emoji": "<:Silver:825095477862596618>"
+  },
+  {
+    "id": "Gold",
+    "emoji": "<:Gold:825095477543567390>"
+  },
+  {
+    "id": "Platinum",
+    "emoji": "<:Platinium:825095477552873523>"
+  },
+  {
+    "id": "Diamond",
+    "emoji": "<:Diamond:825095477208940565>"
+  },
+  {
+    "id": "Master",
+    "emoji": "<:Master:825095477808726126>"
+  },
+  {
+    "id": "Grandmaster",
+    "emoji": "<:Grandmaster:825095477799288883>"
+  },
+  {
+    "id": "Challenger",
+    "emoji": "<:Challenger:825095477162803201>"
+  }
+]
