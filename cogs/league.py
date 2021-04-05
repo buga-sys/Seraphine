@@ -3,7 +3,7 @@ from discord.ext import commands
 import requests
 import json
 import traceback
-import psycopg2
+import mysql.connector
 
 api = 'RGAPI-712e16c6-d3c8-4295-9592-ee5e52f8c12d'
 version = '11.7.1'
@@ -359,11 +359,12 @@ class League(commands.Cog):
         regions = ['euw', 'br', 'na', 'eun', 'jp', 'la', 'oc', 'tr', 'kr', 'ru']
         if region is None and summoner is None:
             try:
-                conn = psycopg2.connect(
-                    host="localhost",
-                    database="seraphine",
-                    user="postgres",
-                    password="password")
+                conn = mysql.connector.connect(
+                    host="eu02-sql.pebblehost.com",
+                    database="customer_174679_seraphine",
+                    user="customer_174679_seraphine",
+                    password="Eod#-HQD##91-0qd6fG@",
+                    port='3306')
             
                 cur = conn.cursor()
                 cur.execute(f"""SELECT * FROM profile WHERE user_id = '{user_id}'""")
@@ -379,11 +380,11 @@ class League(commands.Cog):
                     embed.add_field(name='Add your profile', value='`!myprofile [region] [summoner]`')
                     await ctx.send(embed=embed)
                 cur.close()
-            except (Exception, psycopg2.DatabaseError) as e:
-                print(e)
-            finally:
+            except mysql.connector.Error as err:
+                print("Something went wrong: {}".format(err))
+            else:
                 if conn is not None:
-                    conn.close
+                    conn.close()
         elif region not in regions:
             embed=discord.Embed(description="Invalid region!", color=0xfda5b0)
             embed.add_field(name='Regions', value='`euw` `br` `na` `eun` `jp` `la` `oc` `tr` `kr` `ru`')
@@ -394,26 +395,25 @@ class League(commands.Cog):
             await ctx.send(embed=embed) 
         else:
             try:
-                conn = psycopg2.connect(
-                    host="localhost",
-                    database="seraphine",
-                    user="postgres",
-                    password="password")
-            
+                conn = mysql.connector.connect(
+                    host="eu02-sql.pebblehost.com",
+                    database="customer_174679_seraphine",
+                    user="customer_174679_seraphine",
+                    password="Eod#-HQD##91-0qd6fG@",
+                    port='3306')
                 cur = conn.cursor()
                 cur.execute(f"""DELETE FROM profile WHERE user_id = '{user_id}'""")
                 cur.execute(f"""INSERT INTO profile(user_id, region, summoner)
-                            VALUES ({user_id}, '{region}', '{summoner}')""")
+                            VALUES ('{user_id}', '{region}', '{summoner}')""")
                 conn.commit()
                 cur.close()
                 embed=discord.Embed(description="Your profile has been added.", color=0xfda5b0)
                 await ctx.send(embed=embed)
-            except (Exception, psycopg2.DatabaseError) as e:
-                print(e)
-            finally:
+            except mysql.connector.Error as err:
+                print("Something went wrong: {}".format(err))
+            else:
                 if conn is not None:
-                    conn.close
-        
-                                   
+                    conn.close()
+                           
 def setup(client):
     client.add_cog(League(client))
