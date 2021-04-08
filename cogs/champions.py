@@ -3,6 +3,7 @@ from discord.ext import commands
 import json
 import re
 import traceback
+import asyncio
 
 version = '11.7.1'
 
@@ -73,6 +74,78 @@ class Champions(commands.Cog):
         if isinstance(error, commands.errors.MissingRequiredArgument):
             embed=discord.Embed(description="Display information about a champion\nUsage: `!champion [champion]` for example, `!champion annie`", color=0xfda5b0)
             await ctx.send(embed=embed) 
+            
+    @commands.command()
+    async def skins(self, ctx, value):
+        if len(value) > 2:
+            try:
+
+                champion = value.lower()
+                with open(f'dragontail/{version}/data/en_GB/championFull.json', encoding='utf-8') as f:
+                    champions = json.load(f)
+
+                champions_data = champions['data']
+                name = None
+                images_path = f'dragontail/img/champion/loading/'
+                skin_name = ''
+                skin_id = ''
+                pages = []
+                buttons = [u"\u23EA", u"\u2B05", u"\u27A1", u"\u23E9"] # skip to start, left, right, skip to end
+                current = 0
+
+                for k,v in champions_data.items():
+                    if champion.lower() in k.lower():
+                        name = v['id']
+                        for sid in v['skins']:
+                            skin_name= sid['name']
+                            skin_id = str(sid['num'])
+                            skin_image = name + '_' + skin_id + '.jpg' 
+                            # image_full_path = images_path + skin_image
+                            page = discord.Embed(title=f'{skin_name}', color=0xfda5b0).set_image(url=f'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/{skin_image}')
+                            pages.append(page)    
+                f.close()
+                
+                msg = await ctx.send(embed=pages[current].set_footer(text=f"{current+1}/{len(pages)}"))
+                
+                for button in buttons:
+                    await msg.add_reaction(button)
+                    
+                while True:
+                    try:
+                        reaction, user = await self.client.wait_for("reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons, timeout=60.0)
+
+                    except asyncio.TimeoutError:
+                        pass
+
+                    else:
+                        previous_page = current
+                        if reaction.emoji == u"\u23EA":
+                            current = 0
+                            
+                        elif reaction.emoji == u"\u2B05":
+                            if current > 0:
+                                current -= 1
+                                
+                        elif reaction.emoji == u"\u27A1":
+                            if current < len(pages)-1:
+                                current += 1
+
+                        elif reaction.emoji == u"\u23E9":
+                            current = len(pages)-1
+
+                        for button in buttons:
+                            await msg.remove_reaction(button, ctx.author)
+
+                        if current != previous_page:
+                            await msg.edit(embed=pages[current].set_footer(text=f"{current+1}/{len(pages)}"))
+            except IndexError:
+                await ctx.send("That's not a valid champion name.")
+                
+            except Exception:
+                traceback.print_exc()
+        else:
+            await ctx.send("That's not a valid champion name.")
+        
             
 
 def setup(client):

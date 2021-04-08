@@ -192,9 +192,10 @@ class Items(commands.Cog):
                     image_full_path = item_image_path + item_png
                     # file = discord.File(f"{image_full_path}", filename=f"{item_png}")
                     # files.append(file)
-                    page = discord.Embed(title=f'{name}', description=f'<:gold:823209384942370836>{gold_total}', color=0xfda5b0).set_thumbnail(url=f'http://ddragon.leagueoflegends.com/cdn/11.6.1/img/item/{item_png}').add_field(name='\u200B', value=f'{description}')
+                    page = discord.Embed(title=f'{name}', description=f'<:gold:823209384942370836>{gold_total}', color=0xfda5b0).set_thumbnail(url=f'http://ddragon.leagueoflegends.com/cdn/11.7.1/img/item/{item_png}').add_field(name='\u200B', value=f'{description}')
                     pages.append(page)  
             f.close()
+            
             msg = await ctx.send(embed=pages[current].set_footer(text=f"{current+1}/{len(pages)}"))
             
             for button in buttons:

@@ -9,7 +9,6 @@ class Commands(commands.Cog):
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandNotFound):
             return
-        raise error
         
     @commands.command()
     async def help(self, ctx):
@@ -23,8 +22,18 @@ class Commands(commands.Cog):
     
     @commands.command(name='commands', aliases=['cmds'])
     async def _commands(self, ctx):
-        embed=discord.Embed(title="Commands", description='''
-                            `profile` `history` `champion` `ability` `item` `itemtype`''', color=0xfda5b0)
+        url = 'http://google.com/'
+        profile = f"""[`profile`]({url} "Display a summoner's profile.")"""
+        myprofile = f"""[`myprofile`]({url} "Display your summoner's profile.")"""
+        history = f"""[`history`]({url} "Display a summoner's match history.")"""
+        champion = f"""[`champion`]({url} "See information about a champion.")"""
+        skins = f"""[`skins`]({url} "View all champion's skins.")"""
+        ability = f"""[`ability`]({url} "View a specific champion's skill.")"""
+        item = f"""[`item`]({url} "See detailed information of an item.")"""
+        itemtype = f"""[`itemtype`]({url} "Look up item types: ability, attack speed, armor, etc.")"""
+        
+        embed=discord.Embed(title="Commands", description=f'''
+                            {profile} {myprofile} {history} {champion} {skins} {ability} {item} {itemtype}''', color=0xfda5b0)
         embed.set_thumbnail(url='')
         embed.set_footer(text="use prefix ! before each command.")
         await ctx.send(embed=embed)  
