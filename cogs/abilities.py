@@ -3,7 +3,7 @@ from discord.ext import commands
 import json
 import traceback
 
-version = '11.7.1'
+version = '11.8.1'
 
 class Abilities(commands.Cog):
     def __init__(self, client):

@@ -5,7 +5,7 @@ import re
 import traceback
 import asyncio
 
-version = '11.7.1'
+version = '11.8.1'
 
 class Champions(commands.Cog):
     def __init__(self, client):

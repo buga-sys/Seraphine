@@ -5,7 +5,7 @@ import re
 import asyncio
 import traceback
 
-version = '11.7.1'
+version = '11.8.1'
 
 class Items(commands.Cog):
     def __init__(self, client):
@@ -93,6 +93,8 @@ class Items(commands.Cog):
             embed.add_field(name='\u200B', value=f'{description}')
             await ctx.send(file=file, embed=embed)
         except IndexError:
+            await ctx.send("That's not a valid item name.")
+        except TypeError:
             await ctx.send("That's not a valid item name.")
         except Exception:
             traceback.print_exc()
@@ -230,6 +232,8 @@ class Items(commands.Cog):
                     if current != previous_page:
                         await msg.edit(embed=pages[current].set_footer(text=f"{current+1}/{len(pages)}"))
         except IndexError:
+            await ctx.send("That's not a valid item type.")
+        except TypeError:
             await ctx.send("That's not a valid item type.")
         except Exception:
             traceback.print_exc()
