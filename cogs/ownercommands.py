@@ -62,7 +62,7 @@ class OwnerCommands(commands.Cog):
         except Exception as e:
             await ctx.author.send('{}: {}'.format(type(e).__name__, e))
         else:
-            await ctx.author.send('hehe xd cogs reloaded.') 
+            await ctx.author.send('*** cogs reloaded ***') 
     
     @commands.command(name='leave', hidden=True)
     @commands.is_owner()

@@ -12,7 +12,7 @@ class Commands(commands.Cog):
         
     @commands.command()
     async def help(self, ctx):
-        invite_link = 'https://discord.com/oauth2/authorize?client_id=818488537456181248&permissions=52224&scope=bot'
+        invite_link = 'https://discord.com/oauth2/authorize?client_id=818488537456181248&permissions=59392&scope=bot'
         embed=discord.Embed(color=0xfda5b0)
         embed.set_thumbnail(url='')
         embed.set_author(name='Seraphine', icon_url='')
@@ -32,7 +32,7 @@ class Commands(commands.Cog):
         item = f"""[`item`]({url} "See detailed information of an item.")"""
         itemtype = f"""[`itemtype`]({url} "Look up item types: ability, attack speed, armor, etc.")"""
         
-        embed=discord.Embed(title="Commands", description=f'''
+        embed=discord.Embed(title="Commands", description=f'''(hover for tooltip)
                             {profile} {myprofile} {history} {champion} {skins} {ability} {item} {itemtype}''', color=0xfda5b0)
         embed.set_thumbnail(url='')
         embed.set_footer(text="use prefix ! before each command.")
