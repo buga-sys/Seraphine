@@ -72,7 +72,9 @@ class Champions(commands.Cog):
     @champion.error
     async def champion_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Display information about a champion\nUsage: `!champion [champion]` for example, `!champion annie`", color=0xfda5b0)
+            embed=discord.Embed(description="Display information about a champion.", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!champion [champion]`')
+            embed.add_field(name='Example', value='`!champion annie`')
             await ctx.send(embed=embed) 
             
     @commands.command()
@@ -149,7 +151,9 @@ class Champions(commands.Cog):
     @skins.error
     async def skins_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Display a champion's skins\nUsage: `!skins [champion]` for example, `!skins gwen`", color=0xfda5b0)
+            embed=discord.Embed(description="Display a champion's skins.", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!skins [champion]`')
+            embed.add_field(name='Example', value='`!skins gwen`')
             await ctx.send(embed=embed) 
         
             

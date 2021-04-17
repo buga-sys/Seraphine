@@ -15,4 +15,4 @@ client.load_extension('cogs.abilities')
 client.load_extension('cogs.commands')
 client.load_extension('cogs.ownercommands')
 
-client.run('ODE4NDg4NTM3NDU2MTgxMjQ4.YEYy2g.7Pa84mtVXUw8rER23v6zxlwyq4g')
+client.run('ODMyOTgwMDg3NzAzMzM5MDMw.YHrrKA.eNNR5J8l1odAi_JyAt-E1mOXnEY')
