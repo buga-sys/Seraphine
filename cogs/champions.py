@@ -145,6 +145,12 @@ class Champions(commands.Cog):
                 traceback.print_exc()
         else:
             await ctx.send("That's not a valid champion name.")
+              
+    @skins.error
+    async def skins_error(self, ctx, error):
+        if isinstance(error, commands.errors.MissingRequiredArgument):
+            embed=discord.Embed(description="Display a champion's skins\nUsage: `!skins [champion]` for example, `!skins gwen`", color=0xfda5b0)
+            await ctx.send(embed=embed) 
         
             
 

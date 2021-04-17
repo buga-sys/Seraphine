@@ -5,7 +5,7 @@ import json
 import traceback
 import mysql.connector
 
-api = 'RGAPI-c2f7eb72-0124-4016-9c67-1fb5e06122a4'
+api = 'RGAPI-33a5f342-ceda-4ffa-b3f1-ac95cf58725b'
 version = '11.8.1'
                 
 class League(commands.Cog):
@@ -14,6 +14,7 @@ class League(commands.Cog):
         
     @commands.command()
     async def profile(self, ctx, region, *, summoner):
+        region = region.lower()
         if region == 'euw' or region == 'br' or region == 'na' or region == 'eun' or region == 'jp' or region == 'la' or region == 'oc' or region == 'tr' or region == 'kr' or region == 'ru':
             server = region
             if region == 'euw' or region == 'br' or region == 'na' or region == 'eun' or region == 'jp' or region == 'la' or region == 'oc' or region == 'tr':
@@ -244,6 +245,7 @@ class League(commands.Cog):
     
     @commands.command()
     async def history(self, ctx, region, *, summoner):
+        region = region.lower()
         if region == 'euw' or region == 'br' or region == 'na' or region == 'eun' or region == 'jp' or region == 'la' or region == 'oc' or region == 'tr' or region == 'kr' or region == 'ru':
             server = region
             if region == 'euw' or region == 'br' or region == 'na' or region == 'eun' or region == 'jp' or region == 'la' or region == 'oc' or region == 'tr':
@@ -385,7 +387,7 @@ class League(commands.Cog):
             else:
                 if conn is not None:
                     conn.close()
-        elif region not in regions:
+        elif region.lower() not in regions:
             embed=discord.Embed(description="Invalid region!", color=0xfda5b0)
             embed.add_field(name='Regions', value='`euw` `br` `na` `eun` `jp` `la` `oc` `tr` `kr` `ru`')
             await ctx.send(embed=embed) 
@@ -445,18 +447,19 @@ class League(commands.Cog):
             
     #         queue_type = None
     #         live_data = ''
-    #         team_one = {}
+    #         team_one = []
     #         team_one_champs = []
             
-    #         team_two = {}
+    #         team_two = []
     #         team_two_champs = []
             
     #         if live_request.status_code == 200:
     #             for p in live_json['participants']:
     #                 if p['teamId'] == 100:
     #                     team_one_summoners = (p['summonerName'])
-    #                     team_one_ids = (p['championId'])
-    #                     team_one.update({team_one_summoners: team_one_ids})
+    #                     team_one_ids = (p['championId'])\
+    #                     dic = {team_one_summoners: team_one_ids}
+    #                     team_one.append(dic)
     #                 else:
     #                     team_two_summoners = (p['summonerName'])
     #                     team_two_ids = (p['championId'])

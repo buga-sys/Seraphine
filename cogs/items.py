@@ -241,7 +241,7 @@ class Items(commands.Cog):
     @itemtype.error
     async def itemtype_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Display all items of specific type\nUsage: `!itemtype [item]` for example, `!itemtype ability power`", color=0xfda5b0)
+            embed=discord.Embed(description="Display items of specific type. \nUsage: `!itemtype [type]` for example, `!itemtype ability power`", color=0xfda5b0)
             await ctx.send(embed=embed)      
 
 def setup(client):
