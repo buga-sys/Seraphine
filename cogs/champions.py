@@ -26,7 +26,6 @@ class Champions(commands.Cog):
                 partype = None
                 spells_names = []
                 spells_description = []
-                spells_cd = []
                 images_path = f'dragontail/{version}/img/champion/'
                 champion_image = None
                 passive_name = None
@@ -45,7 +44,6 @@ class Champions(commands.Cog):
                             clean = re.compile('<.*?>')
                             description = re.sub(clean, "", spell['description'])  
                             spells_description.append(description)
-                            spells_cd.append(spell['cooldown'])
                         passive_name = v['passive']['name']
                         passive_description = v['passive']['description']
                         clean = re.compile('<.*?>')
@@ -57,10 +55,10 @@ class Champions(commands.Cog):
                 embed = discord.Embed(title=f'{name} - {title.title()}', description=f'''{', '.join(tags)} \n Partype: {partype}''', color=0xfda5b0)
                 embed.set_thumbnail(url=f'attachment://{champion_image}')
                 embed.add_field(name=f'(Passive) {passive_name}', value=f"{passive_description}", inline=False)
-                embed.add_field(name=f'(Q) {spells_names[0]}', value=f"{'/'.join(map(str, spells_cd[0]))} \n {spells_description[0]}", inline=False)
-                embed.add_field(name=f'(W) {spells_names[1]}', value=f"{'/'.join(map(str, spells_cd[1]))} \n {spells_description[1]}", inline=False)
-                embed.add_field(name=f'(E) {spells_names[2]}', value=f"{'/'.join(map(str, spells_cd[2]))} \n {spells_description[2]}", inline=False)
-                embed.add_field(name=f'(R) {spells_names[3]}', value=f"{'/'.join(map(str, spells_cd[3]))} \n {spells_description[3]}", inline=False)
+                embed.add_field(name=f'(Q) {spells_names[0]}', value=f"{spells_description[0]}", inline=False)
+                embed.add_field(name=f'(W) {spells_names[1]}', value=f"{spells_description[1]}", inline=False)
+                embed.add_field(name=f'(E) {spells_names[2]}', value=f"{spells_description[2]}", inline=False)
+                embed.add_field(name=f'(R) {spells_names[3]}', value=f"{spells_description[3]}", inline=False)
                 await ctx.send(file=file, embed=embed)
             except TypeError:
                 await ctx.send("That's not a valid champion name.")

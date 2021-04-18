@@ -74,6 +74,7 @@ class Abilities(commands.Cog):
             spells_names = []
             spells_description = []
             spells_cd = []
+            spells_cost = []
             spells_image = []
             spell_images_path = f'dragontail/{version}/img/spell/'
 
@@ -85,6 +86,7 @@ class Abilities(commands.Cog):
                         spells_names.append(spell['name'])  
                         spells_description.append(spell['description'])
                         spells_cd.append(spell['cooldown'])
+                        spells_cost.append(spell['cost'])
                         spells_image.append(spell['image']['full'])
             spell_image_full_path = spell_images_path + spells_image[0]
             f.close()
@@ -92,7 +94,9 @@ class Abilities(commands.Cog):
             file = discord.File(f"{spell_image_full_path}", filename=f"{spells_image[0]}")
             embed = discord.Embed(title=f'{name} - {title.title()}', description=f'', color=0xfda5b0)
             embed.set_thumbnail(url=f'attachment://{spells_image[0]}')
-            embed.add_field(name=f'(Q) {spells_names[0]}', value=f"{'/'.join(map(str, spells_cd[0]))} \n {spells_description[0]}", inline=False)
+            embed.add_field(name=f'(Q) {spells_names[0]}', value=f"{spells_description[0]}", inline=False)
+            embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[0]))}")
+            embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[0]))}")
             await ctx.send(file=file, embed=embed)
         except IndexError:
             await ctx.send("Oops, Couldn't find champion.") 
@@ -111,6 +115,7 @@ class Abilities(commands.Cog):
             spells_names = []
             spells_description = []
             spells_cd = []
+            spells_cost = []
             spells_image = []
             spell_images_path = f'dragontail/{version}/img/spell/'
 
@@ -122,6 +127,7 @@ class Abilities(commands.Cog):
                         spells_names.append(spell['name'])  
                         spells_description.append(spell['description'])
                         spells_cd.append(spell['cooldown'])
+                        spells_cost.append(spell['cost'])
                         spells_image.append(spell['image']['full'])
             spell_image_full_path = spell_images_path + spells_image[1]
             f.close()
@@ -129,7 +135,9 @@ class Abilities(commands.Cog):
             file = discord.File(f"{spell_image_full_path}", filename=f"{spells_image[1]}")
             embed = discord.Embed(title=f'{name} - {title.title()}', description=f'', color=0xfda5b0)
             embed.set_thumbnail(url=f'attachment://{spells_image[1]}')
-            embed.add_field(name=f'(W) {spells_names[1]}', value=f"{'/'.join(map(str, spells_cd[1]))} \n {spells_description[1]}", inline=False)
+            embed.add_field(name=f'(W) {spells_names[1]}', value=f"{spells_description[1]}", inline=False)
+            embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[1]))}")
+            embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[1]))}")
             await ctx.send(file=file, embed=embed)
         except IndexError:
             await ctx.send("Oops, Couldn't find champion.") 
@@ -148,6 +156,7 @@ class Abilities(commands.Cog):
             spells_names = []
             spells_description = []
             spells_cd = []
+            spells_cost = []
             spells_image = []
             spell_images_path = f'dragontail/{version}/img/spell/'
 
@@ -159,6 +168,7 @@ class Abilities(commands.Cog):
                         spells_names.append(spell['name'])  
                         spells_description.append(spell['description'])
                         spells_cd.append(spell['cooldown'])
+                        spells_cost.append(spell['cost'])
                         spells_image.append(spell['image']['full'])
             spell_image_full_path = spell_images_path + spells_image[2]
             f.close()
@@ -166,7 +176,9 @@ class Abilities(commands.Cog):
             file = discord.File(f"{spell_image_full_path}", filename=f"{spells_image[2]}")
             embed = discord.Embed(title=f'{name} - {title.title()}', description=f'', color=0xfda5b0)
             embed.set_thumbnail(url=f'attachment://{spells_image[2]}')
-            embed.add_field(name=f'(E) {spells_names[2]}', value=f"{'/'.join(map(str, spells_cd[2]))} \n {spells_description[2]}", inline=False)
+            embed.add_field(name=f'(W) {spells_names[2]}', value=f"{spells_description[2]}", inline=False)
+            embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[2]))}")
+            embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[2]))}")
             await ctx.send(file=file, embed=embed)
         except IndexError:
             await ctx.send("Oops, Couldn't find champion.") 
@@ -185,6 +197,7 @@ class Abilities(commands.Cog):
             spells_names = []
             spells_description = []
             spells_cd = []
+            spells_cost = []
             spells_image = []
             spell_images_path = f'dragontail/{version}/img/spell/'
 
@@ -196,6 +209,7 @@ class Abilities(commands.Cog):
                         spells_names.append(spell['name'])  
                         spells_description.append(spell['description'])
                         spells_cd.append(spell['cooldown'])
+                        spells_cost.append(spell['cost'])
                         spells_image.append(spell['image']['full'])
             spell_image_full_path = spell_images_path + spells_image[3]
             f.close()
@@ -203,7 +217,9 @@ class Abilities(commands.Cog):
             file = discord.File(f"{spell_image_full_path}", filename=f"{spells_image[3]}")
             embed = discord.Embed(title=f'{name} - {title.title()}', description=f'', color=0xfda5b0)
             embed.set_thumbnail(url=f'attachment://{spells_image[3]}')
-            embed.add_field(name=f'(R) {spells_names[3]}', value=f"{'/'.join(map(str, spells_cd[3]))} \n {spells_description[3]}", inline=False)
+            embed.add_field(name=f'(R) {spells_names[3]}', value=f"{spells_description[3]}", inline=False)
+            embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[3]))}")
+            embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[3]))}")
             await ctx.send(file=file, embed=embed)
         except IndexError:
             await ctx.send("Oops, Couldn't find champion.") 
@@ -213,7 +229,7 @@ class Abilities(commands.Cog):
     @ability.error
     async def ability_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Lookup a champion's specific ability.", color=0xfda5b0)
+            embed=discord.Embed(description="See detailed information of a champion's specific ability.", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!ability [champion] [ability]`')
             embed.add_field(name='Example', value='`!ability teemo q`')
             await ctx.send(embed=embed)
