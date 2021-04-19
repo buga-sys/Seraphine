@@ -14,5 +14,6 @@ client.load_extension('cogs.items')
 client.load_extension('cogs.abilities')
 client.load_extension('cogs.commands')
 client.load_extension('cogs.ownercommands')
+client.load_extension('cogs.other')
 
 client.run('ODMyOTgwMDg3NzAzMzM5MDMw.YHrrKA.eNNR5J8l1odAi_JyAt-E1mOXnEY')

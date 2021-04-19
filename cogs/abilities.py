@@ -10,7 +10,7 @@ class Abilities(commands.Cog):
     def __init__(self, client):
         self.client = client   
    
-    @commands.command(aliases=['a'])
+    @commands.command()
     async def ability(self, ctx, value, ability):
         if len(value) > 2:
             if ability == None:
