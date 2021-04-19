@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import json
 import traceback
+import re
 
 version = '11.8.1'
 
@@ -41,13 +42,16 @@ class Abilities(commands.Cog):
             passive_description = None
             passive_image = None
             passive_images_path = f'dragontail/{version}/img/passive/'
+            cid = None
 
             for k,v in champions_data.items():
                 if champion in k.lower():
                     name = v['name']
                     title = v['title']
+                    cid = v['key']
                     passive_name = v['passive']['name']
-                    passive_description = v['passive']['description']
+                    clean = re.compile('<.*?>')
+                    passive_description = re.sub(clean, "", v['passive']['description']) 
                     passive_image = v['passive']['image']['full']
             passive_image_full_path = passive_images_path + passive_image
             f.close()
@@ -55,6 +59,7 @@ class Abilities(commands.Cog):
             file = discord.File(f"{passive_image_full_path}", filename=f"{passive_image}")
             embed = discord.Embed(title=f'{name} - {title.title()}', description=f'', color=0xfda5b0)
             embed.set_thumbnail(url=f'attachment://{passive_image}')
+            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_p.gif')
             embed.add_field(name=f'(Passive) {passive_name}', value=f"{passive_description}", inline=False)
             await ctx.send(file=file, embed=embed)
         except IndexError:
@@ -82,9 +87,12 @@ class Abilities(commands.Cog):
                 if champion in k.lower():
                     name = v['name']
                     title = v['title']
+                    cid = v['key']
                     for spell in v['spells']:
                         spells_names.append(spell['name'])  
-                        spells_description.append(spell['description'])
+                        clean = re.compile('<.*?>')
+                        description = re.sub(clean, "", spell['description'])  
+                        spells_description.append(description)
                         spells_cd.append(spell['cooldown'])
                         spells_cost.append(spell['cost'])
                         spells_image.append(spell['image']['full'])
@@ -97,6 +105,7 @@ class Abilities(commands.Cog):
             embed.add_field(name=f'(Q) {spells_names[0]}', value=f"{spells_description[0]}", inline=False)
             embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[0]))}")
             embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[0]))}")
+            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_q.gif')
             await ctx.send(file=file, embed=embed)
         except IndexError:
             await ctx.send("Oops, Couldn't find champion.") 
@@ -123,9 +132,12 @@ class Abilities(commands.Cog):
                 if champion in k.lower():
                     name = v['name']
                     title = v['title']
+                    cid = v['key']
                     for spell in v['spells']:
                         spells_names.append(spell['name'])  
-                        spells_description.append(spell['description'])
+                        clean = re.compile('<.*?>')
+                        description = re.sub(clean, "", spell['description'])  
+                        spells_description.append(description)
                         spells_cd.append(spell['cooldown'])
                         spells_cost.append(spell['cost'])
                         spells_image.append(spell['image']['full'])
@@ -138,6 +150,7 @@ class Abilities(commands.Cog):
             embed.add_field(name=f'(W) {spells_names[1]}', value=f"{spells_description[1]}", inline=False)
             embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[1]))}")
             embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[1]))}")
+            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_w.gif')
             await ctx.send(file=file, embed=embed)
         except IndexError:
             await ctx.send("Oops, Couldn't find champion.") 
@@ -164,9 +177,12 @@ class Abilities(commands.Cog):
                 if champion in k.lower():
                     name = v['name']
                     title = v['title']
+                    cid = v['key']
                     for spell in v['spells']:
                         spells_names.append(spell['name'])  
-                        spells_description.append(spell['description'])
+                        clean = re.compile('<.*?>')
+                        description = re.sub(clean, "", spell['description'])  
+                        spells_description.append(description)
                         spells_cd.append(spell['cooldown'])
                         spells_cost.append(spell['cost'])
                         spells_image.append(spell['image']['full'])
@@ -179,6 +195,7 @@ class Abilities(commands.Cog):
             embed.add_field(name=f'(W) {spells_names[2]}', value=f"{spells_description[2]}", inline=False)
             embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[2]))}")
             embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[2]))}")
+            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_e.gif')
             await ctx.send(file=file, embed=embed)
         except IndexError:
             await ctx.send("Oops, Couldn't find champion.") 
@@ -205,9 +222,12 @@ class Abilities(commands.Cog):
                 if champion in k.lower():
                     name = v['name']
                     title = v['title']
+                    cid = v['key']
                     for spell in v['spells']:
                         spells_names.append(spell['name'])  
-                        spells_description.append(spell['description'])
+                        clean = re.compile('<.*?>')
+                        description = re.sub(clean, "", spell['description'])  
+                        spells_description.append(description)
                         spells_cd.append(spell['cooldown'])
                         spells_cost.append(spell['cost'])
                         spells_image.append(spell['image']['full'])
@@ -220,6 +240,7 @@ class Abilities(commands.Cog):
             embed.add_field(name=f'(R) {spells_names[3]}', value=f"{spells_description[3]}", inline=False)
             embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[3]))}")
             embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[3]))}")
+            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_r.gif')
             await ctx.send(file=file, embed=embed)
         except IndexError:
             await ctx.send("Oops, Couldn't find champion.") 
