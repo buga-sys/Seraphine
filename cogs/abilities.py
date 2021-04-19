@@ -12,20 +12,23 @@ class Abilities(commands.Cog):
    
     @commands.command(aliases=['a'])
     async def ability(self, ctx, value, ability):
-        if ability == None:
-            pass
-        elif ability.lower() == 'p' or ability.lower() == 'passive': 
-            await self.ability_passive(ctx, value)
-        elif ability.lower() == 'q':
-            await self.ability_q(ctx, value)
-        elif ability.lower() == 'w':
-            await self.ability_w(ctx, value)
-        elif ability.lower() == 'e':
-            await self.ability_e(ctx, value)
-        elif ability.lower() == 'r':
-            await self.ability_r(ctx, value)
+        if len(value) > 2:
+            if ability == None:
+                pass
+            elif ability.lower() == 'p' or ability.lower() == 'passive': 
+                await self.ability_passive(ctx, value)
+            elif ability.lower() == 'q':
+                await self.ability_q(ctx, value)
+            elif ability.lower() == 'w':
+                await self.ability_w(ctx, value)
+            elif ability.lower() == 'e':
+                await self.ability_e(ctx, value)
+            elif ability.lower() == 'r':
+                await self.ability_r(ctx, value)
+            else:
+                await ctx.send("That's not a valid ability.")
         else:
-            await ctx.send("That's not a valid ability.")
+            await ctx.send("Oops, Couldn't find champion.")
             
         
     
@@ -57,7 +60,7 @@ class Abilities(commands.Cog):
             f.close()
             
             file = discord.File(f"{passive_image_full_path}", filename=f"{passive_image}")
-            embed = discord.Embed(title=f'{name} - {title.title()}', description=f'', color=0xfda5b0)
+            embed = discord.Embed(title=f'{name} - {title.title()}', color=0xfda5b0)
             embed.set_thumbnail(url=f'attachment://{passive_image}')
             embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_p.gif')
             embed.add_field(name=f'(Passive) {passive_name}', value=f"{passive_description}", inline=False)
@@ -100,12 +103,12 @@ class Abilities(commands.Cog):
             f.close()
             
             file = discord.File(f"{spell_image_full_path}", filename=f"{spells_image[0]}")
-            embed = discord.Embed(title=f'{name} - {title.title()}', description=f'', color=0xfda5b0)
+            embed = discord.Embed(title=f'{name} - {title.title()}', color=0xfda5b0)
             embed.set_thumbnail(url=f'attachment://{spells_image[0]}')
+            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_q.gif')
             embed.add_field(name=f'(Q) {spells_names[0]}', value=f"{spells_description[0]}", inline=False)
             embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[0]))}")
             embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[0]))}")
-            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_q.gif')
             await ctx.send(file=file, embed=embed)
         except IndexError:
             await ctx.send("Oops, Couldn't find champion.") 
@@ -145,12 +148,12 @@ class Abilities(commands.Cog):
             f.close()
             
             file = discord.File(f"{spell_image_full_path}", filename=f"{spells_image[1]}")
-            embed = discord.Embed(title=f'{name} - {title.title()}', description=f'', color=0xfda5b0)
+            embed = discord.Embed(title=f'{name} - {title.title()}', color=0xfda5b0)
             embed.set_thumbnail(url=f'attachment://{spells_image[1]}')
+            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_w.gif')
             embed.add_field(name=f'(W) {spells_names[1]}', value=f"{spells_description[1]}", inline=False)
             embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[1]))}")
             embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[1]))}")
-            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_w.gif')
             await ctx.send(file=file, embed=embed)
         except IndexError:
             await ctx.send("Oops, Couldn't find champion.") 
@@ -190,12 +193,12 @@ class Abilities(commands.Cog):
             f.close()
             
             file = discord.File(f"{spell_image_full_path}", filename=f"{spells_image[2]}")
-            embed = discord.Embed(title=f'{name} - {title.title()}', description=f'', color=0xfda5b0)
+            embed = discord.Embed(title=f'{name} - {title.title()}', color=0xfda5b0)
             embed.set_thumbnail(url=f'attachment://{spells_image[2]}')
+            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_e.gif')
             embed.add_field(name=f'(E) {spells_names[2]}', value=f"{spells_description[2]}", inline=False)
             embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[2]))}")
             embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[2]))}")
-            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_e.gif')
             await ctx.send(file=file, embed=embed)
         except IndexError:
             await ctx.send("Oops, Couldn't find champion.") 
@@ -235,12 +238,12 @@ class Abilities(commands.Cog):
             f.close()
             
             file = discord.File(f"{spell_image_full_path}", filename=f"{spells_image[3]}")
-            embed = discord.Embed(title=f'{name} - {title.title()}', description=f'', color=0xfda5b0)
+            embed = discord.Embed(title=f'{name} - {title.title()}', color=0xfda5b0)
             embed.set_thumbnail(url=f'attachment://{spells_image[3]}')
+            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_r.gif')
             embed.add_field(name=f'(R) {spells_names[3]}', value=f"{spells_description[3]}", inline=False)
             embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[3]))}")
             embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[3]))}")
-            embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_r.gif')
             await ctx.send(file=file, embed=embed)
         except IndexError:
             await ctx.send("Oops, Couldn't find champion.") 
