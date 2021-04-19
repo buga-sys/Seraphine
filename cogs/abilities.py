@@ -192,7 +192,7 @@ class Abilities(commands.Cog):
             file = discord.File(f"{spell_image_full_path}", filename=f"{spells_image[2]}")
             embed = discord.Embed(title=f'{name} - {title.title()}', description=f'', color=0xfda5b0)
             embed.set_thumbnail(url=f'attachment://{spells_image[2]}')
-            embed.add_field(name=f'(W) {spells_names[2]}', value=f"{spells_description[2]}", inline=False)
+            embed.add_field(name=f'(E) {spells_names[2]}', value=f"{spells_description[2]}", inline=False)
             embed.add_field(name='Cooldown', value=f"{'/'.join(map(str, spells_cd[2]))}")
             embed.add_field(name='Cost', value=f"{'/'.join(map(str, spells_cost[2]))}")
             embed.set_image(url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/abilities_gifs/ability_{cid}_e.gif')
