@@ -4,8 +4,11 @@ import json
 import re
 import traceback
 import asyncio
+import os
+from dotenv import load_dotenv
 
-version = '11.8.1'
+load_dotenv()
+version = str(os.getenv('VERSION'))
 
 class Champions(commands.Cog):
     def __init__(self, client):

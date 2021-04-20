@@ -4,8 +4,11 @@ import json
 import re
 import asyncio
 import traceback
+import os
+from dotenv import load_dotenv
 
-version = '11.8.1'
+load_dotenv()
+version = str(os.getenv('VERSION'))
 
 class Items(commands.Cog):
     def __init__(self, client):

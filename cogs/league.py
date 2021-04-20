@@ -4,9 +4,19 @@ import requests
 import json
 import traceback
 import mysql.connector
+import os
+from dotenv import load_dotenv
 
-api = 'RGAPI-33a5f342-ceda-4ffa-b3f1-ac95cf58725b'
-version = '11.8.1'
+load_dotenv()
+api = str(os.getenv('API_KEY'))
+version = str(os.getenv('VERSION'))
+
+host = str(os.getenv('HOST'))
+database = str(os.getenv('DATABASE'))
+user = str(os.getenv('USER'))
+password = str(os.getenv('PASSWORD'))
+port = str(os.getenv('PORT'))
+
                 
 class League(commands.Cog):
     def __init__(self, client):
@@ -362,11 +372,11 @@ class League(commands.Cog):
         if region is None and summoner is None:
             try:
                 conn = mysql.connector.connect(
-                    host="eu02-sql.pebblehost.com",
-                    database="customer_174679_seraphine",
-                    user="customer_174679_seraphine",
-                    password="Eod#-HQD##91-0qd6fG@",
-                    port='3306')
+                    host=host,
+                    database=database,
+                    user=user,
+                    password=password,
+                    port=port)
             
                 cur = conn.cursor()
                 cur.execute(f"""SELECT * FROM profile WHERE user_id = '{user_id}'""")
@@ -398,11 +408,12 @@ class League(commands.Cog):
         else:
             try:
                 conn = mysql.connector.connect(
-                    host="eu02-sql.pebblehost.com",
-                    database="customer_174679_seraphine",
-                    user="customer_174679_seraphine",
-                    password="Eod#-HQD##91-0qd6fG@",
-                    port='3306')
+                    host=host,
+                    database=database,
+                    user=user,
+                    password=password,
+                    port=port)
+                
                 cur = conn.cursor()
                 cur.execute(f"""DELETE FROM profile WHERE user_id = '{user_id}'""")
                 cur.execute(f"""INSERT INTO profile(user_id, region, summoner)
