@@ -90,7 +90,6 @@ class Champions(commands.Cog):
 
                 champions_data = champions['data']
                 name = None
-                images_path = f'dragontail/img/champion/loading/'
                 skin_name = ''
                 skin_id = ''
                 pages = []
