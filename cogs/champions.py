@@ -6,6 +6,8 @@ import traceback
 import asyncio
 import os
 from dotenv import load_dotenv
+import requests
+import bs4
 
 load_dotenv()
 version = str(os.getenv('VERSION'))
@@ -156,6 +158,63 @@ class Champions(commands.Cog):
             embed.add_field(name='Usage', value='`!skins [champion]`')
             embed.add_field(name='Example', value='`!skins gwen`')
             await ctx.send(embed=embed) 
+            
+    @commands.command()
+    async def counter(self, ctx, champion):
+        with open(f'dragontail/{version}/data/en_GB/championFull.json', encoding='utf-8') as f:
+            champions = json.load(f)
+        champions_data = champions['data']
+        champion_key = None
+        for k,v in champions_data.items():
+            if champion.lower() in k.lower():
+                champion_key = v['key']
+        f.close()
+        print(champion_key)
+
+        champions_data = champions['data']
+        page = requests.get(f'https://app.mobalytics.gg/lol/champions/{champion}/build')
+        soup = bs4.BeautifulSoup(page.text, 'html.parser')
+        
+        weak_againt = []
+        weak_againt_percentage = []
+        strong_againt = []
+        strong_againt_percentage = []
+        best_synergy = []
+        best_synergy_percentage = []
+
+        if soup.find(class_='css-6q4pt9'):
+            for i in soup.find_all(class_='css-1w0si3o ebg788s4')[:3]:
+                weak_againt.append(i.text)
+            for i in soup.find_all(class_='css-1t0zj6v ebg788s6')[:3]:
+                weak_againt_percentage.append(i.text)    
+
+            for i in soup.find_all(class_='css-1w0si3o ebg788s4')[3:6]:
+                strong_againt.append(i.text)
+            for i in soup.find_all(class_='css-1t0zj6v ebg788s6')[3:6]:
+                strong_againt_percentage.append(i.text) 
+
+            for i in soup.find_all(class_='css-1w0si3o ebg788s4')[6:9]:
+                best_synergy.append(i.text)
+            for i in soup.find_all(class_='css-1t0zj6v ebg788s6')[6:9]:
+                best_synergy_percentage.append(i.text)
+            
+            embed = discord.Embed(title=f'{champion.upper()} MATCHUPS OVERVIEW')
+            embed.add_field(name='WEAK AGAINST', value=f'**{weak_againt[0]}** \n {weak_againt_percentage[0]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'**{weak_againt[1]}** \n {weak_againt_percentage[1]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'**{weak_againt[2]}** \n {weak_againt_percentage[2]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'\u200B', inline=False)
+            embed.add_field(name='STRONG AGAINST', value=f'**{strong_againt[0]}** \n {strong_againt_percentage[0]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'**{strong_againt[1]}** \n {strong_againt_percentage[1]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'**{strong_againt[2]}** \n {strong_againt_percentage[2]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'\u200B', inline=False)
+            embed.add_field(name='BEST SYNERGY', value=f'**{best_synergy[0]}** \n {best_synergy_percentage[0]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'**{best_synergy[1]}** \n {best_synergy_percentage[1]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'**{best_synergy[2]}** \n {best_synergy_percentage[2]} \n Win Rate')
+            embed.set_footer(text='data from mobalytics.gg')
+            embed.set_image(url=f'https://raw.githubusercontent.com/buga-sys/championHeaders/master/{champion_key}.png')
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send(f"Couldn't find counter data for {champion.capitalize()}.")
         
             
 
