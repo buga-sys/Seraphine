@@ -75,9 +75,8 @@ class Champions(commands.Cog):
     @champion.error
     async def champion_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Display information about a champion.", color=0xfda5b0)
+            embed=discord.Embed(description="Infomation about a champion.", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!champion [champion]`')
-            embed.add_field(name='Example', value='`!champion annie`')
             await ctx.send(embed=embed) 
             
     @commands.command()
@@ -154,13 +153,15 @@ class Champions(commands.Cog):
     @skins.error
     async def skins_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Display a champion's skins.", color=0xfda5b0)
+            embed=discord.Embed(description="List of a champion's skins.", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!skins [champion]`')
-            embed.add_field(name='Example', value='`!skins gwen`')
             await ctx.send(embed=embed) 
             
     @commands.command()
     async def counter(self, ctx, champion):
+        weak = '<:red_diamond:834133775877013525>'
+        strong = '<:blue_diamond:834133776060907591>'
+        
         with open(f'dragontail/{version}/data/en_GB/championFull.json', encoding='utf-8') as f:
             champions = json.load(f)
         champions_data = champions['data']
@@ -169,7 +170,6 @@ class Champions(commands.Cog):
             if champion.lower() in k.lower():
                 champion_key = v['key']
         f.close()
-        print(champion_key)
 
         champions_data = champions['data']
         page = requests.get(f'https://app.mobalytics.gg/lol/champions/{champion}/build')
@@ -199,24 +199,29 @@ class Champions(commands.Cog):
                 best_synergy_percentage.append(i.text)
             
             embed = discord.Embed(title=f'{champion.upper()} MATCHUPS OVERVIEW')
-            embed.add_field(name='WEAK AGAINST', value=f'**{weak_againt[0]}** \n {weak_againt_percentage[0]} \n Win Rate')
+            embed.add_field(name=f'{weak} WEAK AGAINST', value=f'**{weak_againt[0]}** \n {weak_againt_percentage[0]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'**{weak_againt[1]}** \n {weak_againt_percentage[1]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'**{weak_againt[2]}** \n {weak_againt_percentage[2]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'\u200B', inline=False)
-            embed.add_field(name='STRONG AGAINST', value=f'**{strong_againt[0]}** \n {strong_againt_percentage[0]} \n Win Rate')
+            embed.add_field(name=f'{strong} STRONG AGAINST', value=f'**{strong_againt[0]}** \n {strong_againt_percentage[0]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'**{strong_againt[1]}** \n {strong_againt_percentage[1]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'**{strong_againt[2]}** \n {strong_againt_percentage[2]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'\u200B', inline=False)
-            embed.add_field(name='BEST SYNERGY', value=f'**{best_synergy[0]}** \n {best_synergy_percentage[0]} \n Win Rate')
+            embed.add_field(name=f'{strong} BEST SYNERGY', value=f'**{best_synergy[0]}** \n {best_synergy_percentage[0]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'**{best_synergy[1]}** \n {best_synergy_percentage[1]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'**{best_synergy[2]}** \n {best_synergy_percentage[2]} \n Win Rate')
             embed.set_footer(text='data from mobalytics.gg')
             embed.set_image(url=f'https://raw.githubusercontent.com/buga-sys/championHeaders/master/{champion_key}.png')
             await ctx.send(embed=embed)
         else:
-            await ctx.send(f"Couldn't find counter data for {champion.capitalize()}.")
+            await ctx.send(f"Couldn't fetch data for {champion.capitalize()}.")
         
-            
+    @counter.error
+    async def counter_error(self, ctx, error):
+        if isinstance(error, commands.errors.MissingRequiredArgument):
+            embed=discord.Embed(description="Champion matchups overview.", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!counter [champion]`')
+            await ctx.send(embed=embed) 
 
 def setup(client):
     client.add_cog(Champions(client))

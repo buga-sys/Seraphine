@@ -105,7 +105,7 @@ class Items(commands.Cog):
     @item.error
     async def item_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Display information about an item.", color=0xfda5b0)
+            embed=discord.Embed(description="Detailed information of an item.", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!item [item]`')
             embed.add_field(name='Example', value='`!item infinity edge`')
             await ctx.send(embed=embed) 
@@ -246,9 +246,9 @@ class Items(commands.Cog):
     @itemtype.error
     async def itemtype_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Display items of specific type.", color=0xfda5b0)
+            embed=discord.Embed(description="List of items based on type.", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!itemtype [type]`')
-            embed.add_field(name='Example', value='`!itemtype ability power`')
+            embed.add_field(name='Example', value='`!itemtype armor`')
             await ctx.send(embed=embed)      
 
 def setup(client):

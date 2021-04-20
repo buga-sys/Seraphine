@@ -256,7 +256,7 @@ class Abilities(commands.Cog):
     @ability.error
     async def ability_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="See detailed information of a champion's specific ability.", color=0xfda5b0)
+            embed=discord.Embed(description="Detailed information of a skill.", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!ability [champion] [ability]`')
             embed.add_field(name='Example', value='`!ability teemo q`')
             await ctx.send(embed=embed)
