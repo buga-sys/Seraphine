@@ -306,6 +306,13 @@ class Champions(commands.Cog):
                 await ctx.send(f"No data was found for **{champion.capitalize()}**.")
             else:
                 await ctx.send(f"No data was found for **{champion.capitalize()}**, role: **{role}**.")
+                
+    @counter.error
+    async def counter_error(self, ctx, error):
+        if isinstance(error, commands.errors.MissingRequiredArgument):
+            embed=discord.Embed(description="Champion counters.", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!counter [champion] [optional: role]`')
+            await ctx.send(embed=embed) 
             
 
 def setup(client):
