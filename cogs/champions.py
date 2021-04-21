@@ -157,9 +157,10 @@ class Champions(commands.Cog):
             await ctx.send(embed=embed) 
             
     @commands.command()
-    async def counter(self, ctx, champion):
+    async def counter(self, ctx, champion, role=None):
         weak = '<:red_diamond:834133775877013525>'
         strong = '<:blue_diamond:834133776060907591>'
+        roles = ['adc', 'top', 'mid', 'jungle', 'support']
         
         with open(f'dragontail/{version}/data/en_GB/championFull.json', encoding='utf-8') as f:
             champions = json.load(f)
@@ -171,8 +172,28 @@ class Champions(commands.Cog):
         f.close()
 
         champions_data = champions['data']
-        page = requests.get(f'https://app.mobalytics.gg/lol/champions/{champion}/build')
+        
+        if role is None:
+            page = requests.get(f'https://app.mobalytics.gg/lol/champions/{champion}/build')
+        elif role.lower() in roles:
+            page = requests.get(f'https://app.mobalytics.gg/lol/champions/{champion}/build?role={role}')
+        else:
+            embed=discord.Embed(description="Invalid role!", color=0xfda5b0)
+            embed.add_field(name='Roles', value='`top` `jungle` `mid` `adc` `support`')
+            await ctx.send(embed=embed) 
+            
         soup = bs4.BeautifulSoup(page.text, 'html.parser')
+        
+        title = soup.find(class_='css-4hiyg0 e1c5gntn0').text
+        default = soup.find('div', style=lambda value: value and 'border-color:var(--gold);' in value)
+        default_role = default('img')[0]['alt']
+            
+        with open('data/roles.json') as f:
+            rolesjson = json.load(f)
+        role_icon = ''
+        for r in rolesjson:
+            if r['id'].lower() == default_role.lower():
+                role_icon = r['emoji']
         
         weak_againt = []
         weak_againt_percentage = []
@@ -197,7 +218,7 @@ class Champions(commands.Cog):
             for i in soup.find_all(class_='css-1t0zj6v ebg788s6')[6:9]:
                 best_synergy_percentage.append(i.text)
             
-            embed = discord.Embed(title=f'{champion.upper()} MATCHUPS OVERVIEW')
+            embed = discord.Embed(title=f'{title.upper()}', description=f'Results for role: {role_icon}')
             embed.add_field(name=f'{weak} WEAK AGAINST', value=f'**{weak_againt[0]}** \n {weak_againt_percentage[0]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'**{weak_againt[1]}** \n {weak_againt_percentage[1]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'**{weak_againt[2]}** \n {weak_againt_percentage[2]} \n Win Rate')
@@ -213,13 +234,16 @@ class Champions(commands.Cog):
             embed.set_image(url=f'https://raw.githubusercontent.com/buga-sys/championHeaders/master/{champion_key}.png')
             await ctx.send(embed=embed)
         else:
-            await ctx.send(f"Couldn't fetch data for {champion.capitalize()}.")
+            if role is None:
+                await ctx.send(f"No data was found for **{champion.capitalize()}**.")
+            else:
+                await ctx.send(f"No data was found for **{champion.capitalize()}**, role: **{role}**.")
         
     @counter.error
     async def counter_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
             embed=discord.Embed(description="Champion matchups overview.", color=0xfda5b0)
-            embed.add_field(name='Usage', value='`!counter [champion]`')
+            embed.add_field(name='Usage', value='`!counter [champion] [optional: role]`')
             await ctx.send(embed=embed) 
 
 def setup(client):
