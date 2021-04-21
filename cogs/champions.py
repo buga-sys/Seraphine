@@ -230,7 +230,6 @@ class Champions(commands.Cog):
             embed.add_field(name=f'{strong} BEST SYNERGY', value=f'**{best_synergy[0]}** \n {best_synergy_percentage[0]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'**{best_synergy[1]}** \n {best_synergy_percentage[1]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'**{best_synergy[2]}** \n {best_synergy_percentage[2]} \n Win Rate')
-            embed.set_footer(text='data from mobalytics.gg')
             embed.set_image(url=f'https://raw.githubusercontent.com/buga-sys/championHeaders/master/{champion_key}.png')
             await ctx.send(embed=embed)
         else:
