@@ -14,28 +14,33 @@ class Commands(commands.Cog):
     async def help(self, ctx):
         invite_link = 'https://discord.com/oauth2/authorize?client_id=818488537456181248&permissions=59392&scope=bot'
         embed=discord.Embed(color=0xfda5b0)
-        embed.set_thumbnail(url='')
-        embed.set_author(name='Seraphine', icon_url='')
+        embed.set_author(name='Seraphine')
         embed.add_field(name="Commands", value="To see list of commands: `!commands`", inline=False)
-        embed.add_field(name="Invite", value=f"Click [here]({invite_link}) to invite the bot to your server.", inline=False)
+        embed.add_field(name="Invite", value=f"Click [**here**]({invite_link}) to invite the bot to your server.", inline=False)
+        await ctx.send(embed=embed)
+    
+    @commands.command()
+    async def invite(self, ctx):
+        invite_link = 'https://discord.com/oauth2/authorize?client_id=818488537456181248&permissions=59392&scope=bot'
+        embed=discord.Embed(title='Seraphine Invite', description="Here's the link to invite the bot to your server!", color=0xfda5b0)
+        embed.add_field(name="Invite", value=f"[**Click here**]({invite_link})", inline=False)
         await ctx.send(embed=embed)
     
     @commands.command(name='commands', aliases=['cmds'])
     async def _commands(self, ctx):
-  
         embed=discord.Embed(title="Commands", color=0xfda5b0)
-        embed.add_field(name='profile', value="Display a summoner's profile.", inline=False)
-        embed.add_field(name='myprofile', value="Display your summoner's profile.", inline=False)
-        embed.add_field(name='history', value="Display a summoner's match history.", inline=False)
-        embed.add_field(name='champion', value="Infomation about a champion.", inline=False)
         embed.add_field(name='ability', value="Detailed information of a skill.", inline=False)
-        embed.add_field(name='matchup', value="Champion matchups overview.", inline=False)
+        embed.add_field(name='champion', value="Infomation about a champion.", inline=False)
         embed.add_field(name='counter', value="Champion counters.", inline=False)
-        embed.add_field(name='skins', value="List of a champion's skins.", inline=False)
+        embed.add_field(name='history', value="Display a summoner's match history.", inline=False)
+        embed.add_field(name='invite', value="Invite the bot to your server.", inline=False)
         embed.add_field(name='item', value="Detailed information of an item.", inline=False)
         embed.add_field(name='itemtype', value="List of items based on type.", inline=False)
+        embed.add_field(name='matchup', value="Champion matchups overview.", inline=False)
+        embed.add_field(name='myprofile', value="Display your summoner's profile.", inline=False)
         embed.add_field(name='patchnotes', value="Latest patch notes.", inline=False)
-        embed.set_thumbnail(url='')
+        embed.add_field(name='profile', value="Display a summoner's profile.", inline=False)
+        embed.add_field(name='skins', value="List of a champion's skins.", inline=False)
         embed.set_footer(text="use prefix ! before each command.")
         await ctx.send(embed=embed)  
 

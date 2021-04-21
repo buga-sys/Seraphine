@@ -86,6 +86,8 @@ class Items(commands.Cog):
             description = description.replace('</rarityMythic>', '**')
             description = description.replace('<rarityLegendary>', '**')
             description = description.replace('</rarityLegendary>', '**')
+            description = description.replace('<rarityGeneric>', '**')
+            description = description.replace('</rarityGeneric>', '**')
             description = description.replace('<br>', '\n')
             rx = r"\.(?=\S)"
             description = re.sub(rx, ". ", description)
@@ -189,6 +191,8 @@ class Items(commands.Cog):
                     description = description.replace('</rarityMythic>', '**')
                     description = description.replace('<rarityLegendary>', '**')
                     description = description.replace('</rarityLegendary>', '**')
+                    description = description.replace('<rarityGeneric>', '**')
+                    description = description.replace('</rarityGeneric>', '**')
                     description = description.replace('<br>', '\n')
                     rx = r"\.(?=\S)"
                     description = re.sub(rx, ". ", description)
