@@ -1,1 +1,6 @@
 /dragontail
+/abilities
+*.gitignore
+cogs/__pycache__/
+.env
+/championHeaders
