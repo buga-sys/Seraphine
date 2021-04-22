@@ -169,9 +169,9 @@ class Champions(commands.Cog):
         for k,v in champions_data.items():
             if champion.lower() in k.lower():
                 champion_key = v['key']
+                champion_image = v['image']['full']
         f.close()
-
-        champions_data = champions['data']
+        
         
         if role is None:
             page = requests.get(f'https://app.mobalytics.gg/lol/champions/{champion}/build')
@@ -217,19 +217,44 @@ class Champions(commands.Cog):
                 best_synergy.append(i.text)
             for i in soup.find_all(class_='css-1t0zj6v ebg788s6')[6:9]:
                 best_synergy_percentage.append(i.text)
+                
+                
+            with open('data/champions.json', encoding='utf-8') as f:
+                emojis = json.load(f)
+            for e in emojis:
+                if e['name'] == weak_againt[0]:
+                    emoji_weak_uno = e['emoji']
+                if e['name'] == weak_againt[1]:
+                    emoji_weak_dos = e['emoji']
+                if e['name'] == weak_againt[2]:
+                    emoji_weak_tres = e['emoji']
+                if e['name'] == strong_againt[0]:
+                    emoji_strong_uno = e['emoji']
+                if e['name'] == strong_againt[1]:
+                    emoji_strong_dos = e['emoji']
+                if e['name'] == strong_againt[2]:
+                    emoji_strong_tres = e['emoji']
+                if e['name'] == best_synergy[0]:
+                    emoji_synergy_uno = e['emoji']
+                if e['name'] == best_synergy[1]:
+                    emoji_synergy_dos = e['emoji']
+                if e['name'] == best_synergy[2]:
+                    emoji_synergy_tres = e['emoji']
+            f.close()
             
-            embed = discord.Embed(title=f'{title.upper()}', description=f'Results for role: {role_icon}', color=0xfda5b0)
-            embed.add_field(name=f'{weak} WEAK AGAINST', value=f'**{weak_againt[0]}** \n {weak_againt_percentage[0]} \n Win Rate')
-            embed.add_field(name='\u200B', value=f'**{weak_againt[1]}** \n {weak_againt_percentage[1]} \n Win Rate')
-            embed.add_field(name='\u200B', value=f'**{weak_againt[2]}** \n {weak_againt_percentage[2]} \n Win Rate')
+            embed = discord.Embed(description=f'Results for role: {role_icon}', color=0xfda5b0)
+            embed.set_author(name=f'{title}', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{champion_image}')
+            embed.add_field(name=f'{weak} WEAK AGAINST', value=f'{emoji_weak_uno} **{weak_againt[0]}** \n {weak_againt_percentage[0]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'{emoji_weak_dos} **{weak_againt[1]}** \n {weak_againt_percentage[1]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'{emoji_weak_tres} **{weak_againt[2]}** \n {weak_againt_percentage[2]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'\u200B', inline=False)
-            embed.add_field(name=f'{strong} STRONG AGAINST', value=f'**{strong_againt[0]}** \n {strong_againt_percentage[0]} \n Win Rate')
-            embed.add_field(name='\u200B', value=f'**{strong_againt[1]}** \n {strong_againt_percentage[1]} \n Win Rate')
-            embed.add_field(name='\u200B', value=f'**{strong_againt[2]}** \n {strong_againt_percentage[2]} \n Win Rate')
+            embed.add_field(name=f'{strong} STRONG AGAINST', value=f'{emoji_strong_uno} **{strong_againt[0]}** \n {strong_againt_percentage[0]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'{emoji_strong_dos} **{strong_againt[1]}** \n {strong_againt_percentage[1]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'{emoji_strong_tres} **{strong_againt[2]}** \n {strong_againt_percentage[2]} \n Win Rate')
             embed.add_field(name='\u200B', value=f'\u200B', inline=False)
-            embed.add_field(name=f'{strong} BEST SYNERGY', value=f'**{best_synergy[0]}** \n {best_synergy_percentage[0]} \n Win Rate')
-            embed.add_field(name='\u200B', value=f'**{best_synergy[1]}** \n {best_synergy_percentage[1]} \n Win Rate')
-            embed.add_field(name='\u200B', value=f'**{best_synergy[2]}** \n {best_synergy_percentage[2]} \n Win Rate')
+            embed.add_field(name=f'{strong} BEST SYNERGY', value=f'{emoji_synergy_uno} **{best_synergy[0]}** \n {best_synergy_percentage[0]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'{emoji_synergy_dos} **{best_synergy[1]}** \n {best_synergy_percentage[1]} \n Win Rate')
+            embed.add_field(name='\u200B', value=f'{emoji_synergy_tres} **{best_synergy[2]}** \n {best_synergy_percentage[2]} \n Win Rate')
             embed.set_image(url=f'https://raw.githubusercontent.com/buga-sys/championHeaders/master/{champion_key}.png')
             await ctx.send(embed=embed)
         else:
@@ -258,8 +283,8 @@ class Champions(commands.Cog):
         for k,v in champions_data.items():
             if champion.lower() in k.lower():
                 champion_key = v['key']
+                champion_image = v['image']['full']
         f.close()
-        champions_data = champions['data']
         
         if role is None:
             page = requests.get(f'https://app.mobalytics.gg/lol/champions/{champion}/counters')
@@ -293,12 +318,46 @@ class Champions(commands.Cog):
                 counter = [champion, matches, win_rate]
                 counters.append(counter)
             counters.sort(key= lambda x: float(x[2][:-1]), reverse=True)
-            nl = '\n'
+            nl = '\n'   
+
+            with open('data/champions.json', encoding='utf-8') as f:
+                emojis = json.load(f)
+            for e in emojis:
+                for c in counters:
+                    if e['name'] == c[0]:
+                        emoji = e['emoji']
+                        newstring = emoji + ' ' + c[0]
+                        c[0] = newstring
+            f.close()
             
-            embed = discord.Embed(title=f'{title}', description=f'Results for role: {role_icon}', color=0xfda5b0)
-            embed.add_field(name='vs Champion', value=f"{f'{nl}'.join([c[0] for c in counters[:10]])}")
-            embed.add_field(name='Matches', value=f"{f'{nl}'.join([c[1] for c in counters[:10]])}")
-            embed.add_field(name='Win Rate', value=f"{f'{nl}'.join([c[2] for c in counters[:10]])}")
+            embed = discord.Embed(description=f'Results for role: {role_icon}', color=0xfda5b0)
+            embed.set_author(name=f'{title}', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{champion_image}')
+            embed.add_field(name='Champions', value=f"""
+                            **{counters[0][0]}** — **{counters[0][2]}**
+                            
+                            **{counters[1][0]}** — **{counters[1][2]}**
+                            
+                            **{counters[2][0]}** — **{counters[2][2]}**
+                            
+                            **{counters[3][0]}** — **{counters[3][2]}**
+                            
+                            **{counters[4][0]}** — **{counters[4][2]}**
+                            
+                            **{counters[5][0]}** — **{counters[5][2]}**
+                            """)
+            embed.add_field(name='\u200B', value=f"""
+                            **{counters[6][0]}** — **{counters[6][2]}**
+                            
+                            **{counters[7][0]}** — **{counters[7][2]}**
+                            
+                            **{counters[8][0]}** — **{counters[8][2]}**
+                            
+                            **{counters[9][0]}** — **{counters[9][2]}**
+                            
+                            **{counters[10][0]}** — **{counters[10][2]}**
+                            
+                            **{counters[11][0]}** — **{counters[11][2]}**
+                            """)
             embed.set_image(url=f'https://raw.githubusercontent.com/buga-sys/championHeaders/master/{champion_key}.png')
             await ctx.send(embed=embed)
         else:
@@ -313,6 +372,41 @@ class Champions(commands.Cog):
             embed=discord.Embed(description="Champion counters.", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!counter [champion] [optional: role]`')
             await ctx.send(embed=embed) 
+            
+    @commands.command()
+    async def rotation(self, ctx):
+        r = requests.get('https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=RGAPI-2ae7c7ec-e271-4b31-afb8-383f082c5a4f')
+        rotation_json = r.json()
+        
+        temp = []
+        champion_names = []        
+        with open(f'dragontail/11.8.1/data/en_GB/champion.json', encoding="utf8") as f:
+            champion = json.load(f)
+        for p in rotation_json['freeChampionIds']:
+            for k,v in champion['data'].items():
+                if v['key'] == str(p):
+                    temp.append(v['name'])
+        f.close()   
+        
+        with open('data/champions.json', encoding='utf-8') as f:
+                emojis = json.load(f)
+        for e in emojis:
+            for c in temp:
+                if e['name'] == c:
+                    emoji = e['emoji']
+                    newstring = emoji + ' ' + c
+                    champion_names.append(newstring)
+        f.close()
+        nl = '\n'
+        
+        embed = discord.Embed(title='Champion Rotations',description=f"This week's free rotation:", color=0xfda5b0)
+        embed.set_thumbnail(url='https://seraphine-bot.s3.eu-central-1.amazonaws.com/lol_icon_small.png')
+        embed.add_field(name='\u200B', value=f"**{f'{nl}'.join([c for c in champion_names[:10]])}**")
+        embed.add_field(name='\u200B', value=f"**{f'{nl}'.join([c for c in champion_names[10:]])}**")
+        await ctx.send(embed=embed)
+        
+                
+        
             
 
 def setup(client):

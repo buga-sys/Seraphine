@@ -9,6 +9,7 @@ class Commands(commands.Cog):
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandNotFound):
             return
+        raise error
         
     @commands.command()
     async def help(self, ctx):
@@ -40,6 +41,7 @@ class Commands(commands.Cog):
         embed.add_field(name='myprofile', value="Display your summoner's profile.", inline=False)
         embed.add_field(name='patchnotes', value="Latest patch notes.", inline=False)
         embed.add_field(name='profile', value="Display a summoner's profile.", inline=False)
+        embed.add_field(name='rotation', value="Weekly free-to-play champion rotation.", inline=False)
         embed.add_field(name='skins', value="List of a champion's skins.", inline=False)
         embed.set_footer(text="use prefix ! before each command.")
         await ctx.send(embed=embed)  

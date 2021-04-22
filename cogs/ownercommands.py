@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import os
+import json
 
 class OwnerCommands(commands.Cog):
     def __init__(self, client):
@@ -73,6 +74,19 @@ class OwnerCommands(commands.Cog):
             return
         await guild.leave()
         await ctx.send(f"Left guild: {guild.name} ({guild.id})")
+    
+    @commands.command()
+    @commands.is_owner()
+    async def emojis(self, ctx):   
+        mydata = []    
+        for emoji in ctx.guild.emojis:
+            emojis = {"id": f"{emoji.name}",
+                      "name": f"{emoji.name}", 
+                "emoji": f"<:{emoji.name}:{emoji.id}>"
+                }
+            mydata.append(emojis)
+        print(mydata)
+                
     
     
         

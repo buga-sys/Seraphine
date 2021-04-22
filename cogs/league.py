@@ -190,6 +190,8 @@ class League(commands.Cog):
                 live_champion_name = None
                 queue_type = None
                 live_data = ''
+                champion_clear_name = None
+                
                 
                 if live_request.status_code == 200:
                     for p in live_json['participants']:
@@ -200,6 +202,7 @@ class League(commands.Cog):
                             for k,v in champion['data'].items():
                                 if v['key'] == str(live_champion_id):
                                     live_champion_name = v['name']
+                                    champion_clear_name = v['id']
                     with open('data/queues.json', encoding="utf8") as f:
                         queue = json.load(f)   
                     for q in queue:
@@ -209,7 +212,13 @@ class League(commands.Cog):
                         else:
                             queue_type = 'Custom'
                     f.close()
-                    live_data = f'Playing a **{queue_type}** match as **{live_champion_name}**.'
+                    with open('data/champions.json', encoding='utf-8') as f:
+                        emojis = json.load(f)
+                    for e in emojis:
+                        if champion_clear_name == e['id']:
+                            emoji = e['emoji']
+                    f.close()
+                    live_data = f'Playing a **{queue_type}** match as {emoji} **{live_champion_name}**.'
                 else:
                     live_data = 'Not in an active game.'
                           
@@ -306,6 +315,7 @@ class League(commands.Cog):
                 gold = None
                 queue_type = None
                 participant_id = None
+                champion_clear_name = None
                 
                 for m in matchlist:
                     game_id = m['gameId']
@@ -316,6 +326,13 @@ class League(commands.Cog):
                     for k,v in champion['data'].items():
                         if v['key'] == f'{champion_id}':
                             champion_name = v['name']
+                            champion_clear_name = v['id']
+                    f.close()
+                    with open('data/champions.json', encoding='utf-8') as f:
+                        emojis = json.load(f)
+                    for e in emojis:
+                        if champion_clear_name == e['id']:
+                            emoji = e['emoji']
                     f.close()
                     try:
                         game_request = requests.get(f'https://{server}.api.riotgames.com/lol/match/v4/matches/{game_id}?api_key={api}')
@@ -343,7 +360,7 @@ class League(commands.Cog):
                             status = win if p['stats']['win'] == True else loss
                             minions = p['stats']['totalMinionsKilled']
                             gold = p['stats']['goldEarned']
-                    embed.add_field(name=f'{status} {champion_name} - ({queue_type})', value=f'''{kills} / {deaths} / {assists} \u200B \u200B <:minion:823209384908816404>{minions} \u200B \u200B <:gold:823209384942370836>{gold}''', inline=False)
+                    embed.add_field(name=f'{status} {emoji} {champion_name} - ({queue_type})', value=f'''{kills} / {deaths} / {assists} \u200B \u200B <:minion:823209384908816404>{minions} \u200B \u200B <:gold:823209384942370836>{gold}''', inline=False)
                 await msg.edit(embed=embed) 
             except KeyError:
                 embed=discord.Embed(description="Oops, Couldn't find summoner!", color=0xfda5b0)
