@@ -120,7 +120,19 @@ class League(commands.Cog):
                     for k,v in champion['data'].items():
                         if v['key'] == str(cid):
                             champion_name.append(v['name'])
-                    f.close()      
+                    f.close()
+                    
+                with open('data/champions.json', encoding='utf-8') as f:
+                    emojis = json.load(f)
+                for e in emojis:
+                    if e['name'] == champion_name[0]:
+                        mastery_uno_emoji = e['emoji']
+                    if e['name'] == champion_name[1]:
+                        mastery_dos_emoji = e['emoji']
+                    if e['name'] == champion_name[2]:
+                        mastery_tres_emoji = e['emoji']
+                f.close()
+
                         
                 try:        
                     league_request = requests.get(f'https://{server}.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_id}?api_key={api}')
@@ -235,9 +247,9 @@ class League(commands.Cog):
                 embed.add_field(name='Recent 10 Games', value=f'{average_kills} / {average_deaths} / {average_assists} \n {last_wins}W {last_losses}L \n Win Ratio {last_win_percentage}% \n \u200B')
                 embed.add_field(name='\u200B', value='\u200B')
                 embed.add_field(name='Highest Champion Mastery', value=f'''
-                                **[{champion_level[0]}]** {champion_name[0]}: {champion_points[0]:,}
-                                **[{champion_level[1]}]** {champion_name[1]}: {champion_points[1]:,}
-                                **[{champion_level[2]}]** {champion_name[2]}: {champion_points[2]:,}
+                                **[{champion_level[0]}]** {mastery_uno_emoji} {champion_name[0]}: {champion_points[0]:,}
+                                **[{champion_level[1]}]** {mastery_dos_emoji} {champion_name[1]}: {champion_points[1]:,}
+                                **[{champion_level[2]}]** {mastery_tres_emoji} {champion_name[2]}: {champion_points[2]:,}
                                 \u200B''')
                 embed.add_field(name='Live Game', value=live_data)
                 await msg.edit(embed=embed) 
