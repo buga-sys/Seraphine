@@ -24,11 +24,13 @@ class League(commands.Cog):
         
     @commands.command()
     async def profile(self, ctx, region, *, summoner):
-        region = region.lower()
-        if region == 'euw' or region == 'br' or region == 'na' or region == 'eun' or region == 'jp' or region == 'la' or region == 'oc' or region == 'tr' or region == 'kr' or region == 'ru':
-            server = region
-            if region == 'euw' or region == 'br' or region == 'na' or region == 'eun' or region == 'jp' or region == 'la' or region == 'oc' or region == 'tr':
-                server = server + '1'
+        regions = ['euw', 'br', 'na', 'eune', 'jp', 'las', 'lan', 'oce', 'tr', 'kr', 'ru']
+        servers = {'euw':'euw1','br':'br1', 'na':'na1', 'eune':'eun1', 'jp':'jp1', 'las':'la2', 'lan':'la1', 'oce':'oc1', 'tr':'tr1', 'kr':'kr', 'ru':'ru'}
+        
+        if region.lower() in regions:
+            for k,v in servers.items():
+                if region.lower() == k:
+                    server = v
             try:
                 try:
                     summoner_request = requests.get(f'https://{server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner}?api_key={api}')
@@ -264,8 +266,8 @@ class League(commands.Cog):
                     
         else:
             embed=discord.Embed(description="Invalid region!", color=0xfda5b0)
-            embed.add_field(name='Regions', value='`euw` `br` `na` `eun` `jp` `la` `oc` `tr` `kr` `ru`')
-            await ctx.send(embed=embed) 
+            embed.add_field(name='Regions', value='`br` `eune` `euw` `jp` `kr` `lan` `las` `na` `oce` `ru` `tr`')
+            await ctx.send(embed=embed)   
     
     @profile.error
     async def profile_error(self, ctx, error):
@@ -276,11 +278,12 @@ class League(commands.Cog):
     
     @commands.command()
     async def history(self, ctx, region, *, summoner):
-        region = region.lower()
-        if region == 'euw' or region == 'br' or region == 'na' or region == 'eun' or region == 'jp' or region == 'la' or region == 'oc' or region == 'tr' or region == 'kr' or region == 'ru':
-            server = region
-            if region == 'euw' or region == 'br' or region == 'na' or region == 'eun' or region == 'jp' or region == 'la' or region == 'oc' or region == 'tr':
-                server = server + '1'
+        regions = ['euw', 'br', 'na', 'eune', 'jp', 'las', 'lan', 'oce', 'tr', 'kr', 'ru']
+        servers = {'euw':'euw1','br':'br1', 'na':'na1', 'eune':'eun1', 'jp':'jp1', 'las':'la2', 'lan':'la1', 'oce':'oc1', 'tr':'tr1', 'kr':'kr', 'ru':'ru'}
+        if region.lower() in regions:
+            for k,v in servers.items():
+                if region.lower() == k:
+                    server = v
             try:
                 try:
                     summoner_request = requests.get(f'https://{server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner}?api_key={api}')
@@ -384,8 +387,8 @@ class League(commands.Cog):
                 await msg.edit(embed=except_embed) 
         else:
             embed=discord.Embed(description="Invalid region!", color=0xfda5b0)
-            embed.add_field(name='Regions', value='`euw` `br` `na` `eun` `jp` `la` `oc` `tr` `kr` `ru`')
-            await ctx.send(embed=embed) 
+            embed.add_field(name='Regions', value='`br` `eune` `euw` `jp` `kr` `lan` `las` `na` `oce` `ru` `tr`')
+            await ctx.send(embed=embed)   
             
     @history.error
     async def history_error(self, ctx, error):
@@ -397,7 +400,7 @@ class League(commands.Cog):
     @commands.command()
     async def myprofile(self, ctx, region=None, *, summoner=None):
         user_id = ctx.author.id
-        regions = ['euw', 'br', 'na', 'eun', 'jp', 'la', 'oc', 'tr', 'kr', 'ru']
+        regions = ['euw', 'br', 'na', 'eune', 'jp', 'las', 'lan', 'oce', 'tr', 'kr', 'ru']
         if region is None and summoner is None:
             try:
                 conn = mysql.connector.connect(
@@ -428,8 +431,8 @@ class League(commands.Cog):
                     conn.close()
         elif region.lower() not in regions:
             embed=discord.Embed(description="Invalid region!", color=0xfda5b0)
-            embed.add_field(name='Regions', value='`euw` `br` `na` `eun` `jp` `la` `oc` `tr` `kr` `ru`')
-            await ctx.send(embed=embed) 
+            embed.add_field(name='Regions', value='`br` `eune` `euw` `jp` `kr` `lan` `las` `na` `oce` `ru` `tr`')
+            await ctx.send(embed=embed)  
         elif summoner is None:
             embed=discord.Embed(description="You're missing something!", color=0xfda5b0)
             embed.add_field(name='To add your profile', value='`!myprofile [region] [summoner]`')

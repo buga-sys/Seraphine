@@ -11,6 +11,7 @@ import bs4
 
 load_dotenv()
 version = str(os.getenv('VERSION'))
+api = str(os.getenv('API_KEY'))
 
 class Champions(commands.Cog):
     def __init__(self, client):
@@ -375,7 +376,7 @@ class Champions(commands.Cog):
             
     @commands.command()
     async def rotation(self, ctx):
-        r = requests.get('https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key=RGAPI-2ae7c7ec-e271-4b31-afb8-383f082c5a4f')
+        r = requests.get(f'https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key={api}')
         rotation_json = r.json()
         
         temp = []
@@ -400,7 +401,7 @@ class Champions(commands.Cog):
         nl = '\n'
         
         embed = discord.Embed(title='Champion Rotations',description=f"This week's free rotation:", color=0xfda5b0)
-        embed.set_thumbnail(url='https://seraphine-bot.s3.eu-central-1.amazonaws.com/lol_icon_small.png')
+        embed.set_thumbnail(url='https://seraphine-bot.s3.eu-central-1.amazonaws.com/lol_icon_32.png')
         embed.add_field(name='\u200B', value=f"**{f'{nl}'.join([c for c in champion_names[:10]])}**")
         embed.add_field(name='\u200B', value=f"**{f'{nl}'.join([c for c in champion_names[10:]])}**")
         await ctx.send(embed=embed)

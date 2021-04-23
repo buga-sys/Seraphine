@@ -86,9 +86,6 @@ class OwnerCommands(commands.Cog):
                 }
             mydata.append(emojis)
         print(mydata)
-                
-    
-    
-        
+                   
 def setup(client):
     client.add_cog(OwnerCommands(client))
