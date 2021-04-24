@@ -258,7 +258,7 @@ class Abilities(commands.Cog):
     @ability.error
     async def ability_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(title=f'{ops} Seraphine: Ability', description="You need to give a champion and a skill!", color=0xfda5b0)
+            embed=discord.Embed(title=f'{ops} Seraphine: Ability', description="You need to give me a champion and a skill!", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!ability [champion] [p/q/w/e/r]`')
             await ctx.send(embed=embed)
         
