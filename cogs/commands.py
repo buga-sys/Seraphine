@@ -33,6 +33,7 @@ class Commands(commands.Cog):
         bow = '<:pink_bow:835176521773350912>'
         embed=discord.Embed(title=f"{bow} Seraphine Commands", color=0xfda5b0)
         embed.add_field(name='ability', value="Detailed information of a skill.", inline=False)
+        embed.add_field(name='add', value="Add your summoner to your account.", inline=False)
         embed.add_field(name='champion', value="Infomation about a champion.", inline=False)
         embed.add_field(name='counter', value="Champion counters.", inline=False)
         embed.add_field(name='history', value="Display a summoner's match history.", inline=False)
@@ -40,7 +41,6 @@ class Commands(commands.Cog):
         embed.add_field(name='item', value="Detailed information of an item.", inline=False)
         embed.add_field(name='itemtype', value="List of items based on type.", inline=False)
         embed.add_field(name='matchup', value="Champion matchups overview.", inline=False)
-        embed.add_field(name='myprofile', value="Display your summoner's profile.", inline=False)
         embed.add_field(name='patchnotes', value="Latest patch notes.", inline=False)
         embed.add_field(name='profile', value="Display a summoner's profile.", inline=False)
         embed.add_field(name='rotation', value="Weekly free-to-play champion rotation.", inline=False)

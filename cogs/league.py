@@ -17,17 +17,55 @@ user = str(os.getenv('USER'))
 password = str(os.getenv('PASSWORD'))
 port = str(os.getenv('PORT'))
 
+ops = '<:outage:835522354963677184>'
                 
 class League(commands.Cog):
     def __init__(self, client):
         self.client = client
         
     @commands.command()
-    async def profile(self, ctx, region, *, summoner):
+    async def profile(self, ctx, region=None, *, summoner=None):
         regions = ['euw', 'br', 'na', 'eune', 'jp', 'las', 'lan', 'oce', 'tr', 'kr', 'ru']
         servers = {'euw':'euw1','br':'br1', 'na':'na1', 'eune':'eun1', 'jp':'jp1', 'las':'la2', 'lan':'la1', 'oce':'oc1', 'tr':'tr1', 'kr':'kr', 'ru':'ru'}
-        
-        if region.lower() in regions:
+        if region is None and summoner is None:
+            user_id = ctx.author.id
+            try:
+                conn = mysql.connector.connect(
+                    host=host,
+                    database=database,
+                    user=user,
+                    password=password,
+                    port=port)
+            
+                cur = conn.cursor()
+                cur.execute(f"""SELECT * FROM profile WHERE user_id = '{user_id}'""")
+                data = cur.fetchone()
+                if data is not None:
+                    profile_data = list(data)
+                    region = profile_data[1]
+                    summoner = profile_data[2]
+                    await self.profile(ctx, region, summoner=summoner)
+                else:
+                    embed=discord.Embed(title=f'{ops} Seraphine: Profile', description="You dont have a summoner added. \n \u200B \n Add your profile so you don't have to specify your account information!", color=0xfda5b0)
+                    embed.add_field(name='Add Your Summoner', value='`!add [region] [summoner]`')
+                    embed.add_field(name='Specify', value='`!profile [region] [summoner]`')
+                    await ctx.send(embed=embed)
+                cur.close()
+            except mysql.connector.Error as err:
+                print("Something went wrong: {}".format(err))
+            else:
+                if conn is not None:
+                    conn.close()
+                              
+        elif region.lower() not in regions:
+            embed=discord.Embed(title=f'{ops} Seraphine: Profile', description="Invalid region!", color=0xfda5b0)
+            embed.add_field(name='Regions', value='`br` `eune` `euw` `jp` `kr` `lan` `las` `na` `oce` `ru` `tr`')
+            await ctx.send(embed=embed)
+        elif summoner is None:
+            embed=discord.Embed(title=f'{ops} Seraphine: Profile', description="You're missing something!", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!profile [region] [summoner]`')
+            await ctx.send(embed=embed)
+        else:
             for k,v in servers.items():
                 if region.lower() == k:
                     server = v
@@ -262,12 +300,8 @@ class League(commands.Cog):
                 traceback.print_exc()
                 except_embed = discord.Embed(description=f"Something went wrong, couldn't fetch {name}'s data.", color=0xfda5b0)
                 except_embed.set_thumbnail(url=f'attachment://{icon_png}')
-                await msg.edit(embed=except_embed) 
-                    
-        else:
-            embed=discord.Embed(description="Invalid region!", color=0xfda5b0)
-            embed.add_field(name='Regions', value='`br` `eune` `euw` `jp` `kr` `lan` `las` `na` `oce` `ru` `tr`')
-            await ctx.send(embed=embed)   
+                await msg.edit(embed=except_embed)
+           
     
     @profile.error
     async def profile_error(self, ctx, error):
@@ -277,10 +311,48 @@ class League(commands.Cog):
             await ctx.send(embed=embed) 
     
     @commands.command()
-    async def history(self, ctx, region, *, summoner):
+    async def history(self, ctx, region=None, *, summoner=None):
         regions = ['euw', 'br', 'na', 'eune', 'jp', 'las', 'lan', 'oce', 'tr', 'kr', 'ru']
         servers = {'euw':'euw1','br':'br1', 'na':'na1', 'eune':'eun1', 'jp':'jp1', 'las':'la2', 'lan':'la1', 'oce':'oc1', 'tr':'tr1', 'kr':'kr', 'ru':'ru'}
-        if region.lower() in regions:
+        if region is None and summoner is None:
+            user_id = ctx.author.id
+            try:
+                conn = mysql.connector.connect(
+                    host=host,
+                    database=database,
+                    user=user,
+                    password=password,
+                    port=port)
+            
+                cur = conn.cursor()
+                cur.execute(f"""SELECT * FROM profile WHERE user_id = '{user_id}'""")
+                data = cur.fetchone()
+                if data is not None:
+                    profile_data = list(data)
+                    region = profile_data[1]
+                    summoner = profile_data[2]
+                    await self.history(ctx, region, summoner=summoner)
+                else:
+                    embed=discord.Embed(title=f'{ops} Seraphine: History', description="You dont have a summoner added. \n \u200B \n Add your profile so you don't have to specify your account information!", color=0xfda5b0)
+                    embed.add_field(name='Add Your Summoner', value='`!add [region] [summoner]`')
+                    embed.add_field(name='Specify', value='`!history [region] [summoner]`')
+                    await ctx.send(embed=embed)
+                cur.close()
+            except mysql.connector.Error as err:
+                print("Something went wrong: {}".format(err))
+            else:
+                if conn is not None:
+                    conn.close()
+                    
+        elif region.lower() not in regions:
+            embed=discord.Embed(title=f'{ops} Seraphine: History', description="Invalid region!", color=0xfda5b0)
+            embed.add_field(name='Regions', value='`br` `eune` `euw` `jp` `kr` `lan` `las` `na` `oce` `ru` `tr`')
+            await ctx.send(embed=embed)  
+        elif summoner is None:
+            embed=discord.Embed(title=f'{ops} Seraphine: History', description="You're missing something!", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!history [region] [summoner]`')
+            await ctx.send(embed=embed) 
+        else:
             for k,v in servers.items():
                 if region.lower() == k:
                     server = v
@@ -384,11 +456,7 @@ class League(commands.Cog):
                 traceback.print_exc()
                 except_embed = discord.Embed(description=f"Something went wrong, couldn't fetch {name}'s data.", color=0xfda5b0)
                 except_embed.set_thumbnail(url=f'attachment://{icon_png}')
-                await msg.edit(embed=except_embed) 
-        else:
-            embed=discord.Embed(description="Invalid region!", color=0xfda5b0)
-            embed.add_field(name='Regions', value='`br` `eune` `euw` `jp` `kr` `lan` `las` `na` `oce` `ru` `tr`')
-            await ctx.send(embed=embed)   
+                await msg.edit(embed=except_embed)           
             
     @history.error
     async def history_error(self, ctx, error):
@@ -398,43 +466,19 @@ class League(commands.Cog):
             await ctx.send(embed=embed) 
     
     @commands.command()
-    async def myprofile(self, ctx, region=None, *, summoner=None):
+    async def add(self, ctx, region=None, *, summoner=None):
         user_id = ctx.author.id
         regions = ['euw', 'br', 'na', 'eune', 'jp', 'las', 'lan', 'oce', 'tr', 'kr', 'ru']
         if region is None and summoner is None:
-            try:
-                conn = mysql.connector.connect(
-                    host=host,
-                    database=database,
-                    user=user,
-                    password=password,
-                    port=port)
-            
-                cur = conn.cursor()
-                cur.execute(f"""SELECT * FROM profile WHERE user_id = '{user_id}'""")
-                data = cur.fetchone()
-                if data is not None:
-                    profile_data = list(data)
-                    region = profile_data[1]
-                    summoner = profile_data[2]
-                    await self.profile(ctx, region, summoner=summoner)
-                else:
-                    embed=discord.Embed(description="Add your profile so you don't have to specify your region and summoner everytime you want to view your profile. \n\n Note: Adding new profile will overwrite your pre-existing profile.", color=0xfda5b0)
-                    embed.add_field(name='Usage', value='`!myprofile`')
-                    embed.add_field(name='Add your profile', value='`!myprofile [region] [summoner]`')
-                    await ctx.send(embed=embed)
-                cur.close()
-            except mysql.connector.Error as err:
-                print("Something went wrong: {}".format(err))
-            else:
-                if conn is not None:
-                    conn.close()
+            embed=discord.Embed(title=f'{ops} Seraphine: Add', description="Please give me a region and a summoner!", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!add [region] [summoner]`')
+            await ctx.send(embed=embed)
         elif region.lower() not in regions:
-            embed=discord.Embed(description="Invalid region!", color=0xfda5b0)
+            embed=discord.Embed(title=f'{ops} Seraphine: Add', description="Invalid region!", color=0xfda5b0)
             embed.add_field(name='Regions', value='`br` `eune` `euw` `jp` `kr` `lan` `las` `na` `oce` `ru` `tr`')
             await ctx.send(embed=embed)  
         elif summoner is None:
-            embed=discord.Embed(description="You're missing something!", color=0xfda5b0)
+            embed=discord.Embed(title=f'{ops} Seraphine: Add', description="You're missing something!", color=0xfda5b0)
             embed.add_field(name='To add your profile', value='`!myprofile [region] [summoner]`')
             await ctx.send(embed=embed) 
         else:
@@ -452,8 +496,29 @@ class League(commands.Cog):
                             VALUES ('{user_id}', '{region}', '{summoner}')""")
                 conn.commit()
                 cur.close()
-                embed=discord.Embed(description="Your profile has been added.", color=0xfda5b0)
-                await ctx.send(embed=embed)
+                
+                servers = {'euw':'euw1','br':'br1', 'na':'na1', 'eune':'eun1', 'jp':'jp1', 'las':'la2', 'lan':'la1', 'oce':'oc1', 'tr':'tr1', 'kr':'kr', 'ru':'ru'}
+                for k,v in servers.items():
+                    if region.lower() == k:
+                        server = v
+                try:
+                    summoner_request = requests.get(f'https://{server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner}?api_key={api}')
+                except Exception:
+                    traceback.print_exc()
+                summoner_json = summoner_request.json()
+                icon_id = summoner_json['profileIconId']
+                
+                with open(f'dragontail/{version}/data/en_GB/profileicon.json') as f:
+                    icon = json.load(f)
+                icon_path = f'dragontail/{version}/img/profileicon/'
+                icon_png = icon['data'][f'{icon_id}']['image']['full']
+                icon_full_path = icon_path + icon_png
+                f.close()
+                
+                file = discord.File(f"{icon_full_path}", filename=f"{icon_png}")
+                embed=discord.Embed(description="This summoner has been added to your account.", color=0xfda5b0)
+                embed.set_author(name=f'{summoner} [{region.upper()}]', icon_url=f'attachment://{icon_png}')
+                await ctx.send(file=file, embed=embed)
             except mysql.connector.Error as err:
                 print("Something went wrong: {}".format(err))
             else:
@@ -576,12 +641,7 @@ class League(commands.Cog):
     #         else:
     #             live_data = 'Not in an active game.'
     #             embed = discord.Embed(description={live_data}, color=0xfda5b0)
-            
-
- 
                 
-        
-        
                            
 def setup(client):
     client.add_cog(League(client))
