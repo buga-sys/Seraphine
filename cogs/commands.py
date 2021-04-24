@@ -44,7 +44,7 @@ class Commands(commands.Cog):
         embed.add_field(name='patchnotes', value="Latest patch notes.", inline=False)
         embed.add_field(name='profile', value="Display a summoner's profile.", inline=False)
         embed.add_field(name='rotation', value="Weekly free-to-play champion rotation.", inline=False)
-        embed.add_field(name='remove', value="Remove a summoner from your account.", inline=False)
+        embed.add_field(name='remove', value="Remove added summoner from your account.", inline=False)
         embed.add_field(name='skins', value="List of a champion's skins.", inline=False)
         embed.add_field(name='status', value="Get League of Legends status.", inline=False)
         embed.set_footer(text="use prefix ! before each command.")
