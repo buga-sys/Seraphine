@@ -47,7 +47,7 @@ class League(commands.Cog):
                     summoner = profile_data[2]
                     await self.profile(ctx, region, summoner=summoner)
                 else:
-                    embed=discord.Embed(title=f'{ops} Seraphine: Profile', description="You dont have a summoner added. \n \u200B \n Add your profile so you don't have to specify your account information!", color=0xfda5b0)
+                    embed=discord.Embed(title=f'{ops} Seraphine: Profile', description="You dont have a summoner added! \n \u200B \n Add your profile so you don't have to specify your account information.", color=0xfda5b0)
                     embed.add_field(name='Add Your Summoner', value='`!add [region] [summoner]`')
                     embed.add_field(name='Specify', value='`!profile [region] [summoner]`')
                     await ctx.send(embed=embed)
