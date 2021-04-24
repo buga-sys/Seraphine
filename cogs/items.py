@@ -10,6 +10,8 @@ from dotenv import load_dotenv
 load_dotenv()
 version = str(os.getenv('VERSION'))
 
+ops = '<:outage:835522354963677184>'
+
 class Items(commands.Cog):
     def __init__(self, client):
         self.client = client   
@@ -107,9 +109,8 @@ class Items(commands.Cog):
     @item.error
     async def item_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Detailed information of an item.", color=0xfda5b0)
+            embed=discord.Embed(title=f'{ops} Seraphine: Item', description="You need to give me an item!", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!item [item]`')
-            embed.add_field(name='Example', value='`!item infinity edge`')
             await ctx.send(embed=embed) 
             
     @commands.command()
@@ -250,9 +251,9 @@ class Items(commands.Cog):
     @itemtype.error
     async def itemtype_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="List of items based on type.", color=0xfda5b0)
-            embed.add_field(name='Usage', value='`!itemtype [type]`')
-            embed.add_field(name='Example', value='`!itemtype armor`')
+            embed=discord.Embed(title=f'{ops} Seraphine: Item Type', description="You need to give me an item type!", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!item [itemtype]`')
+            embed.add_field(name='Item Type Examples', value='`ability power` `armor` \n `attack speed`')
             await ctx.send(embed=embed)      
 
 def setup(client):

@@ -35,7 +35,7 @@ class Commands(commands.Cog):
         embed.add_field(name='ability', value="Detailed information of a skill.", inline=False)
         embed.add_field(name='add', value="Add your summoner to your account.", inline=False)
         embed.add_field(name='champion', value="Infomation about a champion.", inline=False)
-        embed.add_field(name='counter', value="Champion counters.", inline=False)
+        embed.add_field(name='counters', value="Champion counters.", inline=False)
         embed.add_field(name='history', value="Display a summoner's match history.", inline=False)
         embed.add_field(name='invite', value="Invite the bot to your server.", inline=False)
         embed.add_field(name='item', value="Detailed information of an item.", inline=False)

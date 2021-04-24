@@ -13,6 +13,8 @@ load_dotenv()
 version = str(os.getenv('VERSION'))
 api = str(os.getenv('API_KEY'))
 
+ops = '<:outage:835522354963677184>'
+
 class Champions(commands.Cog):
     def __init__(self, client):
         self.client = client   
@@ -76,7 +78,7 @@ class Champions(commands.Cog):
     @champion.error
     async def champion_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Infomation about a champion.", color=0xfda5b0)
+            embed=discord.Embed(title=f'{ops} Seraphine: Champion', description="You need to give me a champion!", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!champion [champion]`')
             await ctx.send(embed=embed) 
             
@@ -153,7 +155,7 @@ class Champions(commands.Cog):
     @skins.error
     async def skins_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="List of a champion's skins.", color=0xfda5b0)
+            embed=discord.Embed(title=f'{ops} Seraphine: Skins', description="You need to give me a champion!", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!skins [champion]`')
             await ctx.send(embed=embed) 
             
@@ -260,18 +262,20 @@ class Champions(commands.Cog):
             await ctx.send(embed=embed)
         else:
             if role is None:
-                await ctx.send(f"No data was found for **{champion.capitalize()}**.")
+                embed=discord.Embed(title=f'{ops} Seraphine: Matchup', description=f"No data was found! \n \u200B \n Champion: **{champion.capitalize()}**", color=0xfda5b0)
+                await ctx.send(embed=embed) 
             else:
-                await ctx.send(f"No data was found for **{champion.capitalize()}**, role: **{role}**.")
+                embed=discord.Embed(title=f'{ops} Seraphine: Matchup', description=f"No data was found! \n \u200B \n Champion: **{champion.capitalize()}** \n Role: **{role.capitalize()}**", color=0xfda5b0)
+                await ctx.send(embed=embed) 
         
     @matchup.error
     async def matchup_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Champion matchups overview.", color=0xfda5b0)
+            embed=discord.Embed(title=f'{ops} Seraphine: Matchup', description="You need to give me a champion!", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!matchup [champion] [optional: role]`')
             await ctx.send(embed=embed) 
 
-    @commands.command()
+    @commands.command(aliases=['counters'])
     async def counter(self, ctx, champion, role=None):
         weak = '<:red_diamond:834133775877013525>'
         strong = '<:blue_diamond:834133776060907591>'
@@ -370,8 +374,8 @@ class Champions(commands.Cog):
     @counter.error
     async def counter_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Champion counters.", color=0xfda5b0)
-            embed.add_field(name='Usage', value='`!counter [champion] [optional: role]`')
+            embed=discord.Embed(title=f'{ops} Seraphine: Counters', description="You need to give me a champion!", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!counters [champion] [optional: role]`')
             await ctx.send(embed=embed) 
             
     @commands.command()

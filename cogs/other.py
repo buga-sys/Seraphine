@@ -9,6 +9,8 @@ from dotenv import load_dotenv
 load_dotenv()
 api = str(os.getenv('API_KEY'))
 
+ops = '<:outage:835522354963677184>'
+
 class Other(commands.Cog):
     def __init__(self, client):
         self.client = client              
@@ -68,6 +70,10 @@ class Other(commands.Cog):
                 status = s['status']
                 e_status = online if status == 'online' else offline
                 embed.add_field(name=f'{name}', value=f"{e_status}")
+            await ctx.send(embed=embed)
+        else:
+            embed=discord.Embed(title=f'{ops} Seraphine: Status', description="Invalid region!", color=0xfda5b0)
+            embed.add_field(name='Regions', value='`br` `eune` `euw` `jp` `kr` `lan` `las` `na` `oce` `ru` `tr`')
             await ctx.send(embed=embed)
             
             

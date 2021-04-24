@@ -9,6 +9,8 @@ from dotenv import load_dotenv
 load_dotenv()
 version = str(os.getenv('VERSION'))
 
+ops = '<:outage:835522354963677184>'
+
 class Abilities(commands.Cog):
     def __init__(self, client):
         self.client = client   
@@ -256,9 +258,8 @@ class Abilities(commands.Cog):
     @ability.error
     async def ability_error(self, ctx, error):
         if isinstance(error, commands.errors.MissingRequiredArgument):
-            embed=discord.Embed(description="Detailed information of a skill.", color=0xfda5b0)
-            embed.add_field(name='Usage', value='`!ability [champion] [ability]`')
-            embed.add_field(name='Example', value='`!ability teemo q`')
+            embed=discord.Embed(title=f'{ops} Seraphine: Ability', description="You need to give a champion and a skill!", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!ability [champion] [p/q/w/e/r]`')
             await ctx.send(embed=embed)
         
 
