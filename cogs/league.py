@@ -18,7 +18,7 @@ password = str(os.getenv('PASSWORD'))
 port = str(os.getenv('PORT'))
 
 ops = '<:outage:835522354963677184>'
-check = '<:check:835537223138803802>'
+check = '<:check:835842893696204830>'
                 
 class League(commands.Cog):
     def __init__(self, client):
@@ -78,6 +78,7 @@ class League(commands.Cog):
                 summoner_json = summoner_request.json()
                 summoner_id = summoner_json['id']
                 account_id = summoner_json['accountId']
+                puuid = summoner_json['puuid']
                 name = summoner_json['name']
                 level = summoner_json['summonerLevel']
                 icon_id = summoner_json['profileIconId']
@@ -277,8 +278,8 @@ class League(commands.Cog):
                           
                     
                 file = discord.File(f"{icon_full_path}", filename=f"{icon_png}")
-                embed = discord.Embed(title=f"**{name}**'s Profile", color=0xfda5b0)
-                embed.set_thumbnail(url=f'attachment://{icon_png}')
+                embed = discord.Embed(title=f"Seraphine: Profile", color=0xfda5b0)
+                embed.set_author(name=f'{name}', icon_url=f'attachment://{icon_png}')
                 embed.add_field(name='Region', value=f'{region.upper()} \n \u200B')
                 embed.add_field(name='\u200B', value='\u200B')
                 embed.add_field(name='Summoner Level', value=f'{level} \n \u200B')
@@ -293,6 +294,7 @@ class League(commands.Cog):
                                 **[{champion_level[2]}]** {mastery_tres_emoji} {champion_name[2]}: {champion_points[2]:,}
                                 \u200B''')
                 embed.add_field(name='Live Game', value=live_data)
+                embed.set_image(url='https://img.rankedboost.com/wp-content/uploads/2016/06/Season_2019_-_Diamond_Trim.png')
                 await msg.edit(embed=embed) 
             except KeyError:
                 embed=discord.Embed(description="Oops, Couldn't find summoner!", color=0xfda5b0)
