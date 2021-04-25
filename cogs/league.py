@@ -442,7 +442,7 @@ class League(commands.Cog):
                             status = win if p['stats']['win'] == True else loss
                             minions = p['stats']['totalMinionsKilled']
                             gold = p['stats']['goldEarned']
-                    embed.add_field(name=f'{status} {emoji} {champion_name} - ({queue_type})', value=f'''{kills} / {deaths} / {assists} \u200B \u200B <:minion:823209384908816404>{minions} \u200B \u200B <:gold:823209384942370836>{gold}''', inline=False)
+                    embed.add_field(name=f'{status} {emoji} {champion_name} - ({queue_type})', value=f'''<:kda:836010572586942506>{kills} / {deaths} / {assists} \u200B \u200B <:minion:823209384908816404>{minions} \u200B \u200B <:gold:823209384942370836>{gold}''', inline=False)
                 await msg.edit(embed=embed) 
             except KeyError:
                 embed=discord.Embed(description="Oops, Couldn't find summoner!", color=0xfda5b0)
