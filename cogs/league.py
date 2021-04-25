@@ -279,10 +279,10 @@ class League(commands.Cog):
                     
                 file = discord.File(f"{icon_full_path}", filename=f"{icon_png}")
                 embed = discord.Embed(title=f"Seraphine: Profile", color=0xfda5b0)
-                embed.set_author(name=f'{name}', icon_url=f'attachment://{icon_png}')
-                embed.add_field(name='Region', value=f'{region.upper()} \n \u200B')
-                embed.add_field(name='\u200B', value='\u200B')
+                embed.set_author(name=f'{name} [{region.upper()}]', icon_url=f'attachment://{icon_png}')
                 embed.add_field(name='Summoner Level', value=f'{level} \n \u200B')
+                embed.add_field(name='\u200B', value='\u200B')
+                embed.add_field(name='\u200B', value='\u200B')
                 embed.add_field(name='Ranked (Solo/Duo)', value=f'{solo_data} \n \u200B')
                 embed.add_field(name='\u200B', value='\u200B')
                 embed.add_field(name='Ranked (Flex)', value=f'{flex_data} \n \u200B')
@@ -294,7 +294,6 @@ class League(commands.Cog):
                                 **[{champion_level[2]}]** {mastery_tres_emoji} {champion_name[2]}: {champion_points[2]:,}
                                 \u200B''')
                 embed.add_field(name='Live Game', value=live_data)
-                embed.set_image(url='https://img.rankedboost.com/wp-content/uploads/2016/06/Season_2019_-_Diamond_Trim.png')
                 await msg.edit(embed=embed) 
             except KeyError:
                 embed=discord.Embed(description="Oops, Couldn't find summoner!", color=0xfda5b0)
@@ -377,8 +376,8 @@ class League(commands.Cog):
                 f.close()
                 
                 file = discord.File(f"{icon_full_path}", filename=f"{icon_png}")
-                embed = discord.Embed(title=f"**{name}**'s Match History", description='', color=0xfda5b0) 
-                embed.set_thumbnail(url=f'attachment://{icon_png}')
+                embed = discord.Embed(title=f"Seraphine: Match History", color=0xfda5b0)
+                embed.set_author(name=f'{name} [{region.upper()}]', icon_url=f'attachment://{icon_png}')
                 
                 temp_embed = discord.Embed(description=f"Fetching {name}'s match history, wait a moment...", color=0xfda5b0)
                 temp_embed.set_thumbnail(url=f'attachment://{icon_png}')
