@@ -117,7 +117,7 @@ class Champions(commands.Cog):
     @commands.command()
     async def skins(self, ctx, champion):
         try:
-            with open(f'lolstaticdata/champions/{champion}.json', encoding='utf-8') as f:
+            with open(f'lolstaticdata/champions/{champion.capitalize()}.json', encoding='utf-8') as f:
                 champions = json.load(f)
 
             name = None
