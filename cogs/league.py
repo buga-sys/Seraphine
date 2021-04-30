@@ -164,7 +164,7 @@ class League(commands.Cog):
                             champion_name.append(v['name'])
                     f.close()
                     
-                with open('data/champions.json', encoding='utf-8') as f:
+                with open('data/championIcons.json', encoding='utf-8') as f:
                     emojis = json.load(f)
                 for e in emojis:
                     if e['name'] == champion_name[0]:
@@ -266,7 +266,7 @@ class League(commands.Cog):
                         else:
                             queue_type = 'Custom'
                     f.close()
-                    with open('data/champions.json', encoding='utf-8') as f:
+                    with open('data/championIcons.json', encoding='utf-8') as f:
                         emojis = json.load(f)
                     for e in emojis:
                         if champion_clear_name == e['id']:
@@ -410,7 +410,7 @@ class League(commands.Cog):
                             champion_name = v['name']
                             champion_clear_name = v['id']
                     f.close()
-                    with open('data/champions.json', encoding='utf-8') as f:
+                    with open('data/championIcons.json', encoding='utf-8') as f:
                         emojis = json.load(f)
                     for e in emojis:
                         if champion_clear_name == e['id']:
@@ -550,123 +550,6 @@ class League(commands.Cog):
         else:
             if conn is not None:
                 conn.close()
-        
-    # @commands.command()
-    # async def live(self, ctx, region, *, summoner):
-    #     regions = ['euw', 'br', 'na', 'eun', 'jp', 'la', 'oc', 'tr', 'kr', 'ru']
-    #     regionwithones = ['euw', 'br', 'na', 'eun', 'jp', 'la', 'oc', 'tr']
-    #     server = region
-
-    #     if region not in regions:
-    #         embed=discord.Embed(description="Invalid region!", color=0xfda5b0)
-    #         embed.add_field(name='Regions', value='`euw` `br` `na` `eun` `jp` `la` `oc` `tr` `kr` `ru`')
-    #         await ctx.send(embed=embed) 
-    #     else:
-    #         if region in regionwithones:
-    #             server = server + '1'
-    #         try:
-    #             summoner_request = requests.get(f'https://{server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner}?api_key={api}')
-    #             if summoner_request.status_code == 404:
-    #                 await ctx.send("Oops, Couldn't find summoner.")
-    #         except Exception:
-    #             traceback.print_exc()
-    #         summoner_json = summoner_request.json()
-    #         summoner_id = summoner_json['id']
-            
-    #         try:
-    #             live_request = requests.get(f'https://{server}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/{summoner_id}?api_key={api}')
-    #         except Exception:
-    #             traceback.print_exc()
-    #         live_json = live_request.json()
-            
-    #         queue_type = None
-    #         live_data = ''
-    #         team_one = []
-    #         team_one_champs = []
-            
-    #         team_two = []
-    #         team_two_champs = []
-            
-    #         if live_request.status_code == 200:
-    #             for p in live_json['participants']:
-    #                 if p['teamId'] == 100:
-    #                     team_one_summoners = (p['summonerName'])
-    #                     team_one_ids = (p['championId'])\
-    #                     dic = {team_one_summoners: team_one_ids}
-    #                     team_one.append(dic)
-    #                 else:
-    #                     team_two_summoners = (p['summonerName'])
-    #                     team_two_ids = (p['championId'])
-    #                     team_two.update({team_two_summoners: team_two_ids})
-    #             print(team_one)
-                                   
-                        
-    #             with open(f'dragontail/{version}/data/en_GB/champion.json', encoding="utf8") as f:
-    #                 champion = json.load(f)
-                        
-    #             for k,v in champion['data'].items():
-    #                 for ids in team_one.values:
-    #                     if v['key'] == str(ids):
-    #                         team_one_champs.append(v['name'])
-    #                 for ids in team_two.values:
-    #                     if v['key'] == str(ids):
-    #                         team_two_champs.append(v['name']) 
-                                    
-    #             with open('data/queues.json', encoding="utf8") as f:
-    #                 queue = json.load(f)   
-    #             for q in queue:
-    #                 if 'gameQueueConfigId' in live_json:
-    #                     if q['queueId'] == live_json['gameQueueConfigId']:
-    #                         queue_type = q['description']
-    #                 else:
-    #                     queue_type = 'Custom'
-    #             f.close()
-    #             # embed=discord.Embed(title=f"{queue_type}", color=0xfda5b0)
-    #             # embed.add_field(name='Blue Team', value=f"""
-    #             #     [{team_one_champs[0]}]\t**{team_one_names[0]}**
-    #             #     [{team_one_champs[1]}]\t**{team_one_names[1]}**
-    #             #     [{team_one_champs[2]}]\t**{team_one_names[2]}**
-    #             #     [{team_one_champs[3]}]\t**{team_one_names[3]}**
-    #             #     [{team_one_champs[4]}]\t**{team_one_names[4]}**""")
-    #             # embed.add_field(name='Rank', value="""
-    #             #                 rank
-    #             #                 rank
-    #             #                 rank
-    #             #                 rank
-    #             #                 rank
-    #             #                 """)
-    #             # embed.add_field(name='Ranked WR', value="""
-    #             #                 100% 40G
-    #             #                 100% 40G
-    #             #                 100% 40G
-    #             #                 100% 40G
-    #             #                 100% 40G
-    #             #                 """)
-                
-    #             # embed.add_field(name='Red Team', value=f"""
-    #             #     [{team_two_champs[0]}]\t**{team_two_names[0]}**
-    #             #     [{team_two_champs[1]}]\t**{team_two_names[1]}**
-    #             #     [{team_two_champs[2]}]\t**{team_two_names[2]}**
-    #             #     [{team_two_champs[3]}]\t**{team_two_names[3]}**
-    #             #     [{team_two_champs[4]}]\t**{team_two_names[4]}**""")
-    #             # embed.add_field(name='Rank', value="""
-    #             #                 rank
-    #             #                 rank
-    #             #                 rank
-    #             #                 rank
-    #             #                 rank
-    #             #                 """)
-    #             # embed.add_field(name='Ranked WR', value="""
-    #             #                 100% 40G
-    #             #                 100% 40G
-    #             #                 100% 40G
-    #             #                 100% 40G
-    #             #                 100% 40G
-    #             #                 """)
-    #             # await ctx.send(embed=embed)
-    #         else:
-    #             live_data = 'Not in an active game.'
-    #             embed = discord.Embed(description={live_data}, color=0xfda5b0)
                 
                            
 def setup(client):

@@ -13,16 +13,20 @@ class Commands(commands.Cog):
             return
         else:
             raise error
+    
         
     @commands.command()
     async def help(self, ctx):
         inv = '<:invite:835844574404018177>'
         cmd = '<:cmd:835632392307867739>'
+        halp = '<:help:835845004915245096>'
         invite_link = 'https://discord.com/oauth2/authorize?client_id=818488537456181248&permissions=59392&scope=bot'
+        contact_link = 'https://discordapp.com/channels/@me/161750634251419648/'
         embed=discord.Embed(color=0xfda5b0)
         embed.set_author(name=f'Seraphine Help')
         embed.add_field(name=f"{cmd} Commands", value="To see list of commands: `!commands`", inline=False)
         embed.add_field(name=f"{inv} Invite", value=f"Click [**here**]({invite_link}) to invite the bot to your server.", inline=False)
+        # embed.add_field(name=f"{halp} Help", value=f"To contact the developer, submit bugs, or suggest a feature, click [**here**]({contact_link}).", inline=False)
         await ctx.send(embed=embed)
     
     @commands.command()

@@ -222,7 +222,7 @@ class Champions(commands.Cog):
                 best_synergy_percentage.append(i.text)
                 
                 
-            with open('data/champions.json', encoding='utf-8') as f:
+            with open('data/championIcons.json', encoding='utf-8') as f:
                 emojis = json.load(f)
             for e in emojis:
                 if e['name'] == weak_againt[0]:
@@ -325,7 +325,7 @@ class Champions(commands.Cog):
             counters.sort(key= lambda x: float(x[2][:-1]), reverse=True)
             nl = '\n'   
 
-            with open('data/champions.json', encoding='utf-8') as f:
+            with open('data/championIcons.json', encoding='utf-8') as f:
                 emojis = json.load(f)
             for e in emojis:
                 for c in counters:
@@ -335,41 +335,47 @@ class Champions(commands.Cog):
                         c[0] = newstring
             f.close()
             
-            embed = discord.Embed(description=f'Results for role: {role_icon}', color=0xfda5b0)
-            embed.set_author(name=f'{title}', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{champion_image}')
-            embed.add_field(name='Champions', value=f"""
-                            **{counters[0][0]}** — **{counters[0][2]}**
-                            
-                            **{counters[1][0]}** — **{counters[1][2]}**
-                            
-                            **{counters[2][0]}** — **{counters[2][2]}**
-                            
-                            **{counters[3][0]}** — **{counters[3][2]}**
-                            
-                            **{counters[4][0]}** — **{counters[4][2]}**
-                            
-                            **{counters[5][0]}** — **{counters[5][2]}**
-                            """)
-            embed.add_field(name='\u200B', value=f"""
-                            **{counters[6][0]}** — **{counters[6][2]}**
-                            
-                            **{counters[7][0]}** — **{counters[7][2]}**
-                            
-                            **{counters[8][0]}** — **{counters[8][2]}**
-                            
-                            **{counters[9][0]}** — **{counters[9][2]}**
-                            
-                            **{counters[10][0]}** — **{counters[10][2]}**
-                            
-                            **{counters[11][0]}** — **{counters[11][2]}**
-                            """)
-            embed.set_image(url=f'https://raw.githubusercontent.com/buga-sys/championHeaders/master/{champion_key}.png')
-            await ctx.send(embed=embed)
+            try:
+                embed = discord.Embed(description=f'Results for role: {role_icon}', color=0xfda5b0)
+                embed.set_author(name=f'{title}', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{champion_image}')
+                embed.add_field(name='Champions', value=f"""
+                                **{counters[0][0]}** — **{counters[0][2]}**
+                                
+                                **{counters[1][0]}** — **{counters[1][2]}**
+                                
+                                **{counters[2][0]}** — **{counters[2][2]}**
+                                
+                                **{counters[3][0]}** — **{counters[3][2]}**
+                                
+                                **{counters[4][0]}** — **{counters[4][2]}**
+                                
+                                **{counters[5][0]}** — **{counters[5][2]}**
+                                """)
+                embed.add_field(name='\u200B', value=f"""
+                                **{counters[6][0]}** — **{counters[6][2]}**
+                                
+                                **{counters[7][0]}** — **{counters[7][2]}**
+                                
+                                **{counters[8][0]}** — **{counters[8][2]}**
+                                
+                                **{counters[9][0]}** — **{counters[9][2]}**
+                                
+                                **{counters[10][0]}** — **{counters[10][2]}**
+                                
+                                **{counters[11][0]}** — **{counters[11][2]}**
+                                """)
+                embed.set_image(url=f'https://raw.githubusercontent.com/buga-sys/championHeaders/master/{champion_key}.png')
+                await ctx.send(embed=embed)
+            except:
+                embed=discord.Embed(title=f'{ops} Seraphine: Counters', description=f"No data was found! \n \u200B \n Champion: **{champion.capitalize()}** \n Role: **{role.capitalize()}**", color=0xfda5b0)
+                await ctx.send(embed=embed)
         else:
             if role is None:
-                await ctx.send(f"No data was found for **{champion.capitalize()}**.")
+                embed=discord.Embed(title=f'{ops} Seraphine: Counters', description=f"No data was found! \n \u200B \n Champion: **{champion.capitalize()}**", color=0xfda5b0)
+                await ctx.send(embed=embed) 
             else:
-                await ctx.send(f"No data was found for **{champion.capitalize()}**, role: **{role}**.")
+                embed=discord.Embed(title=f'{ops} Seraphine: Counters', description=f"No data was found! \n \u200B \n Champion: **{champion.capitalize()}** \n Role: **{role.capitalize()}**", color=0xfda5b0)
+                await ctx.send(embed=embed) 
                 
     @counter.error
     async def counter_error(self, ctx, error):
@@ -393,7 +399,7 @@ class Champions(commands.Cog):
                     temp.append(v['name'])
         f.close()   
         
-        with open('data/champions.json', encoding='utf-8') as f:
+        with open('data/championIcons.json', encoding='utf-8') as f:
                 emojis = json.load(f)
         for e in emojis:
             for c in temp:
