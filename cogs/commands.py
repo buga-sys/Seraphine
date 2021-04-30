@@ -18,7 +18,7 @@ class Commands(commands.Cog):
         inv = '<:invite:835844574404018177>'
         cmd = '<:cmd:835632392307867739>'
         halp = '<:help:835845004915245096>'
-        invite_link = 'https://discord.com/oauth2/authorize?client_id=818488537456181248&permissions=59392&scope=bot'
+        invite_link = 'https://discord.com/oauth2/authorize?client_id=818488537456181248&permissions=321600&scope=bot'
         contact_link = 'https://discordapp.com/channels/@me/161750634251419648/'
         embed=discord.Embed(color=0xfda5b0)
         embed.set_author(name=f'Seraphine Help')
