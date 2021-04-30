@@ -30,7 +30,7 @@ class Commands(commands.Cog):
     @commands.command()
     async def invite(self, ctx):
         inv = '<:invite2:835841084147630110>'
-        invite_link = 'https://discord.com/oauth2/authorize?client_id=818488537456181248&permissions=59392&scope=bot'
+        invite_link = 'https://discord.com/oauth2/authorize?client_id=818488537456181248&permissions=321600&scope=bot'
         embed=discord.Embed(title=f'{inv} Seraphine Invite', description="Here's the link to invite the bot to your server!", color=0xfda5b0)
         embed.add_field(name="Invite", value=f"[**Click here**]({invite_link})", inline=False)
         await ctx.send(embed=embed)
