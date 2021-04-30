@@ -78,7 +78,6 @@ class OwnerCommands(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def emojis(self, ctx):   
-        mydata = []
         with open('data/championIcons.json', 'r') as filename:
             data = json.load(filename)
             

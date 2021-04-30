@@ -23,6 +23,34 @@ class Champions(commands.Cog):
     async def champion(self, ctx, value):
         if len(value) > 2:
             try:
+                
+                roles = [
+                {
+                    "name":'Tank',
+                    "icon": '<:tank:837492725518565387>'
+                 },
+                {
+                    "name":'Support',
+                    "icon": '<:support:837492725820817448>'
+                 },
+                {
+                    "name":'Marksman',
+                    "icon": '<:marksman:837492725740863508>'
+                 },
+                {
+                    "name":'Mage',
+                    "icon": '<:mage1:837492725661302815>'
+                 },
+                {
+                    "name":'Fighter',
+                    "icon": '<:fighter:837492725632335892>'
+                 },
+                {
+                    "name":'Assassin',
+                    "icon": '<:assassin:837492725858566174>'
+                 }
+                ]
+                
                 with open(f'dragontail/{version}/data/en_GB/championFull.json', encoding='utf-8') as f:
                     champions = json.load(f)
                 
@@ -46,7 +74,9 @@ class Champions(commands.Cog):
                         champion_image = v['image']['full']
                         partype = v['partype']
                         for tag in v['tags']:
-                            tags.append(tag)
+                            for r in roles:
+                                if tag == r['name']:
+                                    tags.append(r['icon'])
                         for spell in v['spells']:
                             spells_names.append(spell['name'])
                             clean = re.compile('<.*?>')
@@ -60,7 +90,7 @@ class Champions(commands.Cog):
                 f.close()
                 
                 file = discord.File(f"{image_full_path}", filename=f"{champion_image}")
-                embed = discord.Embed(title=f'{name} - {title.title()}', description=f'''{', '.join(tags)} \n Partype: {partype}''', color=0xfda5b0)
+                embed = discord.Embed(title=f'{name} - {title.title()}', description=f'''{' '.join(tags)} \n Partype: {partype}''', color=0xfda5b0)
                 embed.set_thumbnail(url=f'attachment://{champion_image}')
                 embed.add_field(name=f'(Passive) {passive_name}', value=f"{passive_description}", inline=False)
                 embed.add_field(name=f'(Q) {spells_names[0]}', value=f"{spells_description[0]}", inline=False)
@@ -69,11 +99,13 @@ class Champions(commands.Cog):
                 embed.add_field(name=f'(R) {spells_names[3]}', value=f"{spells_description[3]}", inline=False)
                 await ctx.send(file=file, embed=embed)
             except TypeError:
-                await ctx.send("That's not a valid champion name.")
+                embed=discord.Embed(title=f'{ops} Seraphine: Champion', description="That's not a valid champion's name!", color=0xfda5b0)
+                await ctx.send(embed=embed) 
             except Exception:
                 traceback.print_exc()
         else:
-            await ctx.send("That's not a valid champion name.")
+            embed=discord.Embed(title=f'{ops} Seraphine: Champion', description="That's not a valid champion's name!", color=0xfda5b0)
+            await ctx.send(embed=embed) 
     
     @champion.error
     async def champion_error(self, ctx, error):
@@ -83,74 +115,94 @@ class Champions(commands.Cog):
             await ctx.send(embed=embed) 
             
     @commands.command()
-    async def skins(self, ctx, value):
-        if len(value) > 2:
-            try:
+    async def skins(self, ctx, champion):
+        try:
+            with open(f'lolstaticdata/champions/{champion}.json', encoding='utf-8') as f:
+                champions = json.load(f)
 
-                champion = value.lower()
-                with open(f'dragontail/{version}/data/en_GB/championFull.json', encoding='utf-8') as f:
-                    champions = json.load(f)
+            name = None
+            rp = '<:rp:837492647772815389>'
+            skin_name = ''
+            skin_id = ''
+            pages = []
+            buttons = [u"\u23EA", u"\u2B05", u"\u27A1", u"\u23E9"] # skip to start, left, right, skip to end
+            current = 0
+            skinRarity = [
+                {
+                    "name":'Epic',
+                    "icon": '<:Epic_Skin:837722859866030201>'
+                 },
+                {
+                    "name":'Mythic',
+                    "icon": '<:Mythic_Skin:837722860277071902>'
+                 },
+                {
+                    "name":'Legendary',
+                    "icon": '<:Legendary_Skin:837722860248236072>'
+                 },
+                {
+                    "name":'Ultimate',
+                    "icon": '<:Ultimate_Skin:837722843188953118>'
+                 },
+                {
+                    "name":'NoRarity',
+                    "icon": ''
+                 }
+            ]
 
-                champions_data = champions['data']
-                name = None
-                skin_name = ''
-                skin_id = ''
-                pages = []
-                buttons = [u"\u23EA", u"\u2B05", u"\u27A1", u"\u23E9"] # skip to start, left, right, skip to end
-                current = 0
-
-                for k,v in champions_data.items():
-                    if champion.lower() in k.lower():
-                        name = v['id']
-                        for sid in v['skins']:
-                            skin_name= sid['name']
-                            skin_id = str(sid['num'])
-                            skin_image = name + '_' + skin_id + '.jpg' 
-                            # image_full_path = images_path + skin_image
-                            page = discord.Embed(title=f'{skin_name}', color=0xfda5b0).set_image(url=f'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/{skin_image}')
-                            pages.append(page)    
-                f.close()
+            for c in champions['skins'][1:]:
+                name = c['name']
+                if c['cost'] == 'special':
+                    cost = c['distribution']
+                else:
+                    cost = rp + ' ' + str(c['cost'])
+                rarity = c['rarity']
+                for r in skinRarity:
+                    if r['name'] == rarity:
+                        rarity = r['icon']
+                imageurl = c['loadScreenPath']
+                page = discord.Embed(title='Seraphine: Skins', color=0xfda5b0).add_field(name=f'{rarity} {name} {champion.capitalize()}',value=f'{cost}').set_image(url=imageurl)
+                pages.append(page)    
+            f.close()
+            
+            msg = await ctx.send(embed=pages[current].set_footer(text=f"{current+1}/{len(pages)}"))
+            
+            for button in buttons:
+                await msg.add_reaction(button)
                 
-                msg = await ctx.send(embed=pages[current].set_footer(text=f"{current+1}/{len(pages)}"))
-                
-                for button in buttons:
-                    await msg.add_reaction(button)
-                    
-                while True:
-                    try:
-                        reaction, user = await self.client.wait_for("reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons, timeout=60.0)
+            while True:
+                try:
+                    reaction, user = await self.client.wait_for("reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons and reaction.message.id == msg.id, timeout=30.0)
 
-                    except asyncio.TimeoutError:
-                        pass
+                except asyncio.TimeoutError:
+                    pass
 
-                    else:
-                        previous_page = current
-                        if reaction.emoji == u"\u23EA":
-                            current = 0
+                else:
+                    previous_page = current
+                    if reaction.emoji == u"\u23EA":
+                        current = 0
+                        
+                    elif reaction.emoji == u"\u2B05":
+                        if current > 0:
+                            current -= 1
                             
-                        elif reaction.emoji == u"\u2B05":
-                            if current > 0:
-                                current -= 1
-                                
-                        elif reaction.emoji == u"\u27A1":
-                            if current < len(pages)-1:
-                                current += 1
+                    elif reaction.emoji == u"\u27A1":
+                        if current < len(pages)-1:
+                            current += 1
 
-                        elif reaction.emoji == u"\u23E9":
-                            current = len(pages)-1
+                    elif reaction.emoji == u"\u23E9":
+                        current = len(pages)-1
 
-                        for button in buttons:
-                            await msg.remove_reaction(button, ctx.author)
+                    for button in buttons:
+                        await msg.remove_reaction(button, ctx.author)
 
-                        if current != previous_page:
-                            await msg.edit(embed=pages[current].set_footer(text=f"{current+1}/{len(pages)}"))
-            except IndexError:
-                await ctx.send("That's not a valid champion name.")
-                
-            except Exception:
-                traceback.print_exc()
-        else:
-            await ctx.send("That's not a valid champion name.")
+                    if current != previous_page:
+                        await msg.edit(embed=pages[current].set_footer(text=f"{current+1}/{len(pages)}"))
+        except FileNotFoundError:
+            embed=discord.Embed(title=f'{ops} Seraphine: Skins', description=f"No champion with that name was found!", color=0xfda5b0)
+            await ctx.send(embed=embed)
+        except Exception:
+            traceback.print_exc()
               
     @skins.error
     async def skins_error(self, ctx, error):

@@ -215,7 +215,7 @@ class Items(commands.Cog):
                 
             while True:
                 try:
-                    reaction, user = await self.client.wait_for("reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons, timeout=60.0)
+                    reaction, user = await self.client.wait_for("reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons and reaction.message.id == msg.id, timeout=30.0)
 
                 except asyncio.TimeoutError:
                     pass
