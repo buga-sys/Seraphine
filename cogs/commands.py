@@ -14,7 +14,7 @@ class Commands(commands.Cog):
         elif isinstance(error, commands.errors.CommandInvokeError):
             return
         else:
-            raise error   
+            raise error
         
     @commands.command()
     async def help(self, ctx):
