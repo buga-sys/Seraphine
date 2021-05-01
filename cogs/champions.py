@@ -368,14 +368,24 @@ class Champions(commands.Cog):
                     
             table = soup.find_all(class_='css-16pn635 e1yssf620')
             counters = []
-            for c in table:
+            blank = '<:BLANK:837828544410550282>'
+
+            for c in table[:12]:
                 champion = c.find(class_='css-4fiab5').text
                 matches = c.find(class_='css-9zgxyq').text
                 win_rate = c.find_all(class_='css-a632yi')[1].text
                 counter = [champion, matches, win_rate]
                 counters.append(counter)
             counters.sort(key= lambda x: float(x[2][:-1]), reverse=True)
-            nl = '\n'   
+            nl = '\n'
+            
+            for c in counters:
+                newstring = blank + c[2]
+                c[2] = newstring
+            
+            for c in counters:
+                newstring = c[1] + blank
+                c[1] = newstring    
 
             with open('data/championIcons.json', encoding='utf-8') as f:
                 emojis = json.load(f)
@@ -390,32 +400,10 @@ class Champions(commands.Cog):
             try:
                 embed = discord.Embed(description=f'Results for role: {role_icon}', color=0xfda5b0)
                 embed.set_author(name=f'{title}', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{champion_image}')
-                embed.add_field(name='Champions', value=f"""
-                                **{counters[0][0]}** — **{counters[0][2]}**
-                                
-                                **{counters[1][0]}** — **{counters[1][2]}**
-                                
-                                **{counters[2][0]}** — **{counters[2][2]}**
-                                
-                                **{counters[3][0]}** — **{counters[3][2]}**
-                                
-                                **{counters[4][0]}** — **{counters[4][2]}**
-                                
-                                **{counters[5][0]}** — **{counters[5][2]}**
-                                """)
-                embed.add_field(name='\u200B', value=f"""
-                                **{counters[6][0]}** — **{counters[6][2]}**
-                                
-                                **{counters[7][0]}** — **{counters[7][2]}**
-                                
-                                **{counters[8][0]}** — **{counters[8][2]}**
-                                
-                                **{counters[9][0]}** — **{counters[9][2]}**
-                                
-                                **{counters[10][0]}** — **{counters[10][2]}**
-                                
-                                **{counters[11][0]}** — **{counters[11][2]}**
-                                """)
+                embed.add_field(name='Champions', value=f"{f'{nl}'.join([c[0] for c in counters])}")
+                embed.add_field(name='Matches', value=f"{f'{nl}'.join([c[1] for c in counters])}")
+                embed.add_field(name=f'{blank}Win Rate', value=f"{f'{nl}'.join([c[2] for c in counters])}")
+                
                 embed.set_image(url=f'https://raw.githubusercontent.com/buga-sys/championHeaders/master/{champion_key}.png')
                 await ctx.send(embed=embed)
             except:
