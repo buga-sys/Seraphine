@@ -4,14 +4,10 @@ import requests
 import bs4
 from datetime import datetime
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
-api = str(os.getenv('API_KEY'))
 
 ops = '<:outage:835522354963677184>'
 
-class Other(commands.Cog):
+class Misc(commands.Cog):
     def __init__(self, client):
         self.client = client              
         
@@ -78,4 +74,4 @@ class Other(commands.Cog):
         await ctx.send(embed=embed)
             
 def setup(client):
-    client.add_cog(Other(client))
+    client.add_cog(Misc(client))

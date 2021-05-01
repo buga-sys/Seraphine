@@ -11,7 +11,6 @@ import bs4
 
 load_dotenv()
 version = str(os.getenv('VERSION'))
-api = str(os.getenv('API_KEY'))
 
 ops = '<:outage:835522354963677184>'
 
@@ -400,7 +399,7 @@ class Champions(commands.Cog):
             try:
                 embed = discord.Embed(description=f'Results for role: {role_icon}', color=0xfda5b0)
                 embed.set_author(name=f'{title}', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{champion_image}')
-                embed.add_field(name='Champions', value=f"{f'{nl}'.join([c[0] for c in counters])}")
+                embed.add_field(name='Champions', value=f"**{f'{nl}'.join([c[0] for c in counters])}**")
                 embed.add_field(name='Matches', value=f"{f'{nl}'.join([c[1] for c in counters])}")
                 embed.add_field(name=f'{blank}Win Rate', value=f"{f'{nl}'.join([c[2] for c in counters])}")
                 
@@ -422,43 +421,7 @@ class Champions(commands.Cog):
         if isinstance(error, commands.errors.MissingRequiredArgument):
             embed=discord.Embed(title=f'{ops} Seraphine: Counters', description="You need to give me a champion!", color=0xfda5b0)
             embed.add_field(name='Usage', value='`!counters [champion] [optional: role]`')
-            await ctx.send(embed=embed) 
-            
-    @commands.command()
-    async def rotation(self, ctx):
-        r = requests.get(f'https://euw1.api.riotgames.com/lol/platform/v3/champion-rotations?api_key={api}')
-        rotation_json = r.json()
-        
-        temp = []
-        champion_names = []        
-        with open(f'dragontail/11.8.1/data/en_GB/champion.json', encoding="utf8") as f:
-            champion = json.load(f)
-        for p in rotation_json['freeChampionIds']:
-            for k,v in champion['data'].items():
-                if v['key'] == str(p):
-                    temp.append(v['name'])
-        f.close()   
-        
-        with open('data/championIcons.json', encoding='utf-8') as f:
-                emojis = json.load(f)
-        for e in emojis:
-            for c in temp:
-                if e['name'] == c:
-                    emoji = e['emoji']
-                    newstring = emoji + ' ' + c
-                    champion_names.append(newstring)
-        f.close()
-        nl = '\n'
-        
-        embed = discord.Embed(title='Champion Rotations',description=f"This week's free rotation:", color=0xfda5b0)
-        embed.set_thumbnail(url='https://seraphine-bot.s3.eu-central-1.amazonaws.com/lol_icon_32.png')
-        embed.add_field(name='\u200B', value=f"**{f'{nl}'.join([c for c in champion_names[:10]])}**")
-        embed.add_field(name='\u200B', value=f"**{f'{nl}'.join([c for c in champion_names[10:]])}**")
-        await ctx.send(embed=embed)
-        
-                
-        
-            
+            await ctx.send(embed=embed)   
 
 def setup(client):
     client.add_cog(Champions(client))
