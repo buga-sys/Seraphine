@@ -35,23 +35,24 @@ class Other(commands.Cog):
         weeks = days / 7
         months = weeks * 0.229984
         date = None
-        if seconds < 120:
+        
+        if seconds <= 120:
             date = str(int(minutes)) + ' minute ago'
-        elif seconds < 3600:
+        elif seconds <= 3600:
             date = str(int(minutes)) + ' minutes ago'
-        elif seconds < 7200:
+        elif seconds <= 7200:
             date = str(int(hours)) + ' hour ago'
-        elif seconds < 86400:
+        elif seconds <= 86400:
             date = str(int(hours)) + ' hours ago'
-        elif seconds < 172800:
+        elif seconds <= 172800:
             date = str(int(days)) + ' day ago'
-        elif seconds < 604800:
+        elif seconds <= 604800:
             date = str(int(days)) + ' days ago'
-        elif seconds < 1210000:
+        elif seconds <= 1210000:
             date = str(int(weeks)) + ' week ago'
-        elif seconds < 2628000:
+        elif seconds <= 2628000:
             date = str(int(weeks)) + ' weeks ago'
-        elif seconds < 5256000:
+        elif seconds <= 5256000:
             date = str(int(months)) + ' month ago'
         else:
             date = str(int(months)) + ' months ago'
