@@ -6,6 +6,7 @@ import traceback
 import mysql.connector
 import os
 from dotenv import load_dotenv
+from datetime import datetime
 
 load_dotenv()
 api = str(os.getenv('API_KEY'))
@@ -451,9 +452,178 @@ class League(commands.Cog):
                 traceback.print_exc()
                 except_embed = discord.Embed(description=f"Something went wrong, couldn't fetch {name}'s data.", color=0xfda5b0)
                 except_embed.set_thumbnail(url=f'attachment://{icon_png}')
-                await msg.edit(embed=except_embed)           
-            
+                await msg.edit(embed=except_embed)
     
+    @commands.command()
+    async def mastery(self, ctx, region=None, summoner=None):
+        regions = ['euw', 'br', 'na', 'eune', 'jp', 'las', 'lan', 'oce', 'tr', 'kr', 'ru']
+        servers = {'euw':'euw1','br':'br1', 'na':'na1', 'eune':'eun1', 'jp':'jp1', 'las':'la2', 'lan':'la1', 'oce':'oc1', 'tr':'tr1', 'kr':'kr', 'ru':'ru'}
+        if region is None and summoner is None:
+            user_id = ctx.author.id
+            try:
+                conn = mysql.connector.connect(
+                    host=host,
+                    database=database,
+                    user=user,
+                    password=password,
+                    port=port)
+            
+                cur = conn.cursor()
+                cur.execute(f"""SELECT * FROM profile WHERE user_id = '{user_id}'""")
+                data = cur.fetchone()
+                if data is not None:
+                    profile_data = list(data)
+                    region = profile_data[1]
+                    summoner = profile_data[2]
+                    await self.mastery(ctx, region, summoner=summoner)
+                else:
+                    embed=discord.Embed(title=f'{ops} Seraphine: Profile', description="You dont have a summoner added! \n \u200B \n Add your profile so you don't have to specify your account information.", color=0xfda5b0)
+                    embed.add_field(name='Add Your Summoner', value='`!add [region] [summoner]`')
+                    embed.add_field(name='Specify', value='`!profile [region] [summoner]`')
+                    await ctx.send(embed=embed)
+                cur.close()
+            except mysql.connector.Error as err:
+                print("Something went wrong: {}".format(err))
+            else:
+                if conn is not None:
+                    conn.close()
+                              
+        elif region.lower() not in regions:
+            embed=discord.Embed(title=f'{ops} Seraphine: Profile', description="Invalid region!", color=0xfda5b0)
+            embed.add_field(name='Regions', value='`br` `eune` `euw` `jp` `kr` `lan` `las` `na` `oce` `ru` `tr`')
+            await ctx.send(embed=embed)
+        elif summoner is None:
+            embed=discord.Embed(title=f'{ops} Seraphine: Profile', description="You're missing something!", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!profile [region] [summoner]`')
+            await ctx.send(embed=embed)
+        else:
+            for k,v in servers.items():
+                if region.lower() == k:
+                    server = v
+            try:
+                try:
+                    summoner_request = requests.get(f'https://{server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner}?api_key={api}')
+                except Exception:
+                    traceback.print_exc()
+                summoner_json = summoner_request.json()
+                summoner_id = summoner_json['id']
+                icon_id = summoner_json['profileIconId']
+                masteryScore_request = requests.get(f'https://{server}.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/{summoner_id}?api_key={api}')
+                championMasteryList_request = requests.get(f'https://{server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{summoner_id}?api_key={api}')
+                championMasteryList = championMasteryList_request.json()
+                
+                with open(f'dragontail/{version}/data/en_GB/profileicon.json') as f:
+                    icon = json.load(f)
+                icon_path = f'dragontail/{version}/img/profileicon/'
+                icon_png = icon['data'][f'{icon_id}']['image']['full']
+                icon_full_path = icon_path + icon_png
+                f.close()
+                
+                nl = '\n'
+                chestTrue = '<:chest:837893366116909076>'
+                chestFalse = '<:nochest:837895944317698069>'
+                blank = '<:BLANK:837828544410550282>'
+                
+                totalMasteryScore = masteryScore_request.json()
+                masteryPoints = 0
+                chestsGained = 0
+                championsCount = len(championMasteryList)
+                champions = []
+
+                for m in championMasteryList[:10]:
+                    level = m['championLevel']
+                    id = m['championId']
+                    points = m['championPoints']
+                    lastplayed = m['lastPlayTime']
+                    chest = m['chestGranted']
+                    tokens = m['tokensEarned']
+                    champions.append([level,id,points,lastplayed,chest,tokens])
+
+                for m in championMasteryList:
+                    masteryPoints += m['championPoints']
+                    
+                for m in championMasteryList:
+                    if m['chestGranted'] is True:
+                        chestsGained += 1
+
+                with open('data/championIcons.json', encoding='utf-8') as f:
+                    champs = json.load(f)
+
+                with open('data/mastery.json', encoding='utf-8') as k:
+                    mastery = json.load(k)
+
+                championListOrganized = []
+                
+                for c in champions:
+                    if c[4] is False:
+                        c[4] = chestFalse
+                    else:
+                        c[4] = chestTrue
+                    
+                    if c[0] == 7:
+                        c[5] = 'Mastered'
+                    else:
+                        c[5] = str(c[5]) + ' Tokens'
+
+
+                    for i in champs:
+                        if str(c[1]) == i['key']:
+                            c[1] = i['emoji'] + ' ' + i['name']
+                    for i in mastery:
+                        if c[0] == i['mastery']:
+                            c[0] = i['emoji']
+
+                    convert = c[3] / 1000
+                    temp = datetime.fromtimestamp(convert).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+                    then = datetime.strptime(temp, "%Y-%m-%dT%H:%M:%S.%fZ")
+                    now = datetime.now()
+                    seconds = (now-then).total_seconds()
+                    minutes = seconds / 60
+                    hours = minutes / 60
+                    days = hours / 24
+                    weeks = days / 7
+                    months = weeks * 0.229984
+
+                    if seconds < 120:
+                        c[3] = blank + str(int(minutes)) + ' minute ago'
+                    elif seconds < 3600:
+                        c[3] = blank + str(int(minutes)) + ' minutes ago'
+                    elif seconds < 7200:
+                        c[3] = blank + str(int(hours)) + ' hour ago'
+                    elif seconds < 86400:
+                        c[3] = blank + str(int(hours)) + ' hours ago'
+                    elif seconds < 172800:
+                        c[3] = blank + str(int(days)) + ' day ago'
+                    elif seconds < 604800:
+                        c[3] = blank + str(int(days)) + ' days ago'
+                    elif seconds < 1210000:
+                        c[3] = blank + str(int(weeks)) + ' week ago'
+                    elif seconds < 2628000:
+                        c[3] = blank + str(int(weeks)) + ' weeks ago'
+                    elif seconds < 5256000:
+                        c[3] = blank + str(int(months)) + ' month ago'
+                    else:
+                        c[3] = blank + str(int(months)) + ' months ago'
+                    
+                    first = c[0] + ' **' + c[1] + '**' + ' - ' + f'{c[2]:,}'
+                    second = c[3]
+                    third = c[4] + ' - ' + c[5]
+                    championListOrganized.append([first,second,third])
+                
+                file = discord.File(f"{icon_full_path}", filename=f"{icon_png}")
+                embed = discord.Embed(title='Seraphine: Mastery', description='Champions with the most mastery points: \n \u200B', color=0xfda5b0)
+                embed.set_author(name=f'{summoner} [{region}]', icon_url=f"attachment://{icon_png}")
+                embed.add_field(name='Champion Mastery', value=f"{f'{nl}'.join([c[0] for c in championListOrganized])}")
+                embed.add_field(name=f'{blank}Last Played', value=f"{f'{nl}'.join([c[1] for c in championListOrganized])}")
+                embed.add_field(name='Chest/Status', value=f"{f'{nl}'.join([c[2] for c in championListOrganized])}")
+                embed.add_field(name='\u200B', value=f"**Champions:** {championsCount} · **Mastery Score:** {totalMasteryScore} · **Mastery Points:** {masteryPoints:,} · **Chests Gained:** {chestsGained}/{championsCount}")
+                await ctx.send(file=file, embed=embed)
+            except KeyError:
+                embed=discord.Embed(description="Oops, Couldn't find summoner!", color=0xfda5b0)
+                await ctx.send(embed=embed)
+            except Exception:
+                traceback.print_exc()
+                           
     @commands.command()
     async def add(self, ctx, region=None, *, summoner=None):
         user_id = ctx.author.id
