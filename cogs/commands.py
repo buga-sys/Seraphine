@@ -11,7 +11,10 @@ class Commands(commands.Cog):
             return
         elif isinstance(error, commands.errors.MissingRequiredArgument):
             return
-        raise error   
+        elif isinstance(error, commands.errors.CommandInvokeError):
+            return
+        else:
+            raise error   
         
     @commands.command()
     async def help(self, ctx):
