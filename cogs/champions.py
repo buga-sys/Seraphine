@@ -120,9 +120,9 @@ class Champions(commands.Cog):
                 champions = json.load(f)
 
             name = None
-            rp = '<:rp:837492647772815389>'
-            skin_name = ''
-            skin_id = ''
+            rarity = None
+            cost = None
+            rp = '<:rp:838109393307697184>'
             pages = []
             buttons = [u"\u23EA", u"\u2B05", u"\u27A1", u"\u23E9"] # skip to start, left, right, skip to end
             current = 0
@@ -148,7 +148,9 @@ class Champions(commands.Cog):
                     "icon": ''
                  }
             ]
-
+            cid = champions['name']
+            picid = champions['key']
+            
             for c in champions['skins'][1:]:
                 name = c['name']
                 if c['cost'] == 'special':
@@ -160,7 +162,7 @@ class Champions(commands.Cog):
                     if r['name'] == rarity:
                         rarity = r['icon']
                 imageurl = c['loadScreenPath']
-                page = discord.Embed(title='Seraphine: Skins', color=0xfda5b0).add_field(name=f'{rarity} {name} {champion.capitalize()}',value=f'{cost}').set_image(url=imageurl)
+                page = discord.Embed(title='Seraphine: Skins', description='Here are the list of skins: \n \u200B', color=0xfda5b0).add_field(name=f'{rarity} {name}',value=f'{cost}').set_image(url=imageurl).set_author(name=f'{cid}', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{picid}.png')
                 pages.append(page)    
             f.close()
             
