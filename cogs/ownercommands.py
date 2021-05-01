@@ -12,10 +12,7 @@ class OwnerCommands(commands.Cog):
     async def _servers(self, ctx):
         guildcount = len(self.client.guilds)
         activeservers = self.client.guilds
-        print('********************** GUILD LIST **********************')
-        for guild in activeservers:
-            print(f'{guild.name} - ({guild.id})')
-        print(f'Seraphine is in {guildcount} servers.')   
+        print(f'Seraphine is in {guildcount} guilds.')   
     
     @commands.command(hidden=True)
     @commands.is_owner()

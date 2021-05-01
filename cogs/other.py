@@ -67,7 +67,7 @@ class Other(commands.Cog):
                               \u200B
 
                               **Added:**
-                              (5/1) **!mastery** - You can now view champions with most mastery points of a summoner.
+                              (5/1) **!mastery** - You can now view a summoner's champions with most mastery points.
                               
                               \u200B
                               **Improvements:**
