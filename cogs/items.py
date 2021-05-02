@@ -29,6 +29,7 @@ class Items(commands.Cog):
             tags = []
             item_png = None
             gold_total = None
+            ornnIcon = '<:ornnUpgrade:838226741268447262>'
 
             for k,v in items['data'].items():
                 if item.lower() in v['name'].lower():
@@ -40,6 +41,7 @@ class Items(commands.Cog):
                     gold_total = v['gold']['total']
             f.close()
             
+            name = name.replace(r'%i:ornnIcon%', f'{ornnIcon}')
             item_image_path = f'dragontail/{version}/img/item/'
             image_full_path = item_image_path + item_png
             description = description.replace('<mainText>', '')
@@ -48,6 +50,8 @@ class Items(commands.Cog):
             description = description.replace('</stats>', '\n\u200B```')
             description = description.replace('<attention>', '')
             description = description.replace('</attention>', '')
+            description = description.replace('<ornnBonus>', '')
+            description = description.replace('</ornnBonus>', '')
             description = description.replace('<passive>', '**')
             description = description.replace('</passive>', '**')
             description = description.replace('<li>', '')
@@ -62,6 +66,10 @@ class Items(commands.Cog):
             description = description.replace('</magicDamage>', '*')
             description = description.replace('<physicalDamage>', '*')
             description = description.replace('</physicalDamage>', '*')
+            description = description.replace('<attackDamage>', '*')
+            description = description.replace('</attackDamage>', '*')
+            description = description.replace('<shield>', '*')
+            description = description.replace('</shield>', '*')
             description = description.replace('<scaleAP>', '*')
             description = description.replace('</scaleAP>', '*')
             description = description.replace('<attackSpeed>', '*')
@@ -133,6 +141,7 @@ class Items(commands.Cog):
             current = 0
             item_image_path = f'dragontail/{version}/img/item/'
             gold_total = None
+            ornnIcon = '<:ornnUpgrade:838226741268447262>'
             
             def find_between( s, first, last ):
                         try:
@@ -145,6 +154,7 @@ class Items(commands.Cog):
             for k,v in items['data'].items():
                 if itemtype.lower() in find_between(str(v['description']).lower(), '<stats>', '</stats>'):
                     name = v['name']
+                    name = name.replace(r'%i:ornnIcon%', f'{ornnIcon}')
                     description = v['description']
                     description = description.replace('<mainText>', '')
                     description = description.replace('</mainText>', '')
@@ -152,6 +162,8 @@ class Items(commands.Cog):
                     description = description.replace('</stats>', '\n\u200B```')
                     description = description.replace('<attention>', '')
                     description = description.replace('</attention>', '')
+                    description = description.replace('<ornnBonus>', '')
+                    description = description.replace('</ornnBonus>', '')
                     description = description.replace('<passive>', '**')
                     description = description.replace('</passive>', '**')
                     description = description.replace('<li>', '')
@@ -166,6 +178,10 @@ class Items(commands.Cog):
                     description = description.replace('</magicDamage>', '*')
                     description = description.replace('<physicalDamage>', '*')
                     description = description.replace('</physicalDamage>', '*')
+                    description = description.replace('<attackDamage>', '*')
+                    description = description.replace('</attackDamage>', '*')
+                    description = description.replace('<shield>', '*')
+                    description = description.replace('</shield>', '*')
                     description = description.replace('<OnHit>', '*')
                     description = description.replace('</OnHit>', '*')
                     description = description.replace('<scaleAP>', '*')
