@@ -281,7 +281,7 @@ class League(commands.Cog):
                           
                     
                 file = discord.File(f"{icon_full_path}", filename=f"{icon_png}")
-                embed = discord.Embed(description=f"{sep}", color=0xfda5b0)
+                embed = discord.Embed(description=f"Summary of the profile you asked for: \n \u200B", color=0xfda5b0)
                 embed.set_author(name=f'Profile: {name} [{region.upper()}]', icon_url=f'attachment://{icon_png}')
                 embed.add_field(name='Summoner Level', value=f'{level} \n \u200B')
                 embed.add_field(name='\u200B', value='\u200B')
@@ -379,7 +379,7 @@ class League(commands.Cog):
                 f.close()
                 
                 file = discord.File(f"{icon_full_path}", filename=f"{icon_png}")
-                embed = discord.Embed(title=f"{sep}", color=0xfda5b0)
+                embed = discord.Embed(description=f"Recent Games (Last 10 Played): \n \u200B", color=0xfda5b0)
                 embed.set_author(name=f'Match History: {name} [{region.upper()}]', icon_url=f'attachment://{icon_png}')
                 
                 temp_embed = discord.Embed(description=f"Fetching {name}'s match history, wait a moment...", color=0xfda5b0)
@@ -445,7 +445,7 @@ class League(commands.Cog):
                             status = win if p['stats']['win'] == True else loss
                             minions = p['stats']['totalMinionsKilled']
                             gold = p['stats']['goldEarned']
-                    embed.add_field(name=f'{status} {emoji} {champion_name} - ({queue_type})', value=f'''<:kda:836010572586942506>{kills} / {deaths} / {assists} \u200B \u200B <:minion:823209384908816404>{minions} \u200B \u200B <:gold:823209384942370836>{gold}''', inline=False)
+                    embed.add_field(name=f'{status} {emoji} {champion_name} - ({queue_type})', value=f'''<:kda:838239099822669824>{kills} / {deaths} / {assists} \u200B \u200B <:minion:823209384908816404>{minions} \u200B \u200B <:gold:823209384942370836>{gold}''', inline=False)
                 await msg.edit(embed=embed) 
             except KeyError:
                 embed=discord.Embed(description="Oops, Couldn't find summoner!", color=0xfda5b0)
@@ -613,8 +613,8 @@ class League(commands.Cog):
                     championListOrganized.append([first,second,third])
                 
                 file = discord.File(f"{icon_full_path}", filename=f"{icon_png}")
-                embed = discord.Embed(title='Seraphine: Mastery', description='Champions with the most mastery points: \n \u200B', color=0xfda5b0)
-                embed.set_author(name=f'{summoner} [{region}]', icon_url=f"attachment://{icon_png}")
+                embed = discord.Embed(description='Champions with the highest mastery points: \n \u200B', color=0xfda5b0)
+                embed.set_author(name=f'Mastery: {summoner} [{region}]', icon_url=f"attachment://{icon_png}")
                 embed.add_field(name='Champion Mastery', value=f"{f'{nl}'.join([c[0] for c in championListOrganized])}")
                 embed.add_field(name=f'{blank}Last Played', value=f"{f'{nl}'.join([c[1] for c in championListOrganized])}")
                 embed.add_field(name='Chest/Status', value=f"{f'{nl}'.join([c[2] for c in championListOrganized])}")

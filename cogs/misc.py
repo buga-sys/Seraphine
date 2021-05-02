@@ -69,6 +69,7 @@ class Misc(commands.Cog):
                               
                               \u200B
                               **Improvements:**
+                              (5/2) **!item & !itemtype** - Fixed Ornn upgraded items description.
                               (5/2) **!itemtype** - Going through list is slightly faster now.
                               (5/2) **!skins** - Going through list is slightly faster now.
                               (5/2) **!commands** - Added pages for better viewability.
