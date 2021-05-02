@@ -34,6 +34,7 @@ class Items(commands.Cog):
             for k,v in items['data'].items():
                 if item.lower() in v['name'].lower():
                     name = v['name']
+                    name = name.replace(r'%i:ornnIcon%', f'{ornnIcon}')
                     description = v['description']
                     plaintext = v['plaintext']
                     tags = v['tags']
@@ -41,7 +42,6 @@ class Items(commands.Cog):
                     gold_total = v['gold']['total']
             f.close()
             
-            name = name.replace(r'%i:ornnIcon%', f'{ornnIcon}')
             item_image_path = f'dragontail/{version}/img/item/'
             image_full_path = item_image_path + item_png
             description = description.replace('<mainText>', '')
