@@ -64,10 +64,14 @@ class Misc(commands.Cog):
                               \u200B
 
                               **Added:**
+                              (5/2) **!rankings** - List of top players in a region.
                               (5/1) **!mastery** - You can now view a summoner's champions with most mastery points.
                               
                               \u200B
                               **Improvements:**
+                              (5/2) **!itemtype** - Going through list is slightly faster now.
+                              (5/2) **!skins** - Going through list is slightly faster now.
+                              (5/2) **!commands** - Added pages for better viewability.
                               (5/1) **!counter** - Fixed some champions data couldn't be loaded bug and added more information.
                               ''', color=0xfda5b0)
         embed.set_author(name='Seraphine', icon_url='https://i.pinimg.com/originals/05/e0/8b/05e08be9fd54e6da2f6d482625168c91.png')

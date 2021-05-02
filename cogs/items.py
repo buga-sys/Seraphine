@@ -90,6 +90,8 @@ class Items(commands.Cog):
             description = description.replace('</rarityLegendary>', '**')
             description = description.replace('<rarityGeneric>', '**')
             description = description.replace('</rarityGeneric>', '**')
+            description = description.replace('<goldGain>', '*')
+            description = description.replace('</goldGain>', '*')
             description = description.replace('<br>', '\n')
             rx = r"\.(?=\S)"
             description = re.sub(rx, ". ", description)
@@ -194,6 +196,8 @@ class Items(commands.Cog):
                     description = description.replace('</rarityLegendary>', '**')
                     description = description.replace('<rarityGeneric>', '**')
                     description = description.replace('</rarityGeneric>', '**')
+                    description = description.replace('<goldGain>', '*')
+                    description = description.replace('</goldGain>', '*')
                     description = description.replace('<br>', '\n')
                     rx = r"\.(?=\S)"
                     description = re.sub(rx, ". ", description)
@@ -202,8 +206,6 @@ class Items(commands.Cog):
                     item_png = v['image']['full']
                     gold_total = v['gold']['total']
                     image_full_path = item_image_path + item_png
-                    # file = discord.File(f"{image_full_path}", filename=f"{item_png}")
-                    # files.append(file)
                     page = discord.Embed(title=f'{name}', description=f'<:gold:823209384942370836>{gold_total}', color=0xfda5b0).set_thumbnail(url=f'http://ddragon.leagueoflegends.com/cdn/{version}/img/item/{item_png}').add_field(name='\u200B', value=f'{description}')
                     pages.append(page)  
             f.close()
@@ -224,20 +226,21 @@ class Items(commands.Cog):
                     previous_page = current
                     if reaction.emoji == u"\u23EA":
                         current = 0
+                        await msg.remove_reaction(u"\u23EA", ctx.author)
                         
                     elif reaction.emoji == u"\u2B05":
                         if current > 0:
                             current -= 1
+                        await msg.remove_reaction(u"\u2B05", ctx.author)
                             
                     elif reaction.emoji == u"\u27A1":
                         if current < len(pages)-1:
                             current += 1
+                        await msg.remove_reaction(u"\u27A1", ctx.author)
 
                     elif reaction.emoji == u"\u23E9":
                         current = len(pages)-1
-
-                    for button in buttons:
-                        await msg.remove_reaction(button, ctx.author)
+                        await msg.remove_reaction(u"\u23E9", ctx.author)
 
                     if current != previous_page:
                         await msg.edit(embed=pages[current].set_footer(text=f"{current+1}/{len(pages)}"))

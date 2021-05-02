@@ -7,6 +7,7 @@ import mysql.connector
 import os
 from dotenv import load_dotenv
 from datetime import datetime
+import asyncio
 
 load_dotenv()
 api = str(os.getenv('API_KEY'))
@@ -20,6 +21,7 @@ port = str(os.getenv('PORT'))
 
 ops = '<:outage:835522354963677184>'
 check = '<:check:835842893696204830>'
+sep = '<:sep:838164218514505759>'
                 
 class League(commands.Cog):
     def __init__(self, client):
@@ -279,8 +281,8 @@ class League(commands.Cog):
                           
                     
                 file = discord.File(f"{icon_full_path}", filename=f"{icon_png}")
-                embed = discord.Embed(title=f"Seraphine: Profile", color=0xfda5b0)
-                embed.set_author(name=f'{name} [{region.upper()}]', icon_url=f'attachment://{icon_png}')
+                embed = discord.Embed(description=f"{sep}", color=0xfda5b0)
+                embed.set_author(name=f'Profile: {name} [{region.upper()}]', icon_url=f'attachment://{icon_png}')
                 embed.add_field(name='Summoner Level', value=f'{level} \n \u200B')
                 embed.add_field(name='\u200B', value='\u200B')
                 embed.add_field(name='\u200B', value='\u200B')
@@ -377,8 +379,8 @@ class League(commands.Cog):
                 f.close()
                 
                 file = discord.File(f"{icon_full_path}", filename=f"{icon_png}")
-                embed = discord.Embed(title=f"Seraphine: Match History", color=0xfda5b0)
-                embed.set_author(name=f'{name} [{region.upper()}]', icon_url=f'attachment://{icon_png}')
+                embed = discord.Embed(title=f"{sep}", color=0xfda5b0)
+                embed.set_author(name=f'Match History: {name} [{region.upper()}]', icon_url=f'attachment://{icon_png}')
                 
                 temp_embed = discord.Embed(description=f"Fetching {name}'s match history, wait a moment...", color=0xfda5b0)
                 temp_embed.set_thumbnail(url=f'attachment://{icon_png}')
@@ -655,7 +657,112 @@ class League(commands.Cog):
         embed.add_field(name='\u200B', value=f"**{f'{nl}'.join([c for c in champion_names[:10]])}**")
         embed.add_field(name='\u200B', value=f"**{f'{nl}'.join([c for c in champion_names[10:]])}**")
         await ctx.send(embed=embed)
-                                             
+    
+    @commands.command()
+    async def rankings(self, ctx, region=None):
+        regions = ['euw', 'br', 'na', 'eune', 'jp', 'las', 'lan', 'oce', 'tr', 'kr', 'ru']
+        servers = {'euw':'euw1','br':'br1', 'na':'na1', 'eune':'eun1', 'jp':'jp1', 'las':'la2', 'lan':'la1', 'oce':'oc1', 'tr':'tr1', 'kr':'kr', 'ru':'ru'}
+        if region is None:
+            embed=discord.Embed(title=f'{ops} Seraphine: Rankings', description="You're missing something!", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!rankings [region]`')
+            await ctx.send(embed=embed)                  
+        elif region.lower() not in regions:
+            embed=discord.Embed(title=f'{ops} Seraphine: Rankings', description="Invalid region!", color=0xfda5b0)
+            embed.add_field(name='Regions', value='`br` `eune` `euw` `jp` `kr` `lan` `las` `na` `oce` `ru` `tr`')
+            await ctx.send(embed=embed)
+        else:
+            for k,v in servers.items():
+                if region.lower() == k:
+                    server = v
+            try:
+                leagueEntries_request = requests.get(f'https://{server}.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/CHALLENGER/I?page=1&api_key={api}')
+            except Exception:
+                traceback.print_exc()
+                
+            entryList = leagueEntries_request.json()
+            blank = '<:BLANK:837828544410550282>'
+            nl = '\n'
+            summoners = []
+            buttons = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣"]
+            current = 0
+            
+            i = 1
+            for e in entryList[:100]:
+                summonerName =  f'{i}. ' + e['summonerName'] + blank
+                rank = blank + e['tier'] + ' ' + str(e['leaguePoints']) + ' LP'
+                wins = e['wins']
+                losses = e['losses']
+                winrate = int((int(wins) / (int(wins) + int(losses))) * 100)
+                winsall = blank + '**Wins: ' + str(wins) + '** · ' + str(winrate) + '% WR'
+                summoners.append([summonerName, rank, winsall])
+                i += 1               
+            
+            page1 = discord.Embed (
+                title = f'Seraphine: Rankings',
+                description = f'Top Players Rankings in {region.upper()}: \n \u200B',
+                colour = 0xfda5b0
+            ).add_field(name=f'Name', value=f"**{f'{nl}'.join([s[0] for s in summoners[:20]])}**").add_field(name=f'{blank}Solo Queue', value=f"**{f'{nl}'.join([s[1] for s in summoners[:20]])}**").add_field(name='\u200B', value=f"{f'{nl}'.join([s[2] for s in summoners[:20]])}")
+            page2 = discord.Embed (
+                 title = f'Seraphine: Rankings',
+                description = f'Top Players Rankings in {region.upper()}: \n \u200B',
+                colour = 0xfda5b0
+            ).add_field(name=f'Name', value=f"**{f'{nl}'.join([s[0] for s in summoners[20:40]])}**").add_field(name=f'{blank}Solo Queue', value=f"**{f'{nl}'.join([s[1] for s in summoners[20:40]])}**").add_field(name='\u200B', value=f"{f'{nl}'.join([s[2] for s in summoners[20:40]])}")
+            page3 = discord.Embed (
+                 title = f'Seraphine: Rankings',
+                description = f'Top Players Rankings in {region.upper()}: \n \u200B',
+                colour = 0xfda5b0
+            ).add_field(name=f'Name', value=f"**{f'{nl}'.join([s[0] for s in summoners[40:60]])}**").add_field(name=f'{blank}Solo Queue', value=f"**{f'{nl}'.join([s[1] for s in summoners[40:60]])}**").add_field(name='\u200B', value=f"{f'{nl}'.join([s[2] for s in summoners[40:60]])}")
+            page4 = discord.Embed (
+                 title = f'Seraphine: Rankings',
+                description = f'Top Players Rankings in {region.upper()}: \n \u200B',
+                colour = 0xfda5b0
+            ).add_field(name=f'Name', value=f"**{f'{nl}'.join([s[0] for s in summoners[60:80]])}**").add_field(name=f'{blank}Solo Queue', value=f"**{f'{nl}'.join([s[1] for s in summoners[60:80]])}**").add_field(name='\u200B', value=f"{f'{nl}'.join([s[2] for s in summoners[60:80]])}")
+            page5 = discord.Embed (
+                title = f'Seraphine: Rankings',
+                description = f'Top Players Rankings in {region.upper()}: \n \u200B',
+                colour = 0xfda5b0
+            ).add_field(name=f'Name', value=f"**{f'{nl}'.join([s[0] for s in summoners[80:100]])}**").add_field(name=f'{blank}Solo Queue', value=f"**{f'{nl}'.join([s[1] for s in summoners[80:100]])}**").add_field(name='\u200B', value=f"{f'{nl}'.join([s[2] for s in summoners[80:100]])}")
+
+            pages = [page1, page2, page3, page4, page5]
+
+            msg = await ctx.send(embed=pages[current].set_footer(text=f"Page {current+1}ᅠ•ᅠNavigate through the rankings using the reactions below!").set_thumbnail(url='https://seraphine-bot.s3.eu-central-1.amazonaws.com/lol_icon_32.png'))
+
+            for button in buttons:
+                await msg.add_reaction(button)
+                
+            while True:
+                try:
+                    reaction, user = await self.client.wait_for("reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons and reaction.message.id == msg.id, timeout=30.0)
+
+                except asyncio.TimeoutError:
+                    pass
+
+                else:
+                    previous_page = current
+                    if reaction.emoji == "1️⃣":
+                        current = 0
+                        await msg.remove_reaction("1️⃣", ctx.author)
+                        
+                    elif reaction.emoji == "2️⃣":
+                        current = 1
+                        await msg.remove_reaction("2️⃣", ctx.author)
+                            
+                    elif reaction.emoji == "3️⃣":
+                        current = 2
+                        await msg.remove_reaction("3️⃣", ctx.author)
+
+                    elif reaction.emoji == "4️⃣":
+                        current = 3
+                        await msg.remove_reaction("4️⃣", ctx.author)
+                        
+                    elif reaction.emoji == "5️⃣":
+                        current = 4
+                        await msg.remove_reaction("5️⃣", ctx.author)
+
+                    if current != previous_page:
+                        await msg.edit(embed=pages[current].set_footer(text=f"Page {current+1}ᅠ•ᅠNavigate through the rankings using the reactions below!").set_thumbnail(url='https://seraphine-bot.s3.eu-central-1.amazonaws.com/lol_icon_32.png'))
+            
+                                                          
                            
 def setup(client):
     client.add_cog(League(client))

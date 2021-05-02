@@ -162,7 +162,7 @@ class Champions(commands.Cog):
                     if r['name'] == rarity:
                         rarity = r['icon']
                 imageurl = c['loadScreenPath']
-                page = discord.Embed(title='Seraphine: Skins', description='Here are the list of skins: \n \u200B', color=0xfda5b0).add_field(name=f'{rarity} {name}',value=f'{cost}').set_image(url=imageurl).set_author(name=f'{cid}', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{picid}.png')
+                page = discord.Embed(title='Seraphine: Skins', description="Here's what you asked for: \n \u200B", color=0xfda5b0).add_field(name=f'{rarity} {name}',value=f'{cost}').set_image(url=imageurl).set_author(name=f'{cid}', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{picid}.png')
                 pages.append(page)    
             f.close()
             
@@ -182,20 +182,21 @@ class Champions(commands.Cog):
                     previous_page = current
                     if reaction.emoji == u"\u23EA":
                         current = 0
+                        await msg.remove_reaction(u"\u23EA", ctx.author)
                         
                     elif reaction.emoji == u"\u2B05":
                         if current > 0:
                             current -= 1
+                        await msg.remove_reaction(u"\u2B05", ctx.author)
                             
                     elif reaction.emoji == u"\u27A1":
                         if current < len(pages)-1:
                             current += 1
+                        await msg.remove_reaction(u"\u27A1", ctx.author)
 
                     elif reaction.emoji == u"\u23E9":
                         current = len(pages)-1
-
-                    for button in buttons:
-                        await msg.remove_reaction(button, ctx.author)
+                        await msg.remove_reaction(u"\u23E9", ctx.author)
 
                     if current != previous_page:
                         await msg.edit(embed=pages[current].set_footer(text=f"{current+1}/{len(pages)}"))
