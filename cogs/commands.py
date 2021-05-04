@@ -12,23 +12,22 @@ class Commands(commands.Cog):
             return
         elif isinstance(error, commands.errors.MissingRequiredArgument):
             return
-        elif isinstance(error, commands.errors.CommandInvokeError):
-            return
-        else:
-            raise error
+        raise error
         
     @commands.command()
     async def help(self, ctx):
         inv = '<:invite:835844574404018177>'
         cmd = '<:cmd:835632392307867739>'
         halp = '<:help:835845004915245096>'
+        disc = '<:discord:838607571266961449>'
         invite_link = 'https://discord.com/oauth2/authorize?client_id=818488537456181248&permissions=321600&scope=bot'
-        contact_link = 'https://discordapp.com/channels/@me/161750634251419648/'
-        embed=discord.Embed(color=0xfda5b0)
+
+        embed = discord.Embed(color=0xfda5b0)
         embed.set_author(name=f'Seraphine Help')
+        embed.add_field(name=f"{halp} Help", value=f"To contact the developer, submit bugs, or suggest a feature, join the bot's server.")
+        embed.add_field(name=f"{disc} Official Server", value=f"https://discord.gg/QDKwswDYft")
         embed.add_field(name=f"{cmd} Commands", value="To see list of commands: `!commands`", inline=False)
         embed.add_field(name=f"{inv} Invite", value=f"Click [**here**]({invite_link}) to invite the bot to your server.", inline=False)
-        embed.add_field(name=f"{halp} Help", value=f"To contact the developer, submit bugs, or suggest a feature: **BUGA#0001**", inline=False)
         await ctx.send(embed=embed)
     
     @commands.command()
@@ -134,5 +133,25 @@ class Commands(commands.Cog):
                 if current != previous_page:
                     await msg.edit(embed=pages[current].set_footer(text=f"Page {current+1}ᅠ•ᅠNavigate through pages using the reactions below!"))  
 
+    @commands.command(aliases=['updates'])
+    async def update(self, ctx):
+        embed = discord.Embed(description='''
+                              Here are the list of changes:
+                              \u200B
+
+                              **Added:**
+                              **!rankings** - List of top players in a region.
+                              **!mastery** - You can now view a summoner's champions with most mastery points.
+                              
+                              **Improvements:**
+                              **!item & !itemtype** - Fixed Ornn upgraded items description.
+                              **!itemtype** - Going through list is slightly faster now.
+                              **!skins** - Going through list is slightly faster now.
+                              **!commands** - Added pages for better viewability.
+                              **!counter** - Fixed a bug where some champions' data couldn't be loaded and added more information.
+                              ''', color=0xfda5b0)
+        embed.set_author(name='Seraphine', icon_url='https://i.pinimg.com/originals/05/e0/8b/05e08be9fd54e6da2f6d482625168c91.png')
+        await ctx.send(embed=embed)
+    
 def setup(client):
     client.add_cog(Commands(client))

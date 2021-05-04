@@ -10,11 +10,11 @@ token = str(os.getenv('TOKEN'))
 
 client = commands.Bot(command_prefix='!', help_command=None)
 
-@tasks.loop(seconds=60.0)
+@tasks.loop(seconds=120.0)
 async def my_background_task():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name='!help'))
-    await asyncio.sleep(30)
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name='!update'))
+    await asyncio.sleep(60)
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name='on patch: 11.9'))
 
 @client.event
 async def on_ready():
@@ -22,7 +22,7 @@ async def on_ready():
     await client.wait_until_ready()
     my_background_task.start()
 
-client.load_extension('cogs.league')
+client.load_extension('cogs.summoner')
 client.load_extension('cogs.accounts')
 client.load_extension('cogs.champions')
 client.load_extension('cogs.items')

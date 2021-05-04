@@ -56,26 +56,6 @@ class Misc(commands.Cog):
         embed=discord.Embed(title=title, description=f"{author} — {date}", color=0xfda5b0, url=link)
         embed.set_image(url=img_src)
         await ctx.send(embed=embed)
-    
-    @commands.command(aliases=['updates'])
-    async def update(self, ctx):
-        embed = discord.Embed(description='''
-                              Here are the list of changes:
-                              \u200B
-
-                              **Added:**
-                              (5/2) **!rankings** - List of top players in a region.
-                              (5/1) **!mastery** - You can now view a summoner's champions with most mastery points.
-                              
-                              **Improvements:**
-                              (5/2) **!item & !itemtype** - Fixed Ornn upgraded items description.
-                              (5/2) **!itemtype** - Going through list is slightly faster now.
-                              (5/2) **!skins** - Going through list is slightly faster now.
-                              (5/2) **!commands** - Added pages for better viewability.
-                              (5/1) **!counter** - Fixed a bug where some champions' data couldn't be loaded and added more information.
-                              ''', color=0xfda5b0)
-        embed.set_author(name='Seraphine', icon_url='https://i.pinimg.com/originals/05/e0/8b/05e08be9fd54e6da2f6d482625168c91.png')
-        await ctx.send(embed=embed)
             
 def setup(client):
     client.add_cog(Misc(client))

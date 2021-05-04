@@ -92,6 +92,27 @@ class OwnerCommands(commands.Cog):
             f.close() 
             with open('data/championIcons.json', 'w') as outfile:
                 json.dump(data, outfile, indent=4)
+    
+    @commands.command()
+    @commands.is_owner()
+    async def rules(self, ctx):
+        embed = discord.Embed(description='''
+                                **1)** Be mature. Use common sense. Be appropriate.
+
+                                **2)** Respect each other’s opinions, conversation, and DMs.
+
+                                **3)** There is no reason to advertise here.
+
+                                **4)** There will be no lewd, inappropriate, and sexual talk or posting.
+
+                                **5)** Any racist, homophobic/transphobic, sexist comments or slangs will not be tolerated.
+
+                                **6)** Follow each topic for channels. Please, read what you’re supposed to be doing in each channel.
+                              ''',color=0xfda5b0).set_author(
+                                  name='Server Rules', 
+                                  icon_url=''
+                              ).set_image(url='https://seraphine-bot.s3.eu-central-1.amazonaws.com/rules.png')
+        await ctx.send(embed=embed)
                    
 def setup(client):
     client.add_cog(OwnerCommands(client))
