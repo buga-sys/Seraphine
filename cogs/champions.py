@@ -68,7 +68,7 @@ class Champions(commands.Cog):
                 passive_description = None
 
                 for k,v in champions_data.items():
-                    if champion in k.lower():
+                    if champion == v['name'].lower() or champion == k.lower():
                         name = v['name']
                         title = v['title']
                         champion_image = v['image']['full']
@@ -117,7 +117,7 @@ class Champions(commands.Cog):
     @commands.command()
     async def skins(self, ctx, champion):
         try:
-            with open(f'lolstaticdata/champions/{champion.capitalize()}.json', encoding='utf-8') as f:
+            with open(f'lolstaticdata/champions.json', encoding='utf-8') as f:
                 champions = json.load(f)
 
             name = None
@@ -149,22 +149,25 @@ class Champions(commands.Cog):
                     "icon": ''
                  }
             ]
-            cid = champions['name']
-            picid = champions['key']
+        
             
-            for c in champions['skins'][1:]:
-                name = c['name']
-                if c['cost'] == 'special':
-                    cost = c['distribution']
-                else:
-                    cost = rp + ' ' + str(c['cost'])
-                rarity = c['rarity']
-                for r in skinRarity:
-                    if r['name'] == rarity:
-                        rarity = r['icon']
-                imageurl = c['loadScreenPath']
-                page = discord.Embed(description="Here's what you asked for: \n \u200B", color=0xfda5b0).add_field(name=f'{rarity} {name}',value=f'{cost}').set_image(url=imageurl).set_author(name=f'{cid} Skins', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{picid}.png')
-                pages.append(page)    
+            for k,v in champions.items():
+                if champion.lower() == v['name'].lower() or champion.lower() == k.lower():
+                    cid = v['name']
+                    picid = v['key']
+                    for c in v['skins'][1:]:
+                        name = c['name']
+                        if c['cost'] == 'special':
+                            cost = c['distribution']
+                        else:
+                            cost = rp + ' ' + str(c['cost'])
+                        rarity = c['rarity']
+                        for r in skinRarity:
+                            if r['name'] == rarity:
+                                rarity = r['icon']
+                        imageurl = c['loadScreenPath']
+                        page = discord.Embed(description="Here's what you asked for: \n \u200B", color=0xfda5b0).add_field(name=f'{rarity} {name}',value=f'{cost}').set_image(url=imageurl).set_author(name=f'{cid} Skins', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{picid}.png')
+                        pages.append(page)    
             f.close()
             
             msg = await ctx.send(embed=pages[current].set_footer(text=f"{current+1}/{len(pages)}"))
@@ -225,7 +228,8 @@ class Champions(commands.Cog):
         champions_data = champions['data']
         champion_key = None
         for k,v in champions_data.items():
-            if champion.lower() in k.lower():
+            if champion.lower() == v['name'].lower() or champion.lower() == k.lower():
+                champion = v['id']
                 champion_key = v['key']
                 champion_image = v['image']['full']
         f.close()
@@ -301,7 +305,7 @@ class Champions(commands.Cog):
             f.close()
             
             try:
-                embed = discord.Embed(description=f'Results for role: {role_icon}', color=0xfda5b0)
+                embed = discord.Embed(description=f'Results for role: {role_icon} \n \u200B', color=0xfda5b0)
                 embed.set_author(name=f'{title}', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{champion_image}')
                 embed.add_field(name=f'{weak} WEAK AGAINST', value=f'{emoji_weak_uno} **{weak_againt[0]}** \n {weak_againt_percentage[0]} \n Win Rate')
                 embed.add_field(name='\u200B', value=f'{emoji_weak_dos} **{weak_againt[1]}** \n {weak_againt_percentage[1]} \n Win Rate')
@@ -318,7 +322,7 @@ class Champions(commands.Cog):
                 await ctx.send(embed=embed)
             except:
                 traceback.print_exc()
-                embed=discord.Embed(title=f'{ops} Seraphine: Matchup', description=f"No data was found! \n \u200B \n Champion: **{champion.capitalize()}**", color=0xfda5b0)
+                embed=discord.Embed(title=f'{ops} Seraphine: Matchup', description=f"Something went wrong! Couldn't get data.", color=0xfda5b0)
                 await ctx.send(embed=embed)
         else:
             if role is None:
@@ -346,7 +350,8 @@ class Champions(commands.Cog):
         champions_data = champions['data']
         champion_key = None
         for k,v in champions_data.items():
-            if champion.lower() in k.lower():
+            if champion.lower() == v['name'].lower() or champion.lower() == k.lower():
+                champion = v['id']
                 champion_key = v['key']
                 champion_image = v['image']['full']
         f.close()
@@ -406,16 +411,16 @@ class Champions(commands.Cog):
             f.close()
             
             try:
-                embed = discord.Embed(description=f'Results for role: {role_icon}', color=0xfda5b0)
+                embed = discord.Embed(description=f'Results for role: {role_icon} \n \u200B', color=0xfda5b0)
                 embed.set_author(name=f'{title}', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{champion_image}')
                 embed.add_field(name='Champions', value=f"**{f'{nl}'.join([c[0] for c in counters])}**")
                 embed.add_field(name='Matches', value=f"{f'{nl}'.join([c[1] for c in counters])}")
                 embed.add_field(name=f'{blank}Win Rate', value=f"{f'{nl}'.join([c[2] for c in counters])}")
-                
                 embed.set_image(url=f'https://raw.githubusercontent.com/buga-sys/championHeaders/master/{champion_key}.png')
                 await ctx.send(embed=embed)
             except:
-                embed=discord.Embed(title=f'{ops} Seraphine: Counters', description=f"No data was found! \n \u200B \n Champion: **{champion.capitalize()}**", color=0xfda5b0)
+                traceback.print_exc()
+                embed=discord.Embed(title=f'{ops} Seraphine: Counters', description=f"Something went wrong! Couldn't get data.", color=0xfda5b0)
                 await ctx.send(embed=embed)
         else:
             if role is None:
@@ -463,6 +468,253 @@ class Champions(commands.Cog):
         embed.add_field(name='\u200B', value=f"**{f'{nl}'.join([c for c in champion_names[:10]])}**")
         embed.add_field(name='\u200B', value=f"**{f'{nl}'.join([c for c in champion_names[10:]])}**")
         await ctx.send(embed=embed) 
+    
+    @commands.command(aliases=['championrates'])
+    async def championrate(self, ctx, *, champion):
+        with open('lolstaticdata/rates.json', encoding='utf-8') as f:
+            rates = json.load(f)
+
+        with open('data/championIcons.json', encoding='utf-8') as w:
+            emojis = json.load(w)
+            
+        playRate = None
+        winRate = None
+        banRate = None
+
+        for e in emojis:
+            for k,v in rates['data'].items():
+                for q,w in v.items():
+                    if k == e['key']:
+                        name = e['name']
+                        cid = e['id']
+                        if champion.lower() == name.lower() or champion.lower() == cid.lower():
+                            champion_id = e['id']
+                            champion_key = e['key']
+                            playRate = w['playRate']
+                            winRate = w['winRate']
+                            banRate = w['banRate']
+        
+        embed = discord.Embed(description='Champion game stats: \n \u200B',color=0xfda5b0)
+        embed.set_author(name=f'{champion.capitalize()} Rates', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{champion_id}.png')
+        embed.add_field(name='Play Rate', value=f'{playRate}%')
+        embed.add_field(name='Win Rate', value=f'{winRate}%')
+        embed.add_field(name='Ban Rate', value=f'{banRate}%')
+        embed.set_image(url=f'https://raw.githubusercontent.com/buga-sys/championHeaders/master/{champion_key}.png')
+        await ctx.send(embed=embed)
+        
+    @commands.command()
+    async def build(self, ctx, champion, role=None):
+        roles = ['adc', 'top', 'mid', 'jungle', 'support']
+        
+        with open(f'dragontail/{version}/data/en_GB/championFull.json', encoding='utf-8') as f:
+            champions = json.load(f)
+        champions_data = champions['data']
+        champion_key = None
+        for k,v in champions_data.items():
+            if champion.lower() == v['name'].lower() or champion.lower() == k.lower():
+                champion = v['id']
+                champion_key = v['key']
+                champion_image = v['image']['full']
+        f.close()
+        
+        if role is None:
+            page = requests.get(f'https://app.mobalytics.gg/lol/champions/{champion}/build')
+        elif role.lower() in roles:
+            page = requests.get(f'https://app.mobalytics.gg/lol/champions/{champion}/build?role={role}')
+        else:
+            embed=discord.Embed(description="Invalid role!", color=0xfda5b0)
+            embed.add_field(name='Roles', value='`top` `jungle` `mid` `adc` `support`')
+            await ctx.send(embed=embed) 
+            
+        soup = bs4.BeautifulSoup(page.text, 'html.parser')
+
+        if soup.find(class_='css-2ps0tg'):
+            #Role
+            default = soup.find('div', style=lambda value: value and 'border-color:var(--gold);' in value)
+            default_role = default('img')[0]['alt']
+                
+            with open('data/roles.json') as f:
+                rolesjson = json.load(f)
+            role_icon = ''
+            for r in rolesjson:
+                if r['id'].lower() == default_role.lower():
+                    role_icon = r['emoji']
+                    
+            #Runes
+            mainPath = soup.find_all(class_='css-18ujv6b')[0]['alt']
+            keyStone = soup.find(class_='css-1bdyqpk')['alt']
+            mainSlotOne = soup.find_all(class_='css-1054us4')[0]['alt']
+            mainSlotTwo = soup.find_all(class_='css-1054us4')[1]['alt']
+            mainSlotThree = soup.find_all(class_='css-1054us4')[2]['alt']
+            secPath = soup.find_all(class_='css-18ujv6b')[1]['alt']
+            secSlotOne = soup.find_all(class_='css-1054us4')[3]['alt']
+            secSlotTwo = soup.find_all(class_='css-1054us4')[4]['alt']
+            
+            with open(f'data/runeIcons.json', encoding='utf-8') as f:
+                runes = json.load(f)
+            
+            for r in runes:
+                if r['name'] == mainPath:
+                    mainPath = r['emoji'] + ' ' + r['name']
+                if r['name'] == keyStone:
+                    keyStone = r['emoji']
+                if r['name'] == mainSlotOne:
+                    mainSlotOne = r['emoji']
+                if r['name'] == mainSlotTwo:
+                    mainSlotTwo = r['emoji']
+                if r['name'] == mainSlotThree:
+                    mainSlotThree = r['emoji']
+                if r['name'] == secPath:
+                    secPath = r['emoji'] + ' ' + r['name']
+                if r['name'] == secSlotOne:
+                    secSlotOne = r['emoji']
+                if r['name'] == secSlotTwo:
+                    secSlotTwo = r['emoji']
+            f.close()     
+
+            #Shards
+            shardOne = soup.find_all(class_='css-1vgqbrs')[0]['src']
+            shardTwo = soup.find_all(class_='css-1vgqbrs')[1]['src']
+            shardThree = soup.find_all(class_='css-1vgqbrs')[2]['src']
+            
+            with open(f'data/shards.json', encoding='utf-8') as f:
+                shards = json.load(f)
+            
+            for s in shards:
+                if s['id'] in shardOne:
+                    shardOne = s['emoji']
+                if s['id'] in shardTwo:
+                    shardTwo = s['emoji']
+                if s['id'] in shardThree:
+                    shardThree = s['emoji']
+            
+            #Summoners
+            summonerNames = []
+            with open(f'dragontail/11.9.1/data/en_GB/summoner.json', encoding='utf-8') as f:
+                summoner = json.load(f)
+            for s in summoner['data']:
+                for df in soup.find_all(class_='css-erhaoi'):
+                    if s in df['src']:
+                        summonerNames.append(s)
+            f.close()
+
+            with open(f'data/summonerIcons.json', encoding='utf-8') as f:
+                summonerIcons = json.load(f)
+
+            summonerEmojis = []
+            for i in summonerIcons:
+                for n in summonerNames:
+                    if i['id'] == n:
+                        summonerEmojis.append(i['emoji'])
+            f.close()
+                    
+            #Skills
+            skillEmojis = [
+                    {
+                    "name": "Q",
+                    "emoji": "<:q:841775869856710688>"
+                    },
+                    {
+                    "name": "W",
+                    "emoji": "<:w:841775870100242512>"
+                    },
+                    {
+                    "name": "E",
+                    "emoji": "<:e:841775869852385332>"
+                    },
+                    {
+                    "name": "R",
+                    "emoji": "<:r:841775870158569512>"
+                    }
+                ]
+
+            skills = []
+            for i in soup.find_all(class_='css-hgy7ai etewe3q4'):
+                for s in skillEmojis:
+                    if i.text == s['name']:
+                        skills.append(s['emoji'])
+            
+            #Items
+            starterItems = [i['alt'] for i in soup.find_all(class_='css-8atqhb')[0].find_all('img')]
+            earlyItems = [i['alt'] for i in soup.find_all(class_='css-8atqhb')[1].find_all('img')]
+            coreItems = [i['alt'] for i in soup.find_all(class_='css-8atqhb')[2].find_all('img')]
+            fullItems = [i['alt'] for i in soup.find_all(class_='css-8atqhb')[3].find_all('img')]
+            situationalItems = [i['alt'] for i in soup.find(class_='css-ahi832 e1tojong1').find_all('img')]
+            starterEmojis = []
+            earlyEmojis = []
+            coreEmojis = []
+            fullEmojis = []
+            situationalEmojis = []
+            
+            with open(f'data/itemIcons.json', encoding='utf-8') as f:
+                items = json.load(f)
+                
+            for i in items:
+                for s in starterItems:
+                    if i['name'] == s:
+                        starterEmojis.append(i['emoji'])
+                for s in earlyItems:
+                    if i['name'] == s:
+                        earlyEmojis.append(i['emoji'])
+                for s in coreItems:
+                    if i['name'] == s:
+                        coreEmojis.append(i['emoji'])
+                for s in fullItems:
+                    if i['name'] == s:
+                        fullEmojis.append(i['emoji'])
+                for s in situationalItems:
+                    if i['name'] == s:
+                        situationalEmojis.append(i['emoji'])
+            
+            try:
+                embed = discord.Embed(description=f'Results for role: {role_icon} \n \u200B', color=0xfda5b0)
+                embed.set_author(name=f'{champion.capitalize()} · Most Popular Build', icon_url=f'https://seraphine-bot.s3.eu-central-1.amazonaws.com/champion/{champion_image}')
+                embed.set_image(url=f'https://raw.githubusercontent.com/buga-sys/championHeaders/master/{champion_key}.png')
+                embed.add_field(name=f"Runes", value=f"**{mainPath}** \n {keyStone} \n {mainSlotOne} \n {mainSlotTwo} \n {mainSlotThree}")
+                embed.add_field(name=f"\u200B", value=f"""**{secPath}** \n {secSlotOne} \n {secSlotTwo}
+                                \u200B
+                                {shardOne}
+                                {shardTwo}
+                                {shardThree}
+                                """)
+                embed.add_field(name=f"Items", value=f"""
+                                Starter
+                                {' '.join([i for i in starterEmojis])}
+                                \u200B
+                                Early Items
+                                {' '.join([i for i in earlyEmojis])}
+                                \u200B
+                                Core Items
+                                {' '.join([i for i in coreEmojis])}
+                                \u200B
+                                Full Build
+                                {' '.join([i for i in fullEmojis])}
+                                \u200B
+                                """)
+                embed.add_field(name='Spells', value=f"{' '.join([s for s in summonerEmojis])} \n \u200B")
+                embed.add_field(name='\u200B', value=f"\u200B")
+                embed.add_field(name='Situational Items', value=f"{' '.join([i for i in situationalEmojis])}")
+                embed.add_field(name='Skill Order', value=f"{'>'.join([s for s in skills])}", inline=False)
+                await ctx.send(embed=embed)
+            except:
+                traceback.print_exc()
+                embed=discord.Embed(title=f'{ops} Seraphine: Build', description=f"Something went wrong! Couldn't get data.", color=0xfda5b0)
+                await ctx.send(embed=embed)         
+            
+        else:
+            if role is None:
+                embed=discord.Embed(title=f'{ops} Seraphine: Build', description=f"No data was found! \n \u200B \n Champion: **{champion.capitalize()}**", color=0xfda5b0)
+                await ctx.send(embed=embed) 
+            else:
+                embed=discord.Embed(title=f'{ops} Seraphine: Build', description=f"No data was found! \n \u200B \n Champion: **{champion.capitalize()}** \n Role: **{role.capitalize()}**", color=0xfda5b0)
+                await ctx.send(embed=embed) 
+    
+    @build.error
+    async def build_error(self, ctx, error):
+        if isinstance(error, commands.errors.MissingRequiredArgument):
+            embed=discord.Embed(title=f'{ops} Seraphine: Build', description="You need to give me a champion!", color=0xfda5b0)
+            embed.add_field(name='Usage', value='`!build [champion] [optional: role]`')
+            await ctx.send(embed=embed) 
 
 def setup(client):
     client.add_cog(Champions(client))

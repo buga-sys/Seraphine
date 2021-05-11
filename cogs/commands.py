@@ -40,69 +40,38 @@ class Commands(commands.Cog):
     
     @commands.command(name='commands', aliases=['cmds'])
     async def _commands(self, ctx):
-        buttons = ["1️⃣", "2️⃣", "3️⃣"]
+        buttons = ["1️⃣", "2️⃣", "3️⃣","4️⃣"]
         current = 0
         bow = '<:pink_bow:835176521773350912>'
         
-        page1 = discord.Embed(title=f"{bow} Seraphine Commands", 
-                              color=0xfda5b0).add_field(
-                                name='!ability', 
-                                value="Detailed information of a skill.",
-                                inline=False).add_field(
-                                    name='!add', 
-                                    value="Add your summoner to your account.", 
-                                    inline=False).add_field(
-                                        name='!champion', 
-                                        value="Infomation about a champion.", 
-                                        inline=False).add_field(
-                                            name='!counters', 
-                                            value="Champion counters.", 
-                                            inline=False).add_field(
-                                                name='!history', 
-                                                value="Display a summoner's match history.", 
-                                                inline=False).add_field(
-                                                    name='!invite', 
-                                                    value="Invite the bot to your server.", 
-                                                    inline=False)
-        page2 = discord.Embed(title=f"{bow} Seraphine Commands", 
-                              color=0xfda5b0).add_field(
-                                name='!item', 
-                                value="Detailed information of an item.", 
-                                inline=False).add_field(
-                                    name='!itemtype',
-                                    value="List of items based on type.", 
-                                    inline=False).add_field(
-                                        name='!mastery', 
-                                        value="List of champions with the most mastery points.", 
-                                        inline=False).add_field(
-                                            name='!matchup', 
-                                            value="Champion matchups overview.", 
-                                            inline=False).add_field(
-                                                name='!patchnotes', 
-                                                value="Latest patch notes.", 
-                                                inline=False).add_field(
-                                                    name='!profile', 
-                                                    value="Display a summoner's profile.", 
-                                                    inline=False)
-        page3 = discord.Embed(title=f"{bow} Seraphine Commands", 
-                              color=0xfda5b0).add_field(
-                                name='!rankings', 
-                                value="List of top players.", 
-                                inline=False).add_field(
-                                    name='!remove', 
-                                    value="Remove added summoner from your account.", 
-                                    inline=False).add_field(
-                                        name='!rotation', 
-                                        value="Weekly free-to-play champion rotation.", 
-                                        inline=False).add_field(
-                                            name='!skins', 
-                                            value="List of a champion's skins.", 
-                                            inline=False).add_field(
-                                                name='!update', 
-                                                value="Check Seraphine latest updates.", 
-                                                inline=False)
+        page1 = discord.Embed(title=f"{bow} Seraphine Commands", color=0xfda5b0)
+        page1.add_field(name='!ability', value="Detailed information of a skill.", inline=False)
+        page1.add_field(name='!add', value="Add your summoner to your account.", inline=False)
+        page1.add_field(name='!build', value="Champion builds, runes, items, etc.", inline=False)
+        page1.add_field(name='!champion', value="Infomation about a champion.", inline=False)
+        page1.add_field(name='!championrates', value="Champion game stats: win rates, etc.", inline=False)
+        page1.add_field(name='!counters', value="Champion counters.", inline=False)
         
-        pages = [page1, page2, page3]
+        page2 = discord.Embed(title=f"{bow} Seraphine Commands", color=0xfda5b0)
+        page2.add_field(name='!history', value="Display a summoner's match history.", inline=False)
+        page2.add_field(name='!invite', value="Invite the bot to your server.", inline=False)
+        page2.add_field(name='!item', value="Detailed information of an item.", inline=False)
+        page2.add_field(name='!itemtype',value="List of items based on type.", inline=False)
+        page2.add_field(name='!mastery', value="List of champions with the most mastery points.", inline=False)
+        page2.add_field(name='!matchup', value="Champion matchups overview.", inline=False)
+        
+        page3 = discord.Embed(title=f"{bow} Seraphine Commands", color=0xfda5b0)
+        page3.add_field(name='!patchnotes', value="Latest patch notes.", inline=False)
+        page3.add_field(name='!profile', value="Display a summoner's profile.", inline=False)
+        page3.add_field(name='!rankings', value="List of top players.", inline=False)
+        page3.add_field(name='!remove', value="Remove added summoner from your account.", inline=False)
+        page3.add_field(name='!rotation', value="Weekly free-to-play champion rotation.", inline=False)
+        page3.add_field(name='!skins', value="List of a champion's skins.", inline=False)
+        
+        page4 = discord.Embed(title=f"{bow} Seraphine Commands", color=0xfda5b0)
+        page4.add_field(name='!update', value="Check Seraphine latest updates.", inline=False)
+        
+        pages = [page1, page2, page3, page4]
 
         msg = await ctx.send(embed=pages[current].set_footer(text=f"Page {current+1}ᅠ•ᅠNavigate through pages using the reactions below!"))
 
@@ -129,16 +98,30 @@ class Commands(commands.Cog):
                 elif reaction.emoji == "3️⃣":
                     current = 2
                     await msg.remove_reaction("3️⃣", ctx.author)
+                    
+                elif reaction.emoji == "4️⃣":
+                    current = 3
+                    await msg.remove_reaction("4️⃣", ctx.author)
 
                 if current != previous_page:
                     await msg.edit(embed=pages[current].set_footer(text=f"Page {current+1}ᅠ•ᅠNavigate through pages using the reactions below!"))  
 
     @commands.command(aliases=['updates'])
     async def update(self, ctx):
-        embed = discord.Embed(description='''
-                              Here are the list of changes:
-                              \u200B
-
+        radio = '<:radioselected:838560108656721982>'
+        embed = discord.Embed(description="Here's the list of changes: \n \u200B",color=0xfda5b0)
+        embed.add_field(name=f'{radio} 5/12/2020', value='''
+                              **Added:**
+                              **!build** - Champion builds, runes, items, etc.
+                        ''', inline=False)
+        embed.add_field(name=f'{radio} 5/8/2020', value='''
+                              **Added:**
+                              **!championrates** - Champion play rate, ban rate & win rates.
+                              
+                              **Improvements:**
+                              **!counter & !matchup** - minor bug fixes.
+                        ''', inline=False)
+        embed.add_field(name=f'{radio} 5/2/2020', value='''
                               **Added:**
                               **!rankings** - List of top players in a region.
                               **!mastery** - You can now view a summoner's champions with most mastery points.
@@ -149,7 +132,7 @@ class Commands(commands.Cog):
                               **!skins** - Going through list is slightly faster now.
                               **!commands** - Added pages for better viewability.
                               **!counter** - Fixed a bug where some champions' data couldn't be loaded and added more information.
-                              ''', color=0xfda5b0)
+                        ''', inline=False)
         embed.set_author(name='Seraphine', icon_url='https://i.pinimg.com/originals/05/e0/8b/05e08be9fd54e6da2f6d482625168c91.png')
         await ctx.send(embed=embed)
     

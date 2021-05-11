@@ -75,22 +75,21 @@ class OwnerCommands(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def emojis(self, ctx):   
-        with open('data/championIcons.json', 'r') as filename:
+        with open('data/summonerIcons.json', 'r') as filename:
             data = json.load(filename)
             
-            with open(f'dragontail/11.8.1/data/en_GB/champion.json', encoding="utf8") as f:
+            with open(f'dragontail/11.9.1/data/en_GB/summoner.json', encoding="utf8") as f:
                 champion = json.load(f)       
             for emoji in ctx.guild.emojis:
                 for k,v in champion['data'].items():
                     if v['id'] == emoji.name:
                         emojis = {"id": v['id'],
-                                "key": v['key'],
                                 "name": v['name'], 
                                 "emoji": f"<:{emoji.name}:{emoji.id}>"
                             }
                         data.append(emojis)
             f.close() 
-            with open('data/championIcons.json', 'w') as outfile:
+            with open('data/summonerIcons.json', 'w') as outfile:
                 json.dump(data, outfile, indent=4)
     
     @commands.command()
