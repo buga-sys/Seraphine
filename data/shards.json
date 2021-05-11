@@ -1,0 +1,33 @@
+[
+  {
+    "id": "5008",
+    "name": "Adaptive Force",
+    "emoji": "<:Adaptive_Force:841765779648675891>"
+  },
+  {
+    "id": "5005",
+    "name": "Attack Speed",
+    "emoji": "<:Attack_Speed:841765798266667019>"
+  },
+  {
+    "id": "5007",
+    "name": "Cooldown Reduction",
+    "emoji": "<:Cooldown_Reduction:841765798250676274>"
+  },
+  {
+    "id": "5002",
+    "name": "Armor",
+    "emoji": "<:Armor:841765798213189662>"
+  },
+  {
+    "id": "5003",
+    "name": "Magic Resistance",
+    "emoji": "<:Magic_Resistance:841765798213451787>"
+  },
+  {
+    "id": "5001",
+    "name": "Health",
+    "emoji": "<:Health:841765798271778816>"
+  }
+
+]
