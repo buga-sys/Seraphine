@@ -1,0 +1,1112 @@
+[
+    {
+        "id": "1018",
+        "name": "Cloak of Agility",
+        "emoji": "<:1018:841705890654584916>"
+    },
+    {
+        "id": "1029",
+        "name": "Cloth Armor",
+        "emoji": "<:1029:841705890663235605>"
+    },
+    {
+        "id": "1026",
+        "name": "Blasting Wand",
+        "emoji": "<:1026:841705890767044609>"
+    },
+    {
+        "id": "1031",
+        "name": "Chain Vest",
+        "emoji": "<:1031:841705890779627521>"
+    },
+    {
+        "id": "1006",
+        "name": "Rejuvenation Bead",
+        "emoji": "<:1006:841705890905194536>"
+    },
+    {
+        "id": "1027",
+        "name": "Sapphire Crystal",
+        "emoji": "<:1027:841705890938880021>"
+    },
+    {
+        "id": "1011",
+        "name": "Giant's Belt",
+        "emoji": "<:1011:841705890943598622>"
+    },
+    {
+        "id": "1004",
+        "name": "Faerie Charm",
+        "emoji": "<:1004:841705891095249006>"
+    },
+    {
+        "id": "1001",
+        "name": "Boots",
+        "emoji": "<:1001:841705891131555840>"
+    },
+    {
+        "id": "1028",
+        "name": "Ruby Crystal",
+        "emoji": "<:1028:841705891165241354>"
+    },
+    {
+        "id": "1036",
+        "name": "Long Sword",
+        "emoji": "<:1036:841705911486644235>"
+    },
+    {
+        "id": "1043",
+        "name": "Recurve Bow",
+        "emoji": "<:1043:841705911620861983>"
+    },
+    {
+        "id": "1053",
+        "name": "Vampiric Scepter",
+        "emoji": "<:1053:841705911785095278>"
+    },
+    {
+        "id": "1042",
+        "name": "Dagger",
+        "emoji": "<:1042:841705911922982932>"
+    },
+    {
+        "id": "1052",
+        "name": "Amplifying Tome",
+        "emoji": "<:1052:841705911944347699>"
+    },
+    {
+        "id": "1037",
+        "name": "Pickaxe",
+        "emoji": "<:1037:841705911945003098>"
+    },
+    {
+        "id": "1035",
+        "name": "Emberknife",
+        "emoji": "<:1035:841705911969775666>"
+    },
+    {
+        "id": "1033",
+        "name": "Null-Magic Mantle",
+        "emoji": "<:1033:841705911981572147>"
+    },
+    {
+        "id": "1038",
+        "name": "B. F. Sword",
+        "emoji": "<:1038:841705912011718686>"
+    },
+    {
+        "id": "1039",
+        "name": "Hailblade",
+        "emoji": "<:1039:841705912271634482>"
+    },
+    {
+        "id": "2003",
+        "name": "Health Potion",
+        "emoji": "<:2003:841705934413627513>"
+    },
+    {
+        "id": "1055",
+        "name": "Doran's Blade",
+        "emoji": "<:1055:841705934560428044>"
+    },
+    {
+        "id": "1083",
+        "name": "Cull",
+        "emoji": "<:1083:841705934572224532>"
+    },
+    {
+        "id": "2010",
+        "name": "Total Biscuit of Everlasting Will",
+        "emoji": "<:2010:841705934576681000>"
+    },
+    {
+        "id": "1056",
+        "name": "Doran's Ring",
+        "emoji": "<:1056:841705934618230786>"
+    },
+    {
+        "id": "1082",
+        "name": "Dark Seal",
+        "emoji": "<:1082:841705934636318721>"
+    },
+    {
+        "id": "2015",
+        "name": "Kircheis Shard",
+        "emoji": "<:2015:841705934677737533>"
+    },
+    {
+        "id": "1057",
+        "name": "Negatron Cloak",
+        "emoji": "<:1057:841705934695039016>"
+    },
+    {
+        "id": "1054",
+        "name": "Doran's Shield",
+        "emoji": "<:1054:841705934841446430>"
+    },
+    {
+        "id": "1058",
+        "name": "Needlessly Large Rod",
+        "emoji": "<:1058:841705935490777149>"
+    },
+    {
+        "id": "2031",
+        "name": "Refillable Potion",
+        "emoji": "<:2031:841705966830747649>"
+    },
+    {
+        "id": "2052",
+        "name": "Poro-Snax",
+        "emoji": "<:2052:841705967016083457>"
+    },
+    {
+        "id": "2051",
+        "name": "Guardian's Horn",
+        "emoji": "<:2051:841705967057109003>"
+    },
+    {
+        "id": "2140",
+        "name": "Elixir of Wrath",
+        "emoji": "<:2140:841705967104294913>"
+    },
+    {
+        "id": "2139",
+        "name": "Elixir of Sorcery",
+        "emoji": "<:2139:841705967141650452>"
+    },
+    {
+        "id": "2138",
+        "name": "Elixir of Iron",
+        "emoji": "<:2138:841705967166947398>"
+    },
+    {
+        "id": "2403",
+        "name": "Minion Dematerializer",
+        "emoji": "<:2403:841705967237201951>"
+    },
+    {
+        "id": "2033",
+        "name": "Corrupting Potion",
+        "emoji": "<:2033:841705967359361084>"
+    },
+    {
+        "id": "2065",
+        "name": "Shurelya's Battlesong",
+        "emoji": "<:2065:841705967502622810>"
+    },
+    {
+        "id": "2055",
+        "name": "Control Ward",
+        "emoji": "<:2055:841705967594635304>"
+    },
+    {
+        "id": "2424",
+        "name": "Broken Stopwatch",
+        "emoji": "<:2424:841706048879722547>"
+    },
+    {
+        "id": "2421",
+        "name": "Broken Stopwatch",
+        "emoji": "<:2421:841706049060864031>"
+    },
+    {
+        "id": "3004",
+        "name": "Manamune",
+        "emoji": "<:3004:841706049118928897>"
+    },
+    {
+        "id": "3003",
+        "name": "Archangel's Staff",
+        "emoji": "<:3003:841706049181319228>"
+    },
+    {
+        "id": "2423",
+        "name": "Perfectly Timed Stopwatch",
+        "emoji": "<:2423:841706049249869864>"
+    },
+    {
+        "id": "2419",
+        "name": "Commencing Stopwatch",
+        "emoji": "<:2419:841706049375305759>"
+    },
+    {
+        "id": "3006",
+        "name": "Berserker's Greaves",
+        "emoji": "<:3006:841706049387495425>"
+    },
+    {
+        "id": "3001",
+        "name": "Abyssal Mask",
+        "emoji": "<:3001:841706049572175882>"
+    },
+    {
+        "id": "2422",
+        "name": "Slightly Magical Footwear",
+        "emoji": "<:2422:841706049605337100>"
+    },
+    {
+        "id": "2420",
+        "name": "Stopwatch",
+        "emoji": "<:2420:841706049664843785>"
+    },
+    {
+        "id": "3026",
+        "name": "Guardian Angel",
+        "emoji": "<:3026:841706128714498049>"
+    },
+    {
+        "id": "3024",
+        "name": "Glacial Buckler",
+        "emoji": "<:3024:841706128906649621>"
+    },
+    {
+        "id": "3011",
+        "name": "Chemtech Putrifier",
+        "emoji": "<:3011:841706128944398348>"
+    },
+    {
+        "id": "3033",
+        "name": "Mortal Reminder",
+        "emoji": "<:3033:841706128953442345>"
+    },
+    {
+        "id": "3009",
+        "name": "Boots of Swiftness",
+        "emoji": "<:3009:841706129213358140>"
+    },
+    {
+        "id": "3031",
+        "name": "Infinity Edge",
+        "emoji": "<:3031:841706129230659644>"
+    },
+    {
+        "id": "3040",
+        "name": "Seraph's Embrace",
+        "emoji": "<:3040:841706129246388224>"
+    },
+    {
+        "id": "3020",
+        "name": "Sorcerer's Shoes",
+        "emoji": "<:3020:841706129258971197>"
+    },
+    {
+        "id": "3036",
+        "name": "Lord Dominik's Regards",
+        "emoji": "<:3036:841706129535926283>"
+    },
+    {
+        "id": "3035",
+        "name": "Last Whisper",
+        "emoji": "<:3035:841706129566203915>"
+    },
+    {
+        "id": "3044",
+        "name": "Phage",
+        "emoji": "<:3044:841706160482680852>"
+    },
+    {
+        "id": "3050",
+        "name": "Zeke's Convergence",
+        "emoji": "<:3050:841706160641015848>"
+    },
+    {
+        "id": "3047",
+        "name": "Plated Steelcaps",
+        "emoji": "<:3047:841706160691871825>"
+    },
+    {
+        "id": "3051",
+        "name": "Hearthbound Axe",
+        "emoji": "<:3051:841706160808525894>"
+    },
+    {
+        "id": "3057",
+        "name": "Sheen",
+        "emoji": "<:3057:841706160825827379>"
+    },
+    {
+        "id": "3065",
+        "name": "Spirit Visage",
+        "emoji": "<:3065:841706160825958400>"
+    },
+    {
+        "id": "3041",
+        "name": "Mejai's Soulstealer",
+        "emoji": "<:3041:841706160847716362>"
+    },
+    {
+        "id": "3053",
+        "name": "Sterak's Gage",
+        "emoji": "<:3053:841706160850731048>"
+    },
+    {
+        "id": "3046",
+        "name": "Phantom Dancer",
+        "emoji": "<:3046:841706160879828992>"
+    },
+    {
+        "id": "3042",
+        "name": "Muramana",
+        "emoji": "<:3042:841706160888348696>"
+    },
+    {
+        "id": "3070",
+        "name": "Tear of the Goddess",
+        "emoji": "<:3070:841706194111430719>"
+    },
+    {
+        "id": "3077",
+        "name": "Tiamat",
+        "emoji": "<:3077:841706194112479303>"
+    },
+    {
+        "id": "3071",
+        "name": "Black Cleaver",
+        "emoji": "<:3071:841706194174738463>"
+    },
+    {
+        "id": "3068",
+        "name": "Sunfire Aegis",
+        "emoji": "<:3068:841706194379866112>"
+    },
+    {
+        "id": "3067",
+        "name": "Kindlegem",
+        "emoji": "<:3067:841706194442911794>"
+    },
+    {
+        "id": "3066",
+        "name": "Winged Moonplate",
+        "emoji": "<:3066:841706194534924388>"
+    },
+    {
+        "id": "3076",
+        "name": "Bramble Vest",
+        "emoji": "<:3076:841706194627723334>"
+    },
+    {
+        "id": "3074",
+        "name": "Ravenous Hydra",
+        "emoji": "<:3074:841706194687229982>"
+    },
+    {
+        "id": "3072",
+        "name": "Bloodthirster",
+        "emoji": "<:3072:841706194720784424>"
+    },
+    {
+        "id": "3075",
+        "name": "Thornmail",
+        "emoji": "<:3075:841706194783305749>"
+    },
+    {
+        "id": "3086",
+        "name": "Zeal",
+        "emoji": "<:3086:841706238067605536>"
+    },
+    {
+        "id": "3085",
+        "name": "Runaan's Hurricane",
+        "emoji": "<:3085:841706238332108801>"
+    },
+    {
+        "id": "3082",
+        "name": "Warden's Mail",
+        "emoji": "<:3082:841706238391091220>"
+    },
+    {
+        "id": "3094",
+        "name": "Rapid Firecannon",
+        "emoji": "<:3094:841706238555324436>"
+    },
+    {
+        "id": "3095",
+        "name": "Stormrazor",
+        "emoji": "<:3095:841706238583504956>"
+    },
+    {
+        "id": "3091",
+        "name": "Wit's End",
+        "emoji": "<:3091:841706238604476416>"
+    },
+    {
+        "id": "3083",
+        "name": "Warmog's Armor",
+        "emoji": "<:3083:841706238679973938>"
+    },
+    {
+        "id": "3078",
+        "name": "Trinity Force",
+        "emoji": "<:3078:841706238769102908>"
+    },
+    {
+        "id": "3089",
+        "name": "Rabadon's Deathcap",
+        "emoji": "<:3089:841706238794006599>"
+    },
+    {
+        "id": "3100",
+        "name": "Lich Bane",
+        "emoji": "<:3100:841706239611371590>"
+    },
+    {
+        "id": "3107",
+        "name": "Redemption",
+        "emoji": "<:3107:841706287360507925>"
+    },
+    {
+        "id": "3102",
+        "name": "Banshee's Veil",
+        "emoji": "<:3102:841706287402319923>"
+    },
+    {
+        "id": "3105",
+        "name": "Aegis of the Legion",
+        "emoji": "<:3105:841706287569567744>"
+    },
+    {
+        "id": "3111",
+        "name": "Mercury's Treads",
+        "emoji": "<:3111:841706287586738246>"
+    },
+    {
+        "id": "3112",
+        "name": "Guardian's Orb",
+        "emoji": "<:3112:841706287623831612>"
+    },
+    {
+        "id": "3108",
+        "name": "Fiendish Codex",
+        "emoji": "<:3108:841706287644672040>"
+    },
+    {
+        "id": "3113",
+        "name": "Aether Wisp",
+        "emoji": "<:3113:841706287673638941>"
+    },
+    {
+        "id": "3110",
+        "name": "Frozen Heart",
+        "emoji": "<:3110:841706287850848287>"
+    },
+    {
+        "id": "3114",
+        "name": "Forbidden Idol",
+        "emoji": "<:3114:841706288097263656>"
+    },
+    {
+        "id": "3109",
+        "name": "Knight's Vow",
+        "emoji": "<:3109:841706288144187472>"
+    },
+    {
+        "id": "3124",
+        "name": "Guinsoo's Rageblade",
+        "emoji": "<:3124:841706372168548363>"
+    },
+    {
+        "id": "3116",
+        "name": "Rylai's Crystal Scepter",
+        "emoji": "<:3116:841706372285726771>"
+    },
+    {
+        "id": "3115",
+        "name": "Nashor's Tooth",
+        "emoji": "<:3115:841706372412604416>"
+    },
+    {
+        "id": "3123",
+        "name": "Executioner's Calling",
+        "emoji": "<:3123:841706372457300019>"
+    },
+    {
+        "id": "3117",
+        "name": "Mobility Boots",
+        "emoji": "<:3117:841706372524802068>"
+    },
+    {
+        "id": "3139",
+        "name": "Mercurial Scimitar",
+        "emoji": "<:3139:841706372784455680>"
+    },
+    {
+        "id": "3134",
+        "name": "Serrated Dirk",
+        "emoji": "<:3134:841706372851957800>"
+    },
+    {
+        "id": "3133",
+        "name": "Caulfield's Warhammer",
+        "emoji": "<:3133:841706372869521468>"
+    },
+    {
+        "id": "3135",
+        "name": "Void Staff",
+        "emoji": "<:3135:841706372964941885>"
+    },
+    {
+        "id": "3140",
+        "name": "Quicksilver Sash",
+        "emoji": "<:3140:841706373418450994>"
+    },
+    {
+        "id": "3143",
+        "name": "Randuin's Omen",
+        "emoji": "<:3143:841706412107366401>"
+    },
+    {
+        "id": "3155",
+        "name": "Hexdrinker",
+        "emoji": "<:3155:841706412115492894>"
+    },
+    {
+        "id": "3153",
+        "name": "Blade of The Ruined King",
+        "emoji": "<:3153:841706412149178378>"
+    },
+    {
+        "id": "3156",
+        "name": "Maw of Malmortius",
+        "emoji": "<:3156:841706412181684224>"
+    },
+    {
+        "id": "3157",
+        "name": "Zhonya's Hourglass",
+        "emoji": "<:3157:841706412187058227>"
+    },
+    {
+        "id": "3145",
+        "name": "Hextech Alternator",
+        "emoji": "<:3145:841706412233195611>"
+    },
+    {
+        "id": "3158",
+        "name": "Ionian Boots of Lucidity",
+        "emoji": "<:3158:841706412252987392>"
+    },
+    {
+        "id": "3165",
+        "name": "Morellonomicon",
+        "emoji": "<:3165:841706412438454343>"
+    },
+    {
+        "id": "3142",
+        "name": "Youmuu's Ghostblade",
+        "emoji": "<:3142:841706412450906133>"
+    },
+    {
+        "id": "3152",
+        "name": "Hextech Rocketbelt",
+        "emoji": "<:3152:841706412937445446>"
+    },
+    {
+        "id": "3177",
+        "name": "Guardian's Blade",
+        "emoji": "<:3177:841706468595859496>"
+    },
+    {
+        "id": "3211",
+        "name": "Spectre's Cowl",
+        "emoji": "<:3211:841706468637147150>"
+    },
+    {
+        "id": "3184",
+        "name": "Guardian's Hammer",
+        "emoji": "<:3184:841706468771889202>"
+    },
+    {
+        "id": "3179",
+        "name": "Umbral Glaive",
+        "emoji": "<:3179:841706469040717854>"
+    },
+    {
+        "id": "3193",
+        "name": "Gargoyle Stoneplate",
+        "emoji": "<:3193:841706469044256788>"
+    },
+    {
+        "id": "3181",
+        "name": "Sanguine Blade",
+        "emoji": "<:3181:841706469145444395>"
+    },
+    {
+        "id": "3190",
+        "name": "Locket of the Iron Solari",
+        "emoji": "<:3190:841706469702238208>"
+    },
+    {
+        "id": "3191",
+        "name": "Seeker's Armguard",
+        "emoji": "<:3191:841706470080774164>"
+    },
+    {
+        "id": "3222",
+        "name": "Mikael's Blessing",
+        "emoji": "<:3222:841706471490191360>"
+    },
+    {
+        "id": "3330",
+        "name": "Scarecrow Effigy",
+        "emoji": "<:3330:841706473586556988>"
+    },
+    {
+        "id": "3340",
+        "name": "Stealth Ward",
+        "emoji": "<:3340:841706541207781396>"
+    },
+    {
+        "id": "3600",
+        "name": "Kalista's Black Spear",
+        "emoji": "<:3600:841706541320634410>"
+    },
+    {
+        "id": "3508",
+        "name": "Essence Reaver",
+        "emoji": "<:3508:841706541357858876>"
+    },
+    {
+        "id": "3504",
+        "name": "Ardent Censer",
+        "emoji": "<:3504:841706541401112597>"
+    },
+    {
+        "id": "3599",
+        "name": "Kalista's Black Spear",
+        "emoji": "<:3599:841706541429817344>"
+    },
+    {
+        "id": "3364",
+        "name": "Oracle Lens",
+        "emoji": "<:3364:841706541463765052>"
+    },
+    {
+        "id": "3742",
+        "name": "Dead Man's Plate",
+        "emoji": "<:3742:841706541476478996>"
+    },
+    {
+        "id": "3513",
+        "name": "Eye of the Herald",
+        "emoji": "<:3513:841706541526941696>"
+    },
+    {
+        "id": "3400",
+        "name": "Your Cut",
+        "emoji": "<:3400:841706541568884757>"
+    },
+    {
+        "id": "3363",
+        "name": "Farsight Alteration",
+        "emoji": "<:3363:841706541958823997>"
+    },
+    {
+        "id": "3855",
+        "name": "Runesteel Spaulders",
+        "emoji": "<:3855:841706596359077939>"
+    },
+    {
+        "id": "3801",
+        "name": "Crystalline Bracer",
+        "emoji": "<:3801:841706596467998750>"
+    },
+    {
+        "id": "3748",
+        "name": "Titanic Hydra",
+        "emoji": "<:3748:841706596488445953>"
+    },
+    {
+        "id": "3851",
+        "name": "Frostfang",
+        "emoji": "<:3851:841706596505092166>"
+    },
+    {
+        "id": "3854",
+        "name": "Steel Shoulderguards",
+        "emoji": "<:3854:841706596606017636>"
+    },
+    {
+        "id": "3850",
+        "name": "Spellthief's Edge",
+        "emoji": "<:3850:841706596609949717>"
+    },
+    {
+        "id": "3814",
+        "name": "Edge of Night",
+        "emoji": "<:3814:841706596638785626>"
+    },
+    {
+        "id": "3857",
+        "name": "Pauldrons of Whiterock",
+        "emoji": "<:3857:841706596710613004>"
+    },
+    {
+        "id": "3802",
+        "name": "Lost Chapter",
+        "emoji": "<:3802:841706596743512064>"
+    },
+    {
+        "id": "3853",
+        "name": "Shard of True Ice",
+        "emoji": "<:3853:841706596749017128>"
+    },
+    {
+        "id": "3864",
+        "name": "Black Mist Scythe",
+        "emoji": "<:3864:841706873635733515>"
+    },
+    {
+        "id": "3862",
+        "name": "Spectral Sickle",
+        "emoji": "<:3862:841706873690390550>"
+    },
+    {
+        "id": "4403",
+        "name": "The Golden Spatula",
+        "emoji": "<:4403:841706873749110825>"
+    },
+    {
+        "id": "3860",
+        "name": "Bulwark of the Mountain",
+        "emoji": "<:3860:841706873912557678>"
+    },
+    {
+        "id": "3858",
+        "name": "Relic Shield",
+        "emoji": "<:3858:841706874000375858>"
+    },
+    {
+        "id": "3859",
+        "name": "Targon's Buckler",
+        "emoji": "<:3859:841706874034061312>"
+    },
+    {
+        "id": "4005",
+        "name": "Imperial Mandate",
+        "emoji": "<:4005:841706874138656808>"
+    },
+    {
+        "id": "4401",
+        "name": "Force of Nature",
+        "emoji": "<:4401:841706874139181066>"
+    },
+    {
+        "id": "3916",
+        "name": "Oblivion Orb",
+        "emoji": "<:3916:841706874196721696>"
+    },
+    {
+        "id": "3863",
+        "name": "Harrowing Crescent",
+        "emoji": "<:3863:841706874335395880>"
+    },
+    {
+        "id": "4633",
+        "name": "Riftmaker",
+        "emoji": "<:4633:841706930124619797>"
+    },
+    {
+        "id": "4628",
+        "name": "Horizon Focus",
+        "emoji": "<:4628:841706930182291509>"
+    },
+    {
+        "id": "4632",
+        "name": "Verdant Barrier",
+        "emoji": "<:4632:841706930211913729>"
+    },
+    {
+        "id": "4629",
+        "name": "Cosmic Drive",
+        "emoji": "<:4629:841706930275483699>"
+    },
+    {
+        "id": "4630",
+        "name": "Blighting Jewel",
+        "emoji": "<:4630:841706930338398239>"
+    },
+    {
+        "id": "4636",
+        "name": "Night Harvester",
+        "emoji": "<:4636:841706930355699782>"
+    },
+    {
+        "id": "4641",
+        "name": "Stirring Wardstone",
+        "emoji": "<:4641:841706930509840435>"
+    },
+    {
+        "id": "4635",
+        "name": "Leeching Leer",
+        "emoji": "<:4635:841706930656641064>"
+    },
+    {
+        "id": "4637",
+        "name": "Demonic Embrace",
+        "emoji": "<:4637:841706930699370527>"
+    },
+    {
+        "id": "4638",
+        "name": "Watchful Wardstone",
+        "emoji": "<:4638:841706930829000724>"
+    },
+    {
+        "id": "6616",
+        "name": "Staff of Flowing Water",
+        "emoji": "<:6616:841707008486408194>"
+    },
+    {
+        "id": "6333",
+        "name": "Death's Dance",
+        "emoji": "<:6333:841707008612630540>"
+    },
+    {
+        "id": "6029",
+        "name": "Ironspike Whip",
+        "emoji": "<:6029:841707008696254484>"
+    },
+    {
+        "id": "4643",
+        "name": "Vigilant Wardstone",
+        "emoji": "<:4643:841707008881459280>"
+    },
+    {
+        "id": "6631",
+        "name": "Stridebreaker",
+        "emoji": "<:6631:841707008884998214>"
+    },
+    {
+        "id": "6617",
+        "name": "Moonstone Renewer",
+        "emoji": "<:6617:841707008898236466>"
+    },
+    {
+        "id": "4642",
+        "name": "Bandleglass Mirror",
+        "emoji": "<:4642:841707008905969715>"
+    },
+    {
+        "id": "6609",
+        "name": "Chempunk Chainsword",
+        "emoji": "<:6609:841707008939524147>"
+    },
+    {
+        "id": "6630",
+        "name": "Goredrinker",
+        "emoji": "<:6630:841707008960364564>"
+    },
+    {
+        "id": "6035",
+        "name": "Silvermere Dawn",
+        "emoji": "<:6035:841707009039400961>"
+    },
+    {
+        "id": "6632",
+        "name": "Divine Sunderer",
+        "emoji": "<:6632:841707063612276818>"
+    },
+    {
+        "id": "6662",
+        "name": "Frostfire Gauntlet",
+        "emoji": "<:6662:841707063658545170>"
+    },
+    {
+        "id": "6664",
+        "name": "Turbo Chemtank",
+        "emoji": "<:6664:841707063770873866>"
+    },
+    {
+        "id": "6653",
+        "name": "Liandry's Anguish",
+        "emoji": "<:6653:841707063779786822>"
+    },
+    {
+        "id": "6655",
+        "name": "Luden's Tempest",
+        "emoji": "<:6655:841707063784243200>"
+    },
+    {
+        "id": "6670",
+        "name": "Noonquiver",
+        "emoji": "<:6670:841707063825924136>"
+    },
+    {
+        "id": "6660",
+        "name": "Bami's Cinder",
+        "emoji": "<:6660:841707063830904832>"
+    },
+    {
+        "id": "6672",
+        "name": "Kraken Slayer",
+        "emoji": "<:6672:841707063838900224>"
+    },
+    {
+        "id": "6671",
+        "name": "Galeforce",
+        "emoji": "<:6671:841707063914659870>"
+    },
+    {
+        "id": "6656",
+        "name": "Everfrost",
+        "emoji": "<:6656:841707063960535100>"
+    },
+    {
+        "id": "6677",
+        "name": "Rageknife",
+        "emoji": "<:6677:841707131593162805>"
+    },
+    {
+        "id": "6693",
+        "name": "Prowler's Claw",
+        "emoji": "<:6693:841707131723055126>"
+    },
+    {
+        "id": "6675",
+        "name": "Navori Quickblades",
+        "emoji": "<:6675:841707131732099074>"
+    },
+    {
+        "id": "6673",
+        "name": "Immortal Shieldbow",
+        "emoji": "<:6673:841707131769716746>"
+    },
+    {
+        "id": "6691",
+        "name": "Duskblade of Draktharr",
+        "emoji": "<:6691:841707131827650571>"
+    },
+    {
+        "id": "6695",
+        "name": "Serpent's Fang",
+        "emoji": "<:6695:841707131924250675>"
+    },
+    {
+        "id": "7000",
+        "name": "Sandshrike's Claw",
+        "emoji": "<:7000:841707131925430313>"
+    },
+    {
+        "id": "6692",
+        "name": "Eclipse",
+        "emoji": "<:6692:841707131937751064>"
+    },
+    {
+        "id": "6694",
+        "name": "Serylda's Grudge",
+        "emoji": "<:6694:841707131958460427>"
+    },
+    {
+        "id": "6676",
+        "name": "The Collector",
+        "emoji": "<:6676:841707131987820584>"
+    },
+    {
+        "id": "7006",
+        "name": "Typhoon",
+        "emoji": "<:7006:841707206789169194>"
+    },
+    {
+        "id": "7008",
+        "name": "Bloodward",
+        "emoji": "<:7008:841707206978437161>"
+    },
+    {
+        "id": "7002",
+        "name": "Draktharr's Shadowcarver",
+        "emoji": "<:7002:841707207027982337>"
+    },
+    {
+        "id": "7001",
+        "name": "Syzygy",
+        "emoji": "<:7001:841707207032569916>"
+    },
+    {
+        "id": "7005",
+        "name": "Rimeforged Grasp",
+        "emoji": "<:7005:841707207069532240>"
+    },
+    {
+        "id": "7009",
+        "name": "Icathia's Curse",
+        "emoji": "<:7009:841707207087095840>"
+    },
+    {
+        "id": "7004",
+        "name": "Forgefire Crest",
+        "emoji": "<:7004:841707207104135219>"
+    },
+    {
+        "id": "7003",
+        "name": "Turbocharged Hexperiment",
+        "emoji": "<:7003:841707207270858752>"
+    },
+    {
+        "id": "7010",
+        "name": "Vespertide",
+        "emoji": "<:7010:841707207372046396>"
+    },
+    {
+        "id": "7007",
+        "name": "Wyrmfallen Sacrifice",
+        "emoji": "<:7007:841707207464976414>"
+    },
+    {
+        "id": "7013",
+        "name": "Eye of Luden",
+        "emoji": "<:7013:841707235473752115>"
+    },
+    {
+        "id": "7020",
+        "name": "Shurelya's Requiem",
+        "emoji": "<:7020:841707235540467773>"
+    },
+    {
+        "id": "7014",
+        "name": "Eternal Winter",
+        "emoji": "<:7014:841707235540992050>"
+    },
+    {
+        "id": "7018",
+        "name": "Infinity Force",
+        "emoji": "<:7018:841707235591323718>"
+    },
+    {
+        "id": "7017",
+        "name": "Deicide",
+        "emoji": "<:7017:841707235600367636>"
+    },
+    {
+        "id": "7019",
+        "name": "Reliquary of the Golden Dawn",
+        "emoji": "<:7019:841707235695919157>"
+    },
+    {
+        "id": "7012",
+        "name": "Liandry's Lament",
+        "emoji": "<:7012:841707235728949288>"
+    },
+    {
+        "id": "7011",
+        "name": "Upgraded Aeropack",
+        "emoji": "<:7011:841707235801563207>"
+    },
+    {
+        "id": "7015",
+        "name": "Ceaseless Hunger",
+        "emoji": "<:7015:841707235909435392>"
+    },
+    {
+        "id": "7016",
+        "name": "Dreamshatter",
+        "emoji": "<:7016:841707235961077770>"
+    },
+    {
+        "id": "7022",
+        "name": "Seat of Command",
+        "emoji": "<:7022:841707268206231554>"
+    },
+    {
+        "id": "7021",
+        "name": "Starcaster",
+        "emoji": "<:7021:841707268348182569>"
+    }
+]
