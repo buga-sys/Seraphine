@@ -1,0 +1,72 @@
+[
+    {
+        "id": "SummonerBarrier",
+        "name": "Barrier",
+        "emoji": "<:SummonerBarrier:841785151490621451>"
+    },
+    {
+        "id": "SummonerHaste",
+        "name": "Ghost",
+        "emoji": "<:SummonerHaste:841785151503204383>"
+    },
+    {
+        "id": "SummonerMana",
+        "name": "Clarity",
+        "emoji": "<:SummonerMana:841785151728910388>"
+    },
+    {
+        "id": "SummonerExhaust",
+        "name": "Exhaust",
+        "emoji": "<:SummonerExhaust:841785151738740767>"
+    },
+    {
+        "id": "SummonerDot",
+        "name": "Ignite",
+        "emoji": "<:SummonerDot:841785151850676294>"
+    },
+    {
+        "id": "SummonerBoost",
+        "name": "Cleanse",
+        "emoji": "<:SummonerBoost:841785151888293905>"
+    },
+    {
+        "id": "SummonerFlash",
+        "name": "Flash",
+        "emoji": "<:SummonerFlash:841785151964446720>"
+    },
+    {
+        "id": "SummonerSmite",
+        "name": "Smite",
+        "emoji": "<:SummonerSmite:841785152359235595>"
+    },
+    {
+        "id": "SummonerPoroThrow",
+        "name": "Poro Toss",
+        "emoji": "<:SummonerPoroThrow:841785152475758613>"
+    },
+    {
+        "id": "SummonerTeleport",
+        "name": "Teleport",
+        "emoji": "<:SummonerTeleport:841785152497385483>"
+    },
+    {
+        "id": "SummonerHeal",
+        "name": "Heal",
+        "emoji": "<:SummonerHeal:841785152774602754>"
+    },
+    {
+        "id": "SummonerPoroRecall",
+        "name": "To the King!",
+        "emoji": "<:SummonerPoroRecall:841785152853246002>"
+    },
+    {
+        "id": "SummonerSnowURFSnowball_Mark",
+        "name": "Mark",
+        "emoji": "<:SummonerSnowURFSnowball_Mark:841785152920092672>"
+    },
+    {
+        "id": "SummonerSnowball",
+        "name": "Mark",
+        "emoji": "<:SummonerSnowball:841785152938049566>"
+    }
+]
