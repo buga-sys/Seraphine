@@ -72,7 +72,7 @@ class OwnerCommands(commands.Cog):
         await guild.leave()
         await ctx.send(f"Left guild: {guild.name} ({guild.id})")
     
-    @commands.command()
+    @commands.command(hidden=True)
     @commands.is_owner()
     async def emojis(self, ctx):   
         with open('data/summonerIcons.json', 'r') as filename:
@@ -92,7 +92,7 @@ class OwnerCommands(commands.Cog):
             with open('data/summonerIcons.json', 'w') as outfile:
                 json.dump(data, outfile, indent=4)
     
-    @commands.command()
+    @commands.command(hidden=True)
     @commands.is_owner()
     async def rules(self, ctx):
         embed = discord.Embed(description='''

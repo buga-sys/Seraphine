@@ -13,6 +13,26 @@ class Misc(commands.Cog):
         
     @commands.command(aliases=['patchnote'])
     async def patchnotes(self, ctx):
+        def td_format(td_object):
+            seconds = int(td_object.total_seconds())
+            periods = [
+                ('year',        60*60*24*365),
+                ('month',       60*60*24*30),
+                ('day',         60*60*24),
+                ('hour',        60*60),
+                ('minute',      60),
+                ('second',      1)
+            ]
+
+            strings=[]
+            for period_name, period_seconds in periods:
+                if seconds > period_seconds:
+                    period_value , seconds = divmod(seconds, period_seconds)
+                    has_s = 's' if period_value > 1 else ''
+                    strings.append("%s %s%s" % (period_value, period_name, has_s))
+
+            return ", ".join(strings)
+        
         page = requests.get('https://na.leagueoflegends.com/en-us/news/tags/patch-notes')
         soup = bs4.BeautifulSoup(page.text, 'html.parser')
         latest_article = soup.find_all('li')[0]
@@ -21,37 +41,11 @@ class Misc(commands.Cog):
         title = latest_article.find('h2').text
         link = 'http://na.leagueoflegends.com' + href
         author = latest_article.find(class_='style__Author-i44rc3-11 gaoSwO').text
-        time = latest_article.find('time')['datetime']
-        then = datetime.strptime(time, "%Y-%m-%dT%H:%M:%S.%fZ")
+        ar_time = latest_article.find('time')['datetime']
+        then = datetime.strptime(ar_time, "%Y-%m-%dT%H:%M:%S.%fZ")
         now = datetime.now()
-        seconds = (now-then).total_seconds()
-        minutes = seconds / 60
-        hours = minutes / 60
-        days = hours / 24
-        weeks = days / 7
-        months = weeks * 0.229984
-        date = None
-        
-        if seconds <= 120:
-            date = str(int(minutes)) + ' minute ago'
-        elif seconds <= 3600:
-            date = str(int(minutes)) + ' minutes ago'
-        elif seconds <= 7200:
-            date = str(int(hours)) + ' hour ago'
-        elif seconds <= 86400:
-            date = str(int(hours)) + ' hours ago'
-        elif seconds <= 172800:
-            date = str(int(days)) + ' day ago'
-        elif seconds <= 604800:
-            date = str(int(days)) + ' days ago'
-        elif seconds <= 1210000:
-            date = str(int(weeks)) + ' week ago'
-        elif seconds <= 2628000:
-            date = str(int(weeks)) + ' weeks ago'
-        elif seconds <= 5256000:
-            date = str(int(months)) + ' month ago'
-        else:
-            date = str(int(months)) + ' months ago'
+        seconds = (now-then)
+        date = td_format(seconds)
         
         embed=discord.Embed(title=title, description=f"{author} — {date}", color=0xfda5b0, url=link)
         embed.set_image(url=img_src)

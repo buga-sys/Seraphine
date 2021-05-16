@@ -30,5 +30,6 @@ client.load_extension('cogs.abilities')
 client.load_extension('cogs.commands')
 client.load_extension('cogs.ownercommands')
 client.load_extension('cogs.misc')
+client.load_extension('cogs.topgg')
 
 client.run(token)

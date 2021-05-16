@@ -388,5 +388,23 @@
         "key": "Waterwalking",
         "name": "Waterwalking",
         "emoji": "<:Waterwalking:841705398402809866>"
+    },
+    {
+        "id": 8401,
+        "key": "ShieldBash",
+        "name": "Shield Bash",
+        "emoji": "<:ShieldBash:841704914559303710>"
+    },
+    {
+        "id": 8234,
+        "key": "Celerity",
+        "name": "Celerity",
+        "emoji": "<:Celerity:841705051508834386>"
+    },
+    {
+        "id": 8439,
+        "key": "Aftershock",
+        "name": "Aftershock",
+        "emoji": "<:Aftershock:841704987935637504>"
     }
 ]

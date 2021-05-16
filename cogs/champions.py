@@ -635,11 +635,11 @@ class Champions(commands.Cog):
                         skills.append(s['emoji'])
             
             #Items
-            starterItems = [i['alt'] for i in soup.find_all(class_='css-8atqhb')[0].find_all('img')]
-            earlyItems = [i['alt'] for i in soup.find_all(class_='css-8atqhb')[1].find_all('img')]
-            coreItems = [i['alt'] for i in soup.find_all(class_='css-8atqhb')[2].find_all('img')]
-            fullItems = [i['alt'] for i in soup.find_all(class_='css-8atqhb')[3].find_all('img')]
-            situationalItems = [i['alt'] for i in soup.find(class_='css-ahi832 e1tojong1').find_all('img')]
+            starterItems = [i['src'] for i in soup.find_all(class_='css-8atqhb')[0].find_all('img')]
+            earlyItems = [i['src'] for i in soup.find_all(class_='css-8atqhb')[1].find_all('img')]
+            coreItems = [i['src'] for i in soup.find_all(class_='css-8atqhb')[2].find_all('img')]
+            fullItems = [i['src'] for i in soup.find_all(class_='css-8atqhb')[3].find_all('img')]
+            situationalItems = [i['src'] for i in soup.find(class_='css-ahi832').find_all('img')]
             starterEmojis = []
             earlyEmojis = []
             coreEmojis = []
@@ -651,19 +651,19 @@ class Champions(commands.Cog):
                 
             for i in items:
                 for s in starterItems:
-                    if i['name'] == s:
+                    if i['id'] in s:
                         starterEmojis.append(i['emoji'])
                 for s in earlyItems:
-                    if i['name'] == s:
+                    if i['id'] in s:
                         earlyEmojis.append(i['emoji'])
                 for s in coreItems:
-                    if i['name'] == s:
+                    if i['id'] in s:
                         coreEmojis.append(i['emoji'])
                 for s in fullItems:
-                    if i['name'] == s:
+                    if i['id'] in s:
                         fullEmojis.append(i['emoji'])
                 for s in situationalItems:
-                    if i['name'] == s:
+                    if i['id'] in s:
                         situationalEmojis.append(i['emoji'])
             
             try:

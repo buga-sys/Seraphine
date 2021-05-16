@@ -281,8 +281,8 @@ class Summoner(commands.Cog):
                           
                     
                 file = discord.File(f"{icon_full_path}", filename=f"{icon_png}")
-                embed = discord.Embed(description=f"Summary of the profile you asked for: \n \u200B", color=0xfda5b0)
-                embed.set_author(name=f'Profile: {name} [{region.upper()}]', icon_url=f'attachment://{icon_png}')
+                embed = discord.Embed(title=f'Profile: {name} [{region.upper()}]', description=f"Summary of the profile you asked for: \n \u200B", color=0xfda5b0)
+                embed.set_thumbnail(url=f'attachment://{icon_png}')
                 embed.add_field(name='Summoner Level', value=f'{level} \n \u200B')
                 embed.add_field(name='\u200B', value='\u200B')
                 embed.add_field(name='\u200B', value='\u200B')
@@ -379,8 +379,8 @@ class Summoner(commands.Cog):
                 f.close()
                 
                 file = discord.File(f"{icon_full_path}", filename=f"{icon_png}")
-                embed = discord.Embed(description=f"Recent Games (Last 10 Played): \n \u200B", color=0xfda5b0)
-                embed.set_author(name=f'Match History: {name} [{region.upper()}]', icon_url=f'attachment://{icon_png}')
+                embed = discord.Embed(title=f'Match History: {name} [{region.upper()}]',description=f"Recent Games (Last 10 Played): \n \u200B", color=0xfda5b0)
+                embed.set_thumbnail(url=f'attachment://{icon_png}')
                 
                 temp_embed = discord.Embed(description=f"Fetching {name}'s match history, wait a moment...", color=0xfda5b0)
                 temp_embed.set_thumbnail(url=f'attachment://{icon_png}')
@@ -458,6 +458,59 @@ class Summoner(commands.Cog):
     
     @commands.command()
     async def mastery(self, ctx, region=None, summoner=None):
+        def sttls(total_seconds):
+            s = int(total_seconds)
+            years = s // 31104000
+            if years > 1:
+                return '%d years' % years
+            s = s - (years * 31104000)
+            months = s // 2592000
+            if years == 1:
+                r = 'one year'
+                if months > 0:
+                    r += ' and %d months' % months
+                return r
+            if months > 1:
+                return '%d months' % months
+            s = s - (months * 2592000)
+            days = s // 86400
+            if months == 1:
+                r = 'one month'
+                if days > 0:
+                    r += ' and %d days' % days
+                return r
+            if days > 1:
+                return '%d days' % days
+            s = s - (days * 86400)
+            hours = s // 3600
+            if days == 1:
+                r = 'one day'
+                if hours > 0:
+                    r += ' and %d hours' % hours
+                return r 
+            s = s - (hours * 3600)
+            minutes = s // 60
+            seconds = s - (minutes * 60)
+            if hours >= 6:
+                return '%d hours' % hours
+            if hours >= 1:
+                r = '%d hours' % hours
+                if hours == 1:
+                    r = 'one hour'
+                if minutes > 0:
+                    r += ' and %d minutes' % minutes
+                return r
+            if minutes == 1:
+                r = 'one minute'
+                if seconds > 0:
+                    r += ' and %d seconds' % seconds
+                return r
+            if minutes == 0:
+                return '%d seconds' % seconds
+            if seconds == 0:
+                return '%d minutes' % minutes
+            return '%d minutes and %d seconds' % (minutes, seconds)
+                    
         regions = ['euw', 'br', 'na', 'eune', 'jp', 'las', 'lan', 'oce', 'tr', 'kr', 'ru']
         servers = {'euw':'euw1','br':'br1', 'na':'na1', 'eune':'eun1', 'jp':'jp1', 'las':'la2', 'lan':'la1', 'oce':'oc1', 'tr':'tr1', 'kr':'kr', 'ru':'ru'}
         if region is None and summoner is None:
@@ -580,32 +633,8 @@ class Summoner(commands.Cog):
                     then = datetime.strptime(temp, "%Y-%m-%dT%H:%M:%S.%fZ")
                     now = datetime.now()
                     seconds = (now-then).total_seconds()
-                    minutes = seconds / 60
-                    hours = minutes / 60
-                    days = hours / 24
-                    weeks = days / 7
-                    months = weeks * 0.229984
+                    c[3] = blank + sttls(seconds)
 
-                    if seconds < 120:
-                        c[3] = blank + str(int(minutes)) + ' minute ago'
-                    elif seconds < 3600:
-                        c[3] = blank + str(int(minutes)) + ' minutes ago'
-                    elif seconds < 7200:
-                        c[3] = blank + str(int(hours)) + ' hour ago'
-                    elif seconds < 86400:
-                        c[3] = blank + str(int(hours)) + ' hours ago'
-                    elif seconds < 172800:
-                        c[3] = blank + str(int(days)) + ' day ago'
-                    elif seconds < 604800:
-                        c[3] = blank + str(int(days)) + ' days ago'
-                    elif seconds < 1210000:
-                        c[3] = blank + str(int(weeks)) + ' week ago'
-                    elif seconds < 2628000:
-                        c[3] = blank + str(int(weeks)) + ' weeks ago'
-                    elif seconds < 5256000:
-                        c[3] = blank + str(int(months)) + ' month ago'
-                    else:
-                        c[3] = blank + str(int(months)) + ' months ago'
                     
                     first = c[0] + ' **' + c[1] + '**' + ' - ' + f'{c[2]:,}'
                     second = c[3]
