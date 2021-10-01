@@ -1,4 +1,4 @@
-# Seraphine
+# Seraphine (League of Legends discord bot)
 
 https://github.com/meraki-analytics/lolstaticdata
 
